@@ -1,0 +1,53 @@
+##Calon Siswa##  (Untuk Login Menggunakan CodeRegister Sebagai Password dan NISN Sebagai Username)
+CodeRegister/Pendaftaran
+NIK (10 Digit)
+NISN (16 Digit)
+No Registrasi AkteKelahiran
+Nama Siswa
+Jenis Kelamin
+Agama
+Kewarganegaraan
+Tempat Lahir
+Tanggal Lahir
+No HandPhone
+Foto
+Alamat ("Jalan", "Dusun", "RT/RW", "KodePos", "Desa/Kelurahan", "Kecamatan", "Kota/Kabupaten", "Provinsi")
+Status("Proses Selekasi","Di Terima", "Di Tolak")
+id_tb_ortu
+id_tb_nilai
+
+
+
+##Calon Orangtua Siswa##
+ID_Calon_siswa
+ID_Nilai_calon_siswa
+Nama Ayah
+NIK Ayah
+Pekerjaan Ayah
+Pendidikan Ayah
+
+Nama Ibu
+NIK Ibu
+Pekerjaan Ibu
+Pendidikan Ibu
+
+Alamat (Ayah/Ibu)
+No HandPhone (Ayah/Ibu/Yang Bisa Di Hubungi)
+
+
+
+##Nilai Ujian Siswa (UN/SKHUN)##
+ID_Calon_Siswa
+ID_OrangTua
+No SKHUN
+Asal Sekolah ("Kota", "Provinsi")
+Tahun Lulus
+Nilai Siswa ("B.Indonesia", "MTK", "IPA")
+Foto/Scan Surat SKHUN ("Jelas")
+
+
+
+
+
+
+
