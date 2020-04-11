@@ -1,15 +1,28 @@
-@extends('layouts.master-web-ppdb')
+@extends('layouts.master-admin-ppdb')
+@section('br-mainpanel')
+    {{-- br-header --}}
+    <div class="br-pageheader">
+        <nav class="breadcrumb pd-0 mg-0 tx-12">
+            <a class="breadcrumb-item" href="{{route('home')}}">PPDB Online</a>
+            <a class="breadcrumb-item" href="#">Management Siswa</a>
+            <a class="breadcrumb-item" href="{{route('siswa-process')}}">Management Siswa Process</a>
+            <span class="breadcrumb-item active">Create Siswa</span>
+            <span class="breadcrumb-item active">Create Password Account</span>
+        </nav>
+    </div><!-- br-pageheader -->
 
-@section('content-web')
-    <!--================Service Area Start =================-->
-    <section class="hero-banner">
-        <div class="container">
-        <div class="section-intro text-center ">
-            <img class="section-intro-img" src="/safario/img/home/ppdb-logo.png" alt="">
+    {{-- br-title --}}
+    <div class="br-pagetitle">
+        <i class="fa fa-eye" style="font-size:65px;color:#000;"></i>
+        <div>
+            <h4>Create Password Account</h4>
+            <p class="mg-b-0">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
         </div>
-        
+    </div>
+
+    <div class="br-pagebody">
         <div class="d-flex align-items-center justify-content-center bg-white-300 ht-500 pd-x-20 pd-xs-x-0 mt-2">
-            <form action="{{route('laman-store')}}" method="post">
+            <form action="{{route('siswa-process-laman-store')}}" method="post">
                 @csrf
                 <div class="card wd-350 shadow-base">
                     <div class="card-body pd-x-20 pd-xs-40">
@@ -57,12 +70,10 @@
                 </div><!-- card -->
             </form>
         </div><!-- d-flex -->
-
-    </section>
-    <!--================Service Area End =================-->
+    </div><!-- br-pagebody -->
 @endsection
 
-@push('footer-web')
+@push('password-eye')
     <script>
         var state= false;
         function toggle1() {
@@ -102,3 +113,5 @@
         }
     </script>
 @endpush
+
+

@@ -73,7 +73,7 @@
 
                                 <h5 class="h5 m-0 mb-2 mt-2 p-0">Kontak</h5>
                                 <div class=" form-group">
-                                    <input type="text" name="no_hp" class="form-control form-main font-14" placeholder="Telp.Orangtua (Ayah)" id="" value="">
+                                    <input type="text" name="no_hp_ayah" class="form-control form-main font-14" placeholder="Telp.Orangtua (Ayah)" id="" value="">
                                 </div>
                                 
                                 <div class="form-group row mb-0">

@@ -1,5 +1,6 @@
 <?php
 
+// BAHASA INGGRIS
 return [
 
     /*

@@ -204,7 +204,7 @@
                         <tr>
                             <th>Nomer Handphone</th>
                             <td>:</td>
-                            <td>{{$data->data_ayah->no_hp}}</td>
+                            <td>{{$data->data_ayah->no_hp_ayah}}</td>
 
                         </tr>
                         <tr>
@@ -260,7 +260,7 @@
                         <tr>
                             <th>Nomer Handphone</th>
                             <td>:</td>
-                            <td>{{$data->data_ibu->no_hp}}</td>
+                            <td>{{$data->data_ibu->no_hp_ibu}}</td>
 
                         </tr>
                         <tr>
@@ -305,7 +305,7 @@
                         <tr>
                             <th>Jenis Kelamin</th>
                             <td>:</td>
-                            <td>{{$data->data_wali->jenis_kelamin}}</td>
+                            <td>{{$data->data_wali->jenis_kelamin_wali}}</td>
 
                         </tr>
                         <tr>
@@ -323,7 +323,7 @@
                         <tr>
                             <th>Nomer Handphone</th>
                             <td>:</td>
-                            <td>{{$data->data_wali->no_hp}}</td>
+                            <td>{{$data->data_wali->no_hp_wali}}</td>
 
                         </tr>
                         <tr>

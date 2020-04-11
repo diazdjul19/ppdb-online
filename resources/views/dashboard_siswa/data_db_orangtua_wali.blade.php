@@ -127,7 +127,7 @@
                                         <div class="form-group row">
                                             <div class="col-md-12">
                                                 <label for="" class="menu-item-label">Nomer Handphone</label>
-                                                <input type="text" name="no_hp" class="form-control" id="exampleInputEmail1"  placeholder="No Handphone"  value="{{$data->data_ayah->no_hp}}">
+                                                <input type="text" name="no_hp_ayah" class="form-control" id="exampleInputEmail1"  placeholder="No Handphone"  value="{{$data->data_ayah->no_hp_ayah}}">
                                             </div>
                                         </div>
                                     </div>
@@ -264,7 +264,7 @@
                                         <div class="form-group row">
                                             <div class="col-md-12">
                                                 <label for="" class="menu-item-label">Nomer Handphone</label>
-                                                <input type="text" name="no_hp" class="form-control" id="exampleInputEmail1"  placeholder="No Handphone"  value="{{$data->data_ibu->no_hp}}">
+                                                <input type="text" name="no_hp_ibu" class="form-control" id="exampleInputEmail1"  placeholder="No Handphone"  value="{{$data->data_ibu->no_hp_ibu}}">
                                             </div>
                                         </div>
                                     </div>
@@ -402,12 +402,12 @@
                                         <div class="form-group row">
                                             <div class="col-md-12">
                                                 <label>Jenis Kelamin</label>
-                                                <select class="form-control" id="exampleFormControlSelect1" name="jenis_kelamin">
+                                                <select class="form-control" id="exampleFormControlSelect1" name="jenis_kelamin_wali">
                                                     <optgroup label="Gender Lama">
-                                                        <option  value="{{$data->data_wali->jenis_kelamin}}">
-                                                            @if ($data->data_wali->jenis_kelamin == 'laki-laki')
+                                                        <option  value="{{$data->data_wali->jenis_kelamin_wali}}">
+                                                            @if ($data->data_wali->jenis_kelamin_wali == 'laki-laki')
                                                                 <span>Laki-laki</span>
-                                                            @elseif($data->data_wali->jenis_kelamin == 'perempuan')
+                                                            @elseif($data->data_wali->jenis_kelamin_wali == 'perempuan')
                                                                 <span>Perempuan</span>    
                                                             @endif
                                                         </option>
@@ -425,7 +425,7 @@
                                         <div class="form-group row">
                                             <div class="col-md-12">
                                                 <label for="" class="menu-item-label">Nomer Handphone</label>
-                                                <input type="text" name="no_hp" class="form-control" id="exampleInputEmail1"  placeholder="No Handphone"  value="{{$data->data_wali->no_hp}}">
+                                                <input type="text" name="no_hp_wali" class="form-control" id="exampleInputEmail1"  placeholder="No Handphone"  value="{{$data->data_wali->no_hp_wali}}">
                                             </div>
                                         </div>
                                     </div>

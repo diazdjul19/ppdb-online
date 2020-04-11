@@ -117,11 +117,11 @@ class DashboardSiswaController extends Controller
         $data->tanggal_lahir_ayah = $request->get('tanggal_lahir_ayah');
         $data->pekerjaan_ayah = $request->get('pekerjaan_ayah');
         $data->pendidikan_terakhir_ayah = $request->get('pendidikan_terakhir_ayah');
-        $data->no_hp = $request->get('no_hp');
+        $data->no_hp_ayah = $request->get('no_hp_ayah');
         $data->alamat_ayah = $request->get('alamat_ayah');
 
         $data->save();
-        return redirect(route('home-db-siswa'));
+        return redirect(route('data-db-orangtua-wali'));
     }
 
     public function update_db_orangtua_ibu(Request $request, $id)
@@ -134,11 +134,11 @@ class DashboardSiswaController extends Controller
         $data->tanggal_lahir_ibu = $request->get('tanggal_lahir_ibu');
         $data->pekerjaan_ibu = $request->get('pekerjaan_ibu');
         $data->pendidikan_terakhir_ibu = $request->get('pendidikan_terakhir_ibu');
-        $data->no_hp = $request->get('no_hp');
+        $data->no_hp_ibu = $request->get('no_hp_ibu');
         $data->alamat_ibu = $request->get('alamat_ibu');
 
         $data->save();
-        return redirect(route('home-db-siswa'));
+        return redirect(route('data-db-orangtua-wali'));
     }
 
     public function update_db_orangtua_wali(Request $request, $id)
@@ -150,12 +150,13 @@ class DashboardSiswaController extends Controller
         $data->tempat_lahir_wali = $request->get('tempat_lahir_wali');
         $data->tanggal_lahir_wali = $request->get('tanggal_lahir_wali');
         $data->pekerjaan_wali = $request->get('pekerjaan_wali');
+        $data->jenis_kelamin_wali = $request->get('jenis_kelamin_wali');
         $data->pendidikan_terakhir_wali = $request->get('pendidikan_terakhir_wali');
-        $data->no_hp = $request->get('no_hp');
+        $data->no_hp_wali = $request->get('no_hp_wali');
         $data->alamat_wali = $request->get('alamat_wali');
 
         $data->save();
-        return redirect(route('home-db-siswa'));
+        return redirect(route('data-db-orangtua-wali'));
     }
 
 
@@ -165,10 +166,22 @@ class DashboardSiswaController extends Controller
         $data = MsProspectiveStudents::where('enter_code', $enter_code)->with('data_ayah', 'data_ibu', 'data_wali','data_sekolah_nilai')->first();
 
         // Create Rata Rata Nilai
-        $rata_nilai = $data->data_sekolah_nilai->nilai_bahasa_indonesia + $data->data_sekolah_nilai->nilai_mtk + $data->data_sekolah_nilai->nilai_ipa;
+        if ($data->data_sekolah_nilai != true) {
 
-        $pdf = \PDF::loadView('pdf.download_formulir_db_siswa', compact('data', 'rata_nilai'))->setPaper('a4');
-        return $pdf->download('Formulir Sekolah - '.$data->nisn.'.pdf');
+            \Session::flash('gagal_download', "Hallo '$data->nama_calon_siswa', Maaf Anda Harus Mengupload Data Nilai Anda Terlebih Dahulu.");
+            return redirect(route('home-db-siswa'));
+
+        } elseif($data) {
+
+             // Create Rata Rata Nilai
+            $rata_nilai = $data->data_sekolah_nilai->nilai_bahasa_indonesia + $data->data_sekolah_nilai->nilai_mtk + $data->data_sekolah_nilai->nilai_ipa;
+
+            $pdf = \PDF::loadView('pdf.download_formulir_db_siswa', compact('data', 'rata_nilai'))->setPaper('a4');
+            return $pdf->download('Formulir Sekolah - '.$data->nisn.'.pdf');
+            
+        }
+
+
 
     }
 

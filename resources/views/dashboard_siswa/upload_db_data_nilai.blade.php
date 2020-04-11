@@ -37,7 +37,7 @@
                     Jadi jika anda sudah pernah menekan tombol simpan pada form data nilai maka anda tidak akan bisa mengakses halaman ini kembali. <br>
                     Maka dari itu tolong isikan data nilai dengan data yang benar dan foto skhun yang sebenar benar-nya. <br><br>
 
-                    <li>Jika surat skhun dan data nilai yang ands inputkan tidak cocok kemungkianan anda tidak akan di terima / tidak lulus.</li> <br>
+                    <li>Jika surat skhun dan data nilai yang anda inputkan tidak cocok kemungkianan anda tidak akan di terima / tidak lulus.</li> <br>
                     <li>Upload data nilai berlaku sampai batas yang telah di tentukan oleh operator ppdb.</li> <br>
                     <li>Jika anda mengalami masalah dalam mengupload data nilai mohon hubungi operator ppdb.</li>
 
@@ -67,7 +67,7 @@
                             {{-- ID Calon Siswa --}}
                             <input type="hidden" name="id_table_ms_prospective_students" required readonly value="{{$data->id}}">
                             {{-- ID Calon Siswa --}}
-                            <input type="text" name="asal_sekolah_nama" class="form-control" id="exampleInputEmail1"  placeholder="Nama Sekolah" autofocus required>
+                            <input type="text" name="asal_sekolah_nama" class="form-control" id="exampleInputEmail1"  placeholder="Nama Sekolah" required>
                         </div>
 
                         <div class="form-group">

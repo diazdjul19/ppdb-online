@@ -1,51 +1,35 @@
-@extends('layouts.master-dashboard-siswa-ppdb')
+@extends('layouts.master-admin-ppdb')
 @section('br-mainpanel')
+    {{-- br-header --}}
+    <div class="br-pageheader">
+        <nav class="breadcrumb pd-0 mg-0 tx-12">
+            <a class="breadcrumb-item" href="{{route('home')}}">PPDB Online</a>
+            <a class="breadcrumb-item" href="#">Management Siswa</a>
+
+            @if ($data->status == 'process')
+                <a class="breadcrumb-item" href="{{route('siswa-process')}}">Management Siswa Process</a>
+                <span class="breadcrumb-item active">Detail Siswa Process</span>
+            @elseif($data->status == 'received')
+                <a class="breadcrumb-item" href="{{route('siswa-received')}}">Management Siswa Received</a>
+                <span class="breadcrumb-item active">Detail Siswa Received</span>
+            @elseif($data->status == 'rejected')
+                <a class="breadcrumb-item" href="{{route('siswa-rejected')}}">Management Siswa Rejected</a>
+                <span class="breadcrumb-item active">Detail Siswa Rejected</span>
+            @endif
+            
+        </nav>
+    </div><!-- br-pageheader -->
+
+    {{-- br-title --}}
     <div class="br-pagetitle">
-        <i class="icon ion-ios-home-outline"></i>
+        <i class="fas fa-info-circle" style="font-size:65px;color:#000;"></i>
         <div>
-            <h4>Dashboard</h4>
-            <p class="mg-b-0">Do bigger things with Bracket plus, the responsive bootstrap 4 admin template.</p>
+            <h4>Detail Siswa Process</h4>
+            <p class="mg-b-0">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
         </div>
     </div>
 
     <div class="br-pagebody">
-        {{-- Alert --}}
-            @if ($message = Session::get('gagal_masuk'))
-                <div class="alert alert-danger alert-bordered pd-y-20" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                    <div class="d-flex align-items-center justify-content-start">
-                    <i class="icon ion-ios-close alert-icon tx-52 tx-danger mg-r-20"></i>
-                    <div class="mg-t-20 mg-sm-t-0">
-                        <h5 class="mg-b-2 tx-danger">Hallo {{$data->nama_calon_siswa}}, Maaf Anda Sudah Tidak Memiliki Akses</h5>
-                        <p class="mg-b-0 tx-gray">{{$message}}</p> <br>
-                        <li>Silahkan hubungi operator PPDB jika anda memiliki masalah.</li>
-
-                    </div>
-                    </div><!-- d-flex -->
-                </div><!-- alert -->
-            @endif
-        <!-- alert -->
-
-
-        {{-- Alert --}}
-            @if ($message = Session::get('gagal_download'))
-                <div class="alert alert-danger alert-bordered pd-y-20" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                    <div class="d-flex align-items-center justify-content-start">
-                    <i class="icon ion-ios-close alert-icon tx-52 tx-danger mg-r-20"></i>
-                    <div class="mg-t-20 mg-sm-t-0">
-                        <h5 class="mg-b-2 tx-danger">Gagal Download Formulir</h5>
-                        <p class="mg-b-0 tx-gray">{{$message}}</p> <br>
-                    </div>
-                    </div><!-- d-flex -->
-                </div><!-- alert -->
-            @endif
-        <!-- alert -->
-
 
         <div class="row row-sm">
             <div class="col-sm-4">
@@ -80,16 +64,7 @@
                                     </tr>
                                     </p>
                                 </li>
-                                <li class="list-group-item rounded-top-0">
-                                    <p class="mg-b-0">
-                                    <i class="fa fa-tags tx-info mg-r-8"></i>
-                                    <tr>
-                                        <th><strong class="tx-inverse tx-medium">Status</strong></th>
-                                        <td><span class="text-muted">:</span></td>
-                                        <th><span class="text-muted">{{$data->status}}</span></th>
-                                    </tr>
-                                    </p>
-                                </li>
+                                
                                 <li class="list-group-item rounded-top-0">
                                     <p class="mg-b-0">
                                     <i class="fa fa-tags tx-info mg-r-8"></i>
@@ -100,15 +75,76 @@
                                     </tr>
                                     </p>
                                 </li>
+
+                                <li class="list-group-item rounded-top-0">
+                                    <p class="mg-b-0">
+                                    <i class="fa fa-tags tx-info mg-r-8"></i>
+                                    <tr>
+                                        <th><strong class="tx-inverse tx-medium">Status</strong></th>
+                                        <td><span class="text-muted">:</span></td>
+                                        <th><span class="text-muted">
+                                            @if ($data->status == 'process')
+                                                <span class="badge badge-warning" style="font-size:12px;">Menunggu</span> 
+                                            @elseif($data->status == 'received')
+                                                <span class="badge badge-success" style="font-size:12px;">Di Terima</span>
+                                            @elseif($data->status == 'rejected')
+                                                <span class="badge badge-danger" style="font-size:12px;">Di Tolak</span> 
+                                            @endif 
+                                        </span></th>
+                                    </tr>
+                                    </p>
+                                </li>
+
+                                @if ($data->status == 'process' )
+                                    <li class="list-group-item rounded-top-0">
+                                        <p class="mg-b-0">
+                                        <i class="fa fa-tags tx-info mg-r-8"></i>
+                                        <tr>
+                                            <th><strong class="tx-inverse tx-medium">Action</strong></th>
+                                            <td><span class="text-muted">:</span></td>
+                                            <th><span class="text-muted">
+                                                <td class="text-center">
+                                                    <a class="badge badge-success p-2 ml-3 mr-1" href="{{route('siswa-detail.received', $data->id)}}"><i class="fa fa-user-check mr-2"></i>Terima</a>
+                                                    <a class="badge badge-danger p-2 ml-1" href="{{route('siswa-detail.rejected', $data->id)}}"><i class="fa fa-user-times mr-2"></i>Tolak</a>
+                                                </td>
+                                            </span></th>
+                                        </tr>
+                                        </p>
+                                    </li>
+                                @elseif($data->status == 'received')
+                                    <br>
+                                    <a href="{{route('download-formulir-db-siswa' , $data->enter_code)}}" class="btn btn-primary"><i class="fa fa-download mg-r-10"></i>Download Formulir</a>
+                                @elseif($data->status == 'rejected')
+
+                                @endif
                                 
-                                <br>
-                                <a href="{{route('download-formulir-db-siswa' , $data->enter_code)}}" class="btn btn-primary"><i class="fa fa-download mg-r-10"></i>Download Formulir</a>
+
+
+                                
                                 <!-- add more here -->
                             </ul>
                         </div><!-- card-body -->
                     </div>
-                    
                 </div><!-- card -->
+
+                <br>
+
+                @if ($data->data_sekolah_nilai != true)
+                    <div class="card">
+                        <div class="card-header tx-medium bd-0 tx-white bg-dance">
+                        Hallo, {{Auth::user()->name}}
+                        </div><!-- card-header -->
+                        <div class="card-body bd bd-t-0 rounded-bottom">
+                        <p class="mg-b-0">PERINGATAN, Calon siswa  bernama "{{$data->nama_calon_siswa}}" dengan nomer NISN "{{$data->nisn}}", Belum mengupload data nilai.</p>
+                        </div><!-- card-body -->
+                    </div><!-- card -->
+                @else
+                    
+                @endif
+                
+
+
+
             </div>
 
             <div class="col-sm-8">

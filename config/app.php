@@ -171,6 +171,8 @@ return [
         // wkhtmltopdf
         Barryvdh\Snappy\ServiceProvider::class,
 
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+
         /*
          * Package Service Providers...
          */
@@ -245,6 +247,8 @@ return [
         // Wkhtmltopdf
         'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
         'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
+
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];

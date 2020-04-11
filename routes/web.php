@@ -98,5 +98,50 @@ Auth::routes();
     Route::get('user/delete/{id}',"UserController@destroy")->name("user.destroy");
 
 
+    // Start Management SISWA
+
+        // Start Management Siswa (Edit, Delete, Detail)
+            Route::get('/siswa-edit/{id}', 'ManagementSiswaController@siswa_edit')->name('siswa-edit');
+            Route::put('/siswa-update-datadiri/{id}', 'ManagementSiswaController@siswa_update_datadiri')->name('siswa-update-datadiri');
+            Route::put('/siswa-update-data-nilai/{id}', 'ManagementSiswaController@siswa_update_data_nilai')->name('siswa-update-data-nilai');
+            Route::put('/siswa-update-data-orangtua-wali/{id_table_ms_prospective_students}', 'ManagementSiswaController@siswa_update_data_orangtua_wali')->name('siswa-update-data-orangtua-wali');
+
+            Route::get('/siswa-detail/{id}', 'ManagementSiswaController@siswa_detail')->name('siswa-detail');
+            Route::get('siswa-detail/received/{id}', "ManagementSiswaController@received")->name("siswa-detail.received");
+            Route::get('siswa-detail/rejected/{id}', "ManagementSiswaController@rejected")->name("siswa-detail.rejected");
+
+            Route::get('/siswa-delete/{id}',"ManagementSiswaController@siswa_delete")->name("siswa-delete");
+        // End Management Siswa (Edit, Delete, Detail)
+
+
+        //Start Management Siswa Process
+            Route::get('/siswa-process', 'ManagementSiswaController@siswa_process')->name('siswa-process');
+
+            Route::get('siswa-process-create-siswa', 'ManagementSiswaController@siswa_process_create_siswa')->name('siswa-process-create-siswa');
+            Route::post('/siswa-process-store', 'ManagementSiswaController@siswa_process_store')->name('siswa-process-store');
+
+            Route::get('/siswa-process-laman-confirm/{enter_code}', 'ManagementSiswaController@siswa_process_laman_confirm')->name('siswa-process-laman-confirm');
+            Route::post('/siswa-process-laman-store', 'ManagementSiswaController@siswa_process_laman_store')->name('siswa-process-laman-store');
+        // End Management Siswa Process
+
+
+        // Start Management Siswa Received
+            Route::get('/siswa-received', 'ManagementSiswaController@siswa_received')->name('siswa-received');
+            Route::get('/downloadall-received-pdf', 'ManagementSiswaController@downloadall_received_pdf')->name('downloadall-received-pdf');
+            Route::get('/export-received-excel', 'ManagementSiswaController@export_received_excel')->name('export-received-excel');
+        // End Management Siswa Received
+
+        
+        // Start Management Siswa Rejected
+            Route::get('/siswa-rejected', 'ManagementSiswaController@siswa_rejected')->name('siswa-rejected');
+        // End Management Siswa Rejected
+
+    // End Management SISWA
+
+
+    
+
+
+
 
     // End Routing Dashboard Admin

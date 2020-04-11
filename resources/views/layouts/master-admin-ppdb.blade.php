@@ -110,6 +110,19 @@
             </ul>
         </li><!-- br-menu-item -->
 
+        <li class="br-menu-item">
+            <a href="#" class="br-menu-link with-sub {{ request()->is('siswa-process', 'siswa-received') ? 'active' : '' }}">
+            <i class="menu-item-icon icon ion-person-stalker tx-20"></i>
+            <span class="menu-item-label">Management Siswa</span>
+            </a><!-- br-menu-link -->
+            <ul class="br-menu-sub nav flex-column">
+                <li class="sub-item"><a href="{{route('siswa-process')}}" class="sub-link {{ request()->is('siswa-process') ? 'active' : '' }}">Data Pendaftar (Proses)</a></li>
+                <li class="sub-item"><a href="{{route('siswa-received')}}" class="sub-link {{ request()->is('siswa-received') ? 'active' : '' }}">Siswa Di Terima (Received)</a></li>
+                <li class="sub-item"><a href="{{route('siswa-rejected')}}" class="sub-link {{ request()->is('siswa-rejected') ? 'active' : '' }}">Siswa Di Tolak (Rejected)</a></li>
+
+            </ul>
+        </li><!-- br-menu-item -->
+
         <br>
     </div><!-- br-sideleft -->
     <!-- ########## END: LEFT PANEL ########## -->
@@ -207,6 +220,9 @@
     <script src="/bracket-master/app/lib/peity/jquery.peity.min.js"></script>
     <script src="/bracket-master/app/js/bracket.js"></script>
 
+    <script src="/bracket-master/app/lib/jquery-steps/build/jquery.steps.min.js"></script>
+    <script src="/bracket-master/app/lib/parsleyjs/parsley.min.js"></script>
+
     {{-- Datatable --}}
     <script src="/bracket-master/app/lib/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="/bracket-master/app/lib/datatables.net-dt/js/dataTables.dataTables.min.js"></script>
@@ -216,6 +232,8 @@
     
 
     @stack('footer-admin')
+    @stack('script-1')
+    @stack('password-eye')
 
 </body>
 </html>

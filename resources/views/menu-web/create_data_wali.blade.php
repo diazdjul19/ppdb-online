@@ -48,7 +48,7 @@
 
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <select name="jenis_kelamin" id="" required>
+                                        <select name="jenis_kelamin_wali" id="" required>
                                             <option value="disabled" disabled selected>Jenis Kelamin</option>
                                             <option value="laki-laki">Laki - Laki</option>
                                             <option value="perempuan">Perempuan</option>
@@ -83,7 +83,7 @@
 
                                 <h5 class="h5 m-0 mb-2 mt-2 p-0">Kontak</h5>
                                 <div class=" form-group">
-                                    <input type="text" name="no_hp" class="form-control form-main font-14" placeholder="Telp.Orangtua (Wali)" id="" value="">
+                                    <input type="text" name="no_hp_wali" class="form-control form-main font-14" placeholder="Telp.Orangtua (Wali)" id="" value="">
                                 </div>
                                 
                                 <div class="form-group row mb-0">

@@ -35,8 +35,14 @@ return [
     'date_equals' => 'The :attribute must be a date equal to :date.',
     'date_format' => 'The :attribute does not match the format :format.',
     'different' => 'The :attribute and :other must be different.',
-    'digits' => 'The :attribute must be :digits digits.',
-    'digits_between' => 'The :attribute must be between :min and :max digits.',
+    // B.inggris
+    // 'digits' => 'The :attribute must be :digits digits.',
+    // 'digits_between' => 'The :attribute must be between :min and :max digits.',
+
+    // B.indonesia
+    'digits' => 'Isian :attribute harus berupa angka :digits.',
+    'digits_between' => 'Isian :attribute harus antara angka :min dan :max.',
+    
     'dimensions' => 'The :attribute has invalid image dimensions.',
     'distinct' => 'The :attribute field has a duplicate value.',
     'email' => 'The :attribute must be a valid email address.',
@@ -96,7 +102,10 @@ return [
     'password' => 'The password is incorrect.',
     'present' => 'The :attribute field must be present.',
     'regex' => 'The :attribute format is invalid.',
-    'required' => 'The :attribute field is required.',
+    // B.inggris
+    // 'required' => 'The :attribute field is required.',
+    // B.indonesia
+    'required' => 'Bidang isian :attribute wajib diisi.',
     'required_if' => 'The :attribute field is required when :other is :value.',
     'required_unless' => 'The :attribute field is required unless :other is in :values.',
     'required_with' => 'The :attribute field is required when :values is present.',

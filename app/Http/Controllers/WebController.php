@@ -91,7 +91,7 @@ class WebController extends Controller
         $data_cs->alamat_kecamatan = $request->alamat_kecamatan;
         $data_cs->alamat_kota_kabupaten = $request->alamat_kota_kabupaten;
         $data_cs->alamat_provinsi = $request->alamat_provinsi;
-        $data_cs->status= 'Seleksi';
+        $data_cs->status= 'process';
         
         if(isset($request->foto_siswa)){
             $imageFile = $request->nama_calon_siswa.'/'.\Str::random(60).'.'.$request->foto_siswa->getClientOriginalExtension();
@@ -141,7 +141,7 @@ class WebController extends Controller
         $data_ayah->tanggal_lahir_ayah = $request->tanggal_lahir_ayah;
         $data_ayah->pekerjaan_ayah = $request->pekerjaan_ayah;
         $data_ayah->pendidikan_terakhir_ayah = $request->pendidikan_terakhir_ayah;
-        $data_ayah->no_hp = $request->no_hp;
+        $data_ayah->no_hp_ayah = $request->no_hp_ayah;
         $data_ayah->alamat_ayah = $request->alamat_ayah;
         $data_ayah->save();
 
@@ -184,7 +184,7 @@ class WebController extends Controller
         $data_ibu->tanggal_lahir_ibu = $request->tanggal_lahir_ibu;
         $data_ibu->pekerjaan_ibu = $request->pekerjaan_ibu;
         $data_ibu->pendidikan_terakhir_ibu = $request->pendidikan_terakhir_ibu;
-        $data_ibu->no_hp = $request->no_hp;
+        $data_ibu->no_hp_ibu = $request->no_hp_ibu;
         $data_ibu->alamat_ibu = $request->alamat_ibu;
         $data_ibu->save();
         
@@ -223,9 +223,9 @@ class WebController extends Controller
         $data_wali->tempat_lahir_wali = $request->tempat_lahir_wali;
         $data_wali->tanggal_lahir_wali = $request->tanggal_lahir_wali;
         $data_wali->pekerjaan_wali = $request->pekerjaan_wali;
-        $data_wali->jenis_kelamin = $request->jenis_kelamin;
+        $data_wali->jenis_kelamin_wali = $request->jenis_kelamin_wali;
         $data_wali->pendidikan_terakhir_wali = $request->pendidikan_terakhir_wali;
-        $data_wali->no_hp = $request->no_hp;
+        $data_wali->no_hp_wali = $request->no_hp_wali;
         $data_wali->alamat_wali = $request->alamat_wali;
         $data_wali->save();
         
