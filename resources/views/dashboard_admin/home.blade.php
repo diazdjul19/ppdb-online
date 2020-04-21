@@ -17,52 +17,57 @@
                 <i class="fa fa-users tx-50 lh-0 tx-white op-7"></i>
                 <div class="mg-l-20">
                     <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">Jumlah Pendaftar</p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">500 siswa</p>
+                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">{{$data_all}} Siswa</p>
                     <span class="tx-11 tx-roboto tx-white-8"></span>
                 </div>
                 </div>
                 <div id="ch1" class="ht-50 tr-y-1"></div>
             </div>
             </div><!-- col-3 -->
-            <div class="col-sm-6 col-xl-3 mg-t-20 mg-sm-t-0">
-            <div class="bg-danger rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                <i class="fa fa-user-times tx-50 lh-0 tx-white op-7"></i>
-                <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">Tidak Lulus</p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">10 siswa</p>
-                    <span class="tx-11 tx-roboto tx-white-8"></span>
-                </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-            </div>
-            </div><!-- col-3 -->
+
             <div class="col-sm-6 col-xl-3 mg-t-20 mg-xl-t-0">
             <div class="bg-success rounded overflow-hidden">
                 <div class="pd-x-20 pd-t-20 d-flex align-items-center">
                 <i class="fa fa-user-check tx-50 lh-0 tx-white op-7"></i>
                 <div class="mg-l-20">
                     <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">Peserta Lulus</p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">300 siswa</p>
+                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">{{$data_received}} Siswa</p>
                     <span class="tx-11 tx-roboto tx-white-8"></span>
                 </div>
                 </div>
                 <div id="ch2" class="ht-50 tr-y-1"></div>
             </div>
             </div><!-- col-3 -->
+
             <div class="col-sm-6 col-xl-3 mg-t-20 mg-xl-t-0">
             <div class="bg-warning rounded overflow-hidden">
                 <div class="pd-x-20 pd-t-20 d-flex align-items-center">
                 <i class="ion ion-clock tx-50 lh-0 tx-white op-7"></i>
                 <div class="mg-l-20">
                     <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">Belum Di Proses</p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">100 siswa</p>
+                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">{{$data_process}} Siswa</p>
+                    <span class="tx-11 tx-roboto tx-white-8"></span>
+                </div>
+                </div>
+                <div id="ch3" class="ht-50 tr-y-1"></div>
+            </div>
+            </div><!-- col-3 -->
+            
+            <div class="col-sm-6 col-xl-3 mg-t-20 mg-sm-t-0">
+            <div class="bg-danger rounded overflow-hidden">
+                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                <i class="fa fa-user-times tx-50 lh-0 tx-white op-7"></i>
+                <div class="mg-l-20">
+                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">Tidak Lulus</p>
+                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">{{$data_rejected}} Siswa</p>
                     <span class="tx-11 tx-roboto tx-white-8"></span>
                 </div>
                 </div>
                 <div id="ch4" class="ht-50 tr-y-1"></div>
             </div>
             </div><!-- col-3 -->
+            
+            
         </div><!-- row -->
 
         <br>
@@ -136,7 +141,8 @@
 
             <div class="col-sm-8">
                 <div class="card bd-0 shadow-base pd-25">
-                    
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.2633759019077!2d106.92984501431162!3d-6.359947563986839!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6993411a5d5955%3A0x3070600ac1dee970!2sSMK%20Negeri%204%20Kota%20Bekasi!5e0!3m2!1sid!2sid!4v1571283969085!5m2!1sid!2sid" width="100%" height="480px" frameborder="0" style="border:0;" allowfullscreen="">
+                    </iframe>
                 </div><!-- card -->
             </div>
         </div><!-- row -->

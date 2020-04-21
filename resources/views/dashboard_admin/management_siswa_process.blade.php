@@ -81,6 +81,7 @@
                         <th class="text-center">No</th>
                         <th class="text-center">Nama</th>
                         <th class="text-center">NISN</th>
+                        <th class="text-center">Nilai</th>
                         <th class="text-center">Jenis Kelamin</th>
                         <th class="text-center">Status</th>
                         <th class="text-center">Action</th>
@@ -94,6 +95,7 @@
                             <td class="text-center pt-4">{{$loop->iteration}}</td>
                             <td class="text-center pt-4">{{$d->nama_calon_siswa}}</td>
                             <td class="text-center pt-4">{{$d->nisn}}</td>
+                            <td class="text-center pt-4" style="font-weight:bold;">{{$d->data_sekolah_nilai->rata_nilai}}</td>
                             <td class="text-center pt-4">
                                 @if ($d->jenis_kelamin == 'laki-laki')
                                     <span class="badge badge-primary p-1" style="font-size:12px;">Laki - Laki</span> 

@@ -21,9 +21,10 @@ class CreateMsProspectiveStudentGradesTable extends Migration
             $table->string("asal_sekolah_nama")->nullable();
             $table->string("asal_sekolah_kota")->nullable();
             $table->string("asal_sekolah_provinsi")->nullable();
-            $table->string("nilai_bahasa_indonesia")->nullable();
-            $table->string("nilai_mtk")->nullable();
-            $table->string("nilai_ipa")->nullable();
+            $table->float("nilai_bahasa_indonesia")->nullable();
+            $table->float("nilai_mtk")->nullable();
+            $table->float("nilai_ipa")->nullable();
+            $table->float("rata_nilai")->nullable();
             $table->string("foto_scan_surat_skhun")->nullable();
             $table->timestamps();
         });

@@ -64,6 +64,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'logoutdbsiswa'=> \App\Http\Middleware\LogoutDbSiswa::class,
         'firewalldbsiswa'=> \App\Http\Middleware\FirewallDbSiswa::class,
+        'checklevel' => \App\Http\Middleware\CheckLevel::class,
 
     ];
 }

@@ -8,6 +8,7 @@ use App\Models\CandidatsMaster\MsProspectiveStudentGrades;
 use App\Models\CandidatsMaster\MsFatherData;
 use App\Models\CandidatsMaster\MsMotherData;
 use App\Models\CandidatsMaster\MsGuardiansData;
+use App\Models\MaWebMaster\MsOpenCloseWeb;
 
 use PDF;
 
@@ -23,19 +24,41 @@ class DashboardSiswaController extends Controller
         $data_cs = \Session::get('siswa');
         $data = MsProspectiveStudents::where('id', $data_cs->id)->with('data_ayah', 'data_ibu', 'data_wali','data_sekolah_nilai')->first();
         
+        $dt = date('Y-m-d H:i:s');
+        // Start Auto Reject Siswa
+            $open_close = MsOpenCloseWeb::where('jenis_maweb', 'maweb_pendaftaran')        
+                                    ->where('dari_tgl','<=',$dt)
+                                    ->where('sampai_tgl','>=',$dt)
+                                    ->orderBy('id', 'desc')
+                                    ->first();
+
+            if ($open_close != null) {
+
+                if ($dt >= $open_close->sampai_tgl) {
+                    $data->update(['status' => 'rejected']);
+                } 
+                elseif ($dt >= $open_close->dari_tgl) {
+                    # code...
+                }
+
+            }
+        // End Auto Reject Siswa
 
         // Create Rata Rata Nilai
         if ($data->data_sekolah_nilai != true) {
 
             return view('dashboard_siswa.home_db_siswa', compact('data'));
             
-
         } elseif($data) {
 
             $rata_nilai = $data->data_sekolah_nilai->nilai_bahasa_indonesia + $data->data_sekolah_nilai->nilai_mtk + $data->data_sekolah_nilai->nilai_ipa;
             return view('dashboard_siswa.home_db_siswa', compact('data', 'rata_nilai'));
             
         }
+
+
+        
+
 
 
     }
@@ -95,8 +118,6 @@ class DashboardSiswaController extends Controller
         return redirect(route('home-db-siswa'));
 
     }
-
-
 
 
     public function data_db_orangtua_wali()
@@ -160,7 +181,6 @@ class DashboardSiswaController extends Controller
     }
 
 
-
     public function download_formulir_db_siswa($enter_code)
     {
         $data = MsProspectiveStudents::where('enter_code', $enter_code)->with('data_ayah', 'data_ibu', 'data_wali','data_sekolah_nilai')->first();
@@ -184,6 +204,7 @@ class DashboardSiswaController extends Controller
 
 
     }
+
 
     // Upload Data Nilai Berlaku Untuk Sekali Upload
     public function upload_data_nilai()
@@ -233,6 +254,8 @@ class DashboardSiswaController extends Controller
         $data_nilai->nilai_bahasa_indonesia = $request->de_indo .'.'. $request->be_indo;
         $data_nilai->nilai_mtk = $request->de_mtk .'.'. $request->be_mtk;
         $data_nilai->nilai_ipa = $request->de_ipa .'.'. $request->be_ipa;
+
+        $data_nilai->rata_nilai = $data_nilai->nilai_bahasa_indonesia + $data_nilai->nilai_mtk + $data_nilai->nilai_ipa;
         
 
         if(isset($request->foto_scan_surat_skhun)){
@@ -252,11 +275,62 @@ class DashboardSiswaController extends Controller
         $ids_akhir = $data_nilai->id;
         $ids->update(['id_table_ms_prospective_grades' => $ids_akhir]);
 
+        // // SCRIPT Update relation_rata_nilai
+        // $data_relasi = MsProspectiveStudents::where('id',$data_nilai->id_table_ms_prospective_students)->first();
+        // $data_relasi_akhir = $data_nilai->id_table_ms_prospective_students;
+        // $data_relasi->update(['relation_rata_nilai' => $data_relasi_akhir]);
+
+
 
         return redirect(route('home-db-siswa', [$ids->enter_code ]));
 
         
         
+    }
+
+
+    public function edit_password($enter_code)
+    {
+
+        $data = MsProspectiveStudents::where('enter_code' , $enter_code)->first();
+        
+        if ($data == true) {
+            return view('dashboard_siswa.laman_edit_password', compact('data'));
+        }
+        elseif($data == false) {
+            return abort(404);
+        }
+        
+    }
+
+    public function edit_password_store(Request $request)
+    {    
+        
+        $data = MsProspectiveStudents::where('nisn',$request->nisn)->first();
+
+        if ($request->password_pendaftaran != $request->password_confirm) {
+
+            
+            \Session::flash('error', 'Password Tidak Sama !');
+
+            return redirect(route('edit-password', [$data->enter_code ]));
+            
+        }
+
+
+        if (isset($request->password_pendaftaran)) {
+            $data->password_pendaftaran = \Hash::make($request->password_pendaftaran);
+        }
+
+
+        
+        $data_akhir = $data->password_pendaftaran;
+        $data->update(['password_pendaftaran' => $data_akhir]);
+
+
+        \Session::flash('success', 'Sukses Update Password');
+        return redirect(route('home-db-siswa'));
+
     }
 
 

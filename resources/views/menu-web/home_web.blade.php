@@ -9,6 +9,51 @@
     <section class="hero-banner magic-ball">
         <div class="container">
 
+            @if ($message = Session::get('gagal_masuk_contact_us'))
+                <div class="alert alert-danger alert-bordered pd-y-20" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="d-sm-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-close alert-icon tx-52 tx-danger mg-r-20"></i>
+                    <div class="mg-t-20 mg-sm-t-0">
+                        <h5 class="mg-b-2 tx-danger">Gagal Masuk Ke Halaman Contact Us.</h5>
+                        <p class="mg-b-0 tx-gray">{{$message}}</p>
+                    </div>
+                    </div><!-- d-flex -->
+                </div><!-- alert -->
+            @endif
+
+            @if ($message = Session::get('gagal_masuk_hasil_seleksi'))
+                <div class="alert alert-danger alert-bordered pd-y-20" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="d-sm-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-close alert-icon tx-52 tx-danger mg-r-20"></i>
+                    <div class="mg-t-20 mg-sm-t-0">
+                        <h5 class="mg-b-2 tx-danger">Gagal Masuk Ke Halaman Hasil Seleksi.</h5>
+                        <p class="mg-b-0 tx-gray">{{$message}}</p>
+                    </div>
+                    </div><!-- d-flex -->
+                </div><!-- alert -->
+            @endif
+
+            @if ($message = Session::get('gagal_masuk_pendaftaran'))
+                <div class="alert alert-danger alert-bordered pd-y-20" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="d-sm-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-close alert-icon tx-52 tx-danger mg-r-20"></i>
+                    <div class="mg-t-20 mg-sm-t-0">
+                        <h5 class="mg-b-2 tx-danger">Gagal Masuk Ke Halaman Pendaftaran.</h5>
+                        <p class="mg-b-0 tx-gray">{{$message}}</p>
+                    </div>
+                    </div><!-- d-flex -->
+                </div><!-- alert -->
+            @endif
+
             @if ($message = Session::get('success'))
                 <div class="alert alert-success alert-bordered pd-y-20" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">

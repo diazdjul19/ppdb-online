@@ -28,10 +28,42 @@
             <h4>Update Data Siswa</h4>
             <p class="mg-b-0"></p>
         </div>
+
     </div>
 
     {{-- br-body --}}
     <div class="br-pagebody">
+
+        @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-bordered pd-y-20" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="d-sm-flex align-items-center justify-content-start">
+                <i class="icon ion-ios-checkmark alert-icon tx-52 mg-r-20 tx-success"></i>
+                <div class="mg-t-20 mg-sm-t-0">
+                    <h5 class="mg-b-2 tx-success">{{$message}}</h5>
+                    <p class="mg-b-0 tx-gray">Siswa login menggunakan NISN dan Password yang telah anda Update.</p>
+                </div>
+                </div><!-- d-flex -->
+            </div><!-- alert -->
+        @endif
+
+        @if ($message = Session::get('error'))
+            <div class="alert alert-danger alert-bordered pd-y-20" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="d-sm-flex align-items-center justify-content-start">
+                <i class="icon ion-ios-close alert-icon tx-52 tx-danger mg-r-20"></i>
+                <div class="mg-t-20 mg-sm-t-0">
+                    <h5 class="mg-b-2 tx-danger">Gagal Update Password Siswa !</h5>
+                    <p class="mg-b-0 tx-gray">{{$message}}</p>
+                </div>
+                </div><!-- d-flex -->
+            </div><!-- alert -->
+        @endif
+
         <div class="br-section-wrapper bg-white shadow-sm">
             <div class="row justify-content-center ">
                 <div class="col-12 grid-margin ">
@@ -371,7 +403,7 @@
                                     <i class="far fa-arrow-alt-circle-left mt-2" style="font-size:30px;"></i>
                                 </a>
                             @endif
-                            <h3 class="card-title mb-md-0">Form Upload Data Nilai</h3>
+                            <h3 class="card-title mb-md-0">Form Update Data Nilai</h3>
                         </div>
                         <br>                          
                         
@@ -966,5 +998,159 @@
         </div>
     </div>
 
+    <div class="br-pagebody">
+        <div class="br-section-wrapper bg-white shadow-sm">
+            <form class="form-sample" action="{{route('edit-password-siswa-store')}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="row justify-content-center ">
+                        <div class="col-12 grid-margin ">
+                                <div class="d-md-flex align-items-center mb-4">
+
+                                    @if ($data->status == 'process')
+                                        <a href="{{route('siswa-process')}}" style="font-size:25px; margin-right:10px; text-decoration:none;" href="">
+                                            <i class="far fa-arrow-alt-circle-left mt-2" style="font-size:25px;"></i>
+                                        </a>
+                                    @elseif($data->status == 'received')
+                                        <a href="{{route('siswa-received')}}" style="font-size:25px; margin-right:10px; text-decoration:none;" href="">
+                                            <i class="far fa-arrow-alt-circle-left mt-2" style="font-size:25px;"></i>
+                                        </a>
+                                    @elseif($data->status == 'rejected')
+                                        <a href="{{route('siswa-rejected')}}" style="font-size:25px; margin-right:10px; text-decoration:none;" href="">
+                                            <i class="far fa-arrow-alt-circle-left mt-2" style="font-size:25px;"></i>
+                                        </a>
+                                    @endif
+                                    <h4 class="card-title mb-md-0">Form Edit Password Siswa</h4>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <div class="col-md-12">
+                                                <label for="" class="menu-item-label">Nama Siswa</label>
+                                                <input type="text" name="nama_calon_siswa" class="form-control" id="exampleInputEmail1"  placeholder="Nama Ayah"  value="{{$data->nama_calon_siswa}}" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <div class="col-md-12">
+                                                <label for="" class="menu-item-label">NISN</label>
+                                                <input type="text" name="nisn" class="form-control" id="exampleInputEmail1"  placeholder="NIK Ayah" value="{{$data->nisn}}" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <div class="col-md-12">
+                                                <label for="" class="menu-item-label">New Password</label>
+                                                <div class="input-group">
+                                                    <input class="form-control" type="password" name="password_pendaftaran" placeholder="Password" id="password" >
+                                                    <div class="input-group-append">
+                                                        <div class="input-group-text"><i class="fa fa-eye" arial-hidden="true" id="eye1" onclick="toggle1()"></i></div>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                @if ($message = Session::get('error'))
+                                                    <div class="alert alert-danger" role="alert">
+                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                        <div class="d-flex align-items-center justify-content-start">
+                                                            <i class="icon ion-ios-close alert-icon tx-30 tx-danger mg-r-20"></i>
+                                                            <span><strong>{{ $message }}</strong></span>
+                                                        </div><!-- d-flex -->
+                                                    </div><!-- alert -->
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <div class="col-md-12">
+                                                <label for="" class="menu-item-label">Confirm Password</label>
+                                                <div class="input-group">
+                                                    <input class="form-control" type="password" name="password_confirm" placeholder="Confirm Password" id="copassword">
+                                                    <div class="input-group-append">
+                                                        <div class="input-group-text"><i class="fa fa-eye" arial-hidden="true" id="eye2" onclick="toggle2()"></i></div>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                @if ($message = Session::get('error'))
+                                                    <div class="alert alert-danger" role="alert">
+                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                        <div class="d-flex align-items-center justify-content-start">
+                                                            <i class="icon ion-ios-close alert-icon tx-30 tx-danger mg-r-20"></i>
+                                                            <span><strong>{{ $message }}</strong></span>
+                                                        </div><!-- d-flex -->
+                                                    </div><!-- alert -->
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+
+                                <br>
+                            
+                                <div class="form-group row mb-0">
+                                    <div class="col-6">
+                                        <a href="" class="btn btn-warning  w-100  px-4 font-14">Refresh <i class="icon ion-loop"></i></a>
+                                    </div>
+                                    <div class="col-6">
+                                        <button type="submit" class="btn btn-primary w-100  px-4 font-14">Update<i class="fa fa-save ml-2"></i></button>
+                                    </div>
+                                </div>
+                        </div>
+                </div>
+            </form>
+        </div>
+    </div>
 
 @endsection
+
+@push('password-eye')
+    <script>
+        var state= false;
+        function toggle1() {
+            if (state) {
+                document.getElementById(
+                    "password").
+                    setAttribute("type", "password");
+                document.getElementById(
+                    "eye1").style.color='#7a797e';
+                state = false;
+            }else{
+                document.getElementById(
+                    "password").
+                    setAttribute("type", "text");
+                document.getElementById(
+                    "eye1").style.color='#5887ef';
+                state = true;
+            }
+        }
+
+        function toggle2() {
+            if (state) {
+                document.getElementById(
+                    "copassword").
+                    setAttribute("type", "password");
+                document.getElementById(
+                    "eye2").style.color='#7a797e';
+                state = false;
+            }else{
+                document.getElementById(
+                    "copassword").
+                    setAttribute("type", "text");
+                document.getElementById(
+                    "eye2").style.color='#5887ef';
+                state = true;
+            }
+        }
+    </script>
+@endpush

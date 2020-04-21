@@ -48,21 +48,20 @@
 
             <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                 <ul class="nav navbar-nav menu_nav justify-content-end">
-                <li class="nav-item {{ request()->is('home-web') ? 'active' : '' }}"><a class="nav-link" href="{{route('home-web')}}">Home</a></li> 
-                <li class="nav-item {{ request()->is('create-pendaftaran') ? 'active' : '' }}"><a class="nav-link" href="{{route('create-pendaftaran')}}">Pendaftaran</a></li> 
-                <li class="nav-item {{ request()->is('hasil-seleksi') ? 'active' : '' }}"><a class="nav-link" href="{{route('hasil-seleksi')}}">Hasil Seleksi</a></li> 
-                
+                    <li class="nav-item {{ request()->is('home-web') ? 'active' : '' }}"><a class="nav-link" href="{{route('home-web')}}">Home</a></li> 
+                    <li class="nav-item {{ request()->is('create-pendaftaran') ? 'active' : '' }}"><a class="nav-link" href="{{route('create-pendaftaran')}}">Pendaftaran</a></li> 
+                    <li class="nav-item {{ request()->is('hasil-seleksi') ? 'active' : '' }}"><a class="nav-link" href="{{route('hasil-seleksi')}}">Hasil Seleksi</a></li> 
+                    
 
-                <li class="nav-item submenu dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                    aria-expanded="false">Blog</a>
-                    <ul class="dropdown-menu">
-                    <li class="nav-item"><a class="nav-link" href="">Blog Single</a></li>
-                    <li class="nav-item"><a class="nav-link" href="">Blog Details</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item"><a class="nav-link" href="">Contact</a></li>
-                </ul>
+                    <li class="nav-item submenu dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                        aria-expanded="false">Blog</a>
+                        <ul class="dropdown-menu">
+                        <li class="nav-item"><a class="nav-link" href="">Blog Single</a></li>
+                        <li class="nav-item"><a class="nav-link" href="">Blog Details</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item {{ request()->is('contact-us') ? 'active' : '' }}"><a class="nav-link" href="{{route('contact-us')}}">Contact</a></li>                 </ul>
 
                 {{-- Start Login Siswa --}}
                 <div class="nav-right text-center text-lg-right py-4 py-lg-0">
@@ -180,9 +179,14 @@
     <script src="/bracket-master/app/lib/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="/bracket-master/app/lib/datatables.net-responsive-dt/js/responsive.dataTables.min.js"></script>
 
+    {{-- <script src="/bracket-master/app/lib/jquery/jquery.min.js"></script> --}}
     <script src="/bracket-master/app/lib/highlightjs/highlight.pack.min.js"></script>
-
+    <script src="/bracket-master/app/lib/jquery-steps/build/jquery.steps.min.js"></script>
+    <script src="/bracket-master/app/lib/parsleyjs/parsley.min.js"></script>
+    
+    @stack('script-1')
     @stack('footer-web')
+    {{-- @stack('tawk_to') --}}
 
 
     <script>
@@ -207,3 +211,18 @@
     </script>
     </body>
 </html>
+
+
+<!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/5e97a92b69e9320caac40557/default';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script-->

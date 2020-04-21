@@ -31,8 +31,12 @@ class ManagementSiswaController extends Controller
     public function siswa_process()
     {   
         $get_process = 'process';
-        $data = MsProspectiveStudents::where('status', $get_process)->with('data_ayah', 'data_ibu', 'data_wali','data_sekolah_nilai')->get();
-
+        // $data = MsProspectiveStudents::where('status', $get_process)->with('data_sekolah_nilai')->get();
+        $order = 'desc';
+        $data = MsProspectiveStudents::where('status', $get_process)
+                ->join('ms_prospective_student_grades', 'ms_prospective_students.id_table_ms_prospective_grades', '=', 'ms_prospective_student_grades.id')
+                ->orderBy('ms_prospective_student_grades.rata_nilai', $order)->select('ms_prospective_students.*')->get();
+        
         return view('dashboard_admin.management_siswa_process', compact('data'));
     }
 
@@ -203,6 +207,8 @@ class ManagementSiswaController extends Controller
         $data_nilai->nilai_bahasa_indonesia = $request->de_indo .'.'. $request->be_indo;
         $data_nilai->nilai_mtk = $request->de_mtk .'.'. $request->be_mtk;
         $data_nilai->nilai_ipa = $request->de_ipa .'.'. $request->be_ipa;
+
+        $data_nilai->rata_nilai = $data_nilai->nilai_bahasa_indonesia + $data_nilai->nilai_mtk + $data_nilai->nilai_ipa;
         
 
         if(isset($request->foto_scan_surat_skhun)){
@@ -321,9 +327,6 @@ class ManagementSiswaController extends Controller
     }
     
 
-
-
-
     public function siswa_edit($id)
     {
         $data = MsProspectiveStudents::where('id', $id)->with('data_ayah', 'data_ibu', 'data_wali','data_sekolah_nilai')->first();
@@ -423,6 +426,11 @@ class ManagementSiswaController extends Controller
             \Session::flash('dedu_ipa', 'Isikan nilai depan terlebih dulu.');
             return redirect(route('siswa-edit', [$data_nilai->id_table_ms_prospective_students ]));
         }
+
+
+        $data_nilai->rata_nilai = $data_nilai->nilai_bahasa_indonesia + $data_nilai->nilai_mtk + $data_nilai->nilai_ipa;
+        
+        
         
         if(isset($request->foto_scan_surat_skhun)){
             $imageFile = $request->no_skhun.'/'.\Str::random(60).'.'.$request->foto_scan_surat_skhun->getClientOriginalExtension();
@@ -482,6 +490,36 @@ class ManagementSiswaController extends Controller
 
     }
 
+    public function edit_password_siswa_store(Request $request)
+    {    
+        
+        $data = MsProspectiveStudents::where('nisn',$request->nisn)->first();
+
+        if ($request->password_pendaftaran != $request->password_confirm) {
+
+            
+            \Session::flash('error', 'Password & Confirm Password Tidak Sama !');
+
+            return redirect(route('siswa-edit', $data->id ));
+            
+        }
+
+
+        if (isset($request->password_pendaftaran)) {
+            $data->password_pendaftaran = \Hash::make($request->password_pendaftaran);
+        }
+
+
+        
+        $data_akhir = $data->password_pendaftaran;
+        $data->update(['password_pendaftaran' => $data_akhir]);
+
+
+        \Session::flash('success', 'Sukses Update Password');
+        return redirect(route('siswa-edit', $data->id ));
+
+    }
+
 
     public function siswa_delete($id)
     {
@@ -527,14 +565,27 @@ class ManagementSiswaController extends Controller
     public function siswa_received()
     {
         $get_received = 'received';
-        $data = MsProspectiveStudents::where('status', $get_received)->with('data_ayah', 'data_ibu', 'data_wali','data_sekolah_nilai')->get();
+
+        // $data = MsProspectiveStudents::where('status', $get_received)->with('data_ayah', 'data_ibu', 'data_wali','data_sekolah_nilai')->get();
+
+        $order = 'desc';
+        $data = MsProspectiveStudents::where('status', $get_received)
+                ->join('ms_prospective_student_grades', 'ms_prospective_students.id_table_ms_prospective_grades', '=', 'ms_prospective_student_grades.id')
+                ->orderBy('ms_prospective_student_grades.rata_nilai', $order)->select('ms_prospective_students.*')->get();
+
         return view('dashboard_admin.management_siswa_received', compact('data'));
+
     }
 
     public function downloadall_received_pdf()
     {
         $get_recived = 'received';
-        $data = MsProspectiveStudents::where('status', $get_recived)->with('data_sekolah_nilai')->get();
+        // $data = MsProspectiveStudents::where('status', $get_recived)->with('data_sekolah_nilai')->get();
+        $order = 'desc';
+        $data = MsProspectiveStudents::where('status', $get_recived)
+                ->join('ms_prospective_student_grades', 'ms_prospective_students.id_table_ms_prospective_grades', '=', 'ms_prospective_student_grades.id')
+                ->orderBy('ms_prospective_student_grades.rata_nilai', $order)->select('ms_prospective_students.*')->get();
+                
         $pdf = \PDF::loadView('pdf.download_all_siswa_received_pdf' , compact('data'))->setPaper('a4')->setOrientation('landscape');
         return $pdf->download('All_Siswa_Received.pdf');
     }
@@ -550,7 +601,12 @@ class ManagementSiswaController extends Controller
     public function siswa_rejected()
     {
         $get_rejected = 'rejected';
-        $data = MsProspectiveStudents::where('status', $get_rejected)->with('data_ayah', 'data_ibu', 'data_wali','data_sekolah_nilai')->get();
+        // $data = MsProspectiveStudents::where('status', $get_rejected)->with('data_ayah', 'data_ibu', 'data_wali','data_sekolah_nilai')->get();
+        $order = 'desc';
+        $data = MsProspectiveStudents::where('status', $get_rejected)
+                ->join('ms_prospective_student_grades', 'ms_prospective_students.id_table_ms_prospective_grades', '=', 'ms_prospective_student_grades.id')
+                ->orderBy('ms_prospective_student_grades.rata_nilai', $order)->select('ms_prospective_students.*')->get();
+
         return view('dashboard_admin.management_siswa_rejected', compact('data'));
     }
 

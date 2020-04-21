@@ -9,6 +9,22 @@
     </div>
 
     <div class="br-pagebody">
+
+        @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-bordered pd-y-20" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="d-sm-flex align-items-center justify-content-start">
+                <i class="icon ion-ios-checkmark alert-icon tx-52 mg-r-20 tx-success"></i>
+                <div class="mg-t-20 mg-sm-t-0">
+                    <h5 class="mg-b-2 tx-success">{{$message}}</h5>
+                    <p class="mg-b-0 tx-gray">Silahkan login menggunakan NISN dan Password yang telah anda Update.</p>
+                </div>
+                </div><!-- d-flex -->
+            </div><!-- alert -->
+        @endif
+
         {{-- Alert --}}
             @if ($message = Session::get('gagal_masuk'))
                 <div class="alert alert-danger alert-bordered pd-y-20" role="alert">
@@ -86,7 +102,15 @@
                                     <tr>
                                         <th><strong class="tx-inverse tx-medium">Status</strong></th>
                                         <td><span class="text-muted">:</span></td>
-                                        <th><span class="text-muted">{{$data->status}}</span></th>
+                                        <th><span class="text-muted">
+                                            @if ($data->status == 'process')
+                                                <span class="badge badge-warning" style="font-size:12px;">Proses</span> 
+                                            @elseif($data->status == 'received')
+                                                <span class="badge badge-success" style="font-size:12px;">Di Terima</span>
+                                            @elseif($data->status == 'rejected')
+                                                <span class="badge badge-danger" style="font-size:12px;">Di Tolak</span> 
+                                            @endif 
+                                        </span></th>
                                     </tr>
                                     </p>
                                 </li>
@@ -101,14 +125,52 @@
                                     </p>
                                 </li>
                                 
-                                <br>
-                                <a href="{{route('download-formulir-db-siswa' , $data->enter_code)}}" class="btn btn-primary"><i class="fa fa-download mg-r-10"></i>Download Formulir</a>
-                                <!-- add more here -->
+
+                                @if ($data->status == 'process' )
+                                @elseif($data->status == 'received')
+                                    <br>
+                                    <a href="{{route('download-formulir-db-siswa' , $data->enter_code)}}" class="btn btn-primary"><i class="fa fa-download mg-r-10"></i>Download Formulir</a>
+                                @elseif($data->status == 'rejected')
+
+                                @endif
                             </ul>
                         </div><!-- card-body -->
                     </div>
                     
                 </div><!-- card -->
+                <br>
+
+                @if($data->status == 'rejected')
+                    <div class="card">
+                        <div class="card-header tx-medium bd-0 tx-white bg-danger">
+                        Hallo, {{$data->nama_calon_siswa}}
+                        </div><!-- card-header -->
+                        <div class="card-body bd bd-t-0 rounded-bottom">
+                        <p class="mg-b-0">Maaf Anda Di Tolak Karena Tidak Memenuhi Kiteria Atau Syarat Untuk Masuk Ke Sekolah Ini.</p>
+                        </div><!-- card-body -->
+                    </div><!-- card -->
+                @endif    
+                <br>
+                @if ($data->data_sekolah_nilai != true)
+                    <div class="card">
+                        <div class="card-header tx-medium bd-0 tx-white bg-dance">
+                        Hallo, {{$data->nama_calon_siswa}}
+                        </div><!-- card-header -->
+                        <div class="card-body bd bd-t-0 rounded-bottom">
+                        <p class="mg-b-0">PERINGATAN, Anda belum mengupload data Nilai, Mohon segera upload data Nilai.</p>
+                        </div><!-- card-body -->
+                    </div><!-- card -->
+                @elseif($data->data_sekolah_nilai == true)
+                    <div class="card">
+                        <div class="card-header tx-medium bd-0 tx-white bg-success">
+                        Hallo, {{$data->nama_calon_siswa}}
+                        </div><!-- card-header -->
+                        <div class="card-body bd bd-t-0 rounded-bottom">
+                        <p class="mg-b-0">Terimakasih Karena Anda Sudah Mengupload Data Sekolah & Nilai.</p>
+                        </div><!-- card-body -->
+                    </div><!-- card -->
+                @endif
+
             </div>
 
             <div class="col-sm-8">

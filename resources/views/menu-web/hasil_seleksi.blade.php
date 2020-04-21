@@ -33,8 +33,22 @@
                                                     <td class="text-center">{{$d->nik}}</td>
                                                     <td class="text-center">{{$d->nisn}}</td>
                                                     <td class="text-center">{{$d->nama_calon_siswa}}</td>
-                                                    <td class="text-center">{{$d->jenis_kelamin}}</td>
-                                                    <td class="text-center">{{$d->status}}</td>
+                                                    <td class="text-center">
+                                                        @if ($d->jenis_kelamin == 'laki-laki')
+                                                            <span class="badge badge-primary p-1" style="font-size:12px;">Laki - Laki</span> 
+                                                        @elseif($d->jenis_kelamin == 'perempuan')
+                                                            <span class="badge badge-danger p-1" style="font-size:12px;">Perempuan</span> 
+                                                        @endif
+                                                    </td>
+                                                    <td class="text-center">
+                                                        @if ($d->status == 'rejected')
+                                                            <span class="badge badge-danger p-1" style="font-size:12px;">Di Tolak</span> 
+                                                        @elseif($d->status == 'process')
+                                                            <span class="badge badge-warning p-1" style="font-size:12px;">Sedang Proses</span> 
+                                                        @elseif($d->status == 'received')
+                                                        <span class="badge badge-success p-1" style="font-size:12px;">Di Terima</span> 
+                                                        @endif
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -53,7 +67,6 @@
 
 @push('footer-web')
     <script>
-
         $(document).ready( function () {
             // DataTable Biasa
             $('#table_id').DataTable({
@@ -64,8 +77,6 @@
                     lengthMenu: '_MENU_ items/page',
                 }
             });
-
         } );
     </script>
 @endpush
-

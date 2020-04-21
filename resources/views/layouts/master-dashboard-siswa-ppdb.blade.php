@@ -15,13 +15,13 @@
     <!-- Scripts -->
         {{-- <script src="{{ asset('js/app.js') }}" ></script> --}}
 
-        <script>
+        {{-- <script>
         $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-        </script>
+        </script> --}}
 
         {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.print/1.6.0/jQuery.print.min.js"></script> --}}
 
@@ -166,7 +166,8 @@
                         </form>
                         
                     </li> --}}
-
+                    <li><a href="{{route('edit-password', $data->enter_code)}}"><i class="icon ion-wrench"></i> Edit Password</a></li>
+                    
                     <li>
                         <a class="dropdown-item" href="{{ route('logout-db-siswa') }}">
                             <span><i class="icon ion-power"></i>Logout</span>
@@ -193,6 +194,18 @@
     <!-- ########## START: MAIN PANEL ########## -->
     <div class="br-mainpanel">
         @yield('br-mainpanel')
+
+        <footer class="br-footer">
+            <div class="footer-left">
+                <div class="mg-b-2">Copyright &copy; 2020. Diaz Djuliansyah.</div>
+                <div>Teknik Komputer Jaringan. SMKN 4 Kota Bekasi</div>
+            </div>
+            <div class="footer-right d-flex align-items-center">
+                <span class="tx-uppercase mg-r-10">Check:</span>
+                <a target="_blank" class="pd-x-5" href=""><i class="fab fa-facebook tx-20"></i></a>
+                <a target="_blank" class="pd-x-5" href=""><i class="fab fa-instagram tx-20"></i></a>
+            </div>
+        </footer>
     </div><!-- br-mainpanel -->
     <!-- ########## END: MAIN PANEL ########## -->
 
@@ -210,5 +223,6 @@
     <script src="/bracket-master/app/js/bracket.js"></script>
 
     @stack('script-1')
+    @stack('password-eye')
 </body>
 </html>

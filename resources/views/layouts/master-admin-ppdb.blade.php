@@ -82,6 +82,9 @@
     {{-- Datatable --}}
     <link href="/bracket-master/app/lib/datatables.net-dt/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="/bracket-master/app/lib/datatables.net-responsive-dt/css/responsive.dataTables.min.css" rel="stylesheet">
+
+    {{-- DateTimePicker --}}
+    <link rel="stylesheet" href="/bracket-master/app/js/datetimepicker/jquery.datetimepicker.min.css">
 </head>
 
 <body>
@@ -100,29 +103,43 @@
             </a><!-- br-menu-link -->
         </li><!-- br-menu-item -->
 
-        <li class="br-menu-item">
-            <a href="#" class="br-menu-link with-sub {{ request()->is('user') ? 'active' : '' }}">
-            <i class="menu-item-icon icon ion-person tx-20"></i>
-            <span class="menu-item-label">Management User</span>
-            </a><!-- br-menu-link -->
-            <ul class="br-menu-sub nav flex-column">
-                <li class="sub-item"><a href="{{route('user.index')}}" class="sub-link {{ request()->is('user') ? 'active' : '' }}">Management User</a></li>
-            </ul>
-        </li><!-- br-menu-item -->
+        @if (Auth::user()->level == 'A')
+            <li class="br-menu-item">
+                <a href="#" class="br-menu-link with-sub {{ request()->is('user','user/create', 'user/*/edit', 'user/*') ? 'active' : '' }}">
+                <i class="menu-item-icon icon ion-person tx-20"></i>
+                <span class="menu-item-label">Management User</span>
+                </a><!-- br-menu-link -->
+                <ul class="br-menu-sub nav flex-column">
+                    <li class="sub-item"><a href="{{route('user.index')}}" class="sub-link {{ request()->is('user', 'user/create', 'user/*/edit', 'user/*') ? 'active' : '' }}">Management User</a></li>
+                </ul>
+            </li><!-- br-menu-item -->
+        @endif
 
         <li class="br-menu-item">
-            <a href="#" class="br-menu-link with-sub {{ request()->is('siswa-process', 'siswa-received') ? 'active' : '' }}">
+            <a href="#" class="br-menu-link with-sub {{ request()->is('siswa-process','siswa-process-create-siswa', 'siswa-received', 'siswa-rejected',   'siswa-edit/*', 'siswa-detail/*') ? 'active' : '' }}">
             <i class="menu-item-icon icon ion-person-stalker tx-20"></i>
             <span class="menu-item-label">Management Siswa</span>
             </a><!-- br-menu-link -->
             <ul class="br-menu-sub nav flex-column">
-                <li class="sub-item"><a href="{{route('siswa-process')}}" class="sub-link {{ request()->is('siswa-process') ? 'active' : '' }}">Data Pendaftar (Proses)</a></li>
+                <li class="sub-item"><a href="{{route('siswa-process')}}" class="sub-link {{ request()->is('siswa-process', 'siswa-process-create-siswa') ? 'active' : '' }}">Data Pendaftar (Proses)</a></li>
                 <li class="sub-item"><a href="{{route('siswa-received')}}" class="sub-link {{ request()->is('siswa-received') ? 'active' : '' }}">Siswa Di Terima (Received)</a></li>
                 <li class="sub-item"><a href="{{route('siswa-rejected')}}" class="sub-link {{ request()->is('siswa-rejected') ? 'active' : '' }}">Siswa Di Tolak (Rejected)</a></li>
-
             </ul>
         </li><!-- br-menu-item -->
 
+        @if (Auth::user()->level == 'A')
+            <li class="br-menu-item">
+                <a href="#" class="br-menu-link with-sub {{ request()->is('maweb-pendaftaran','maweb-pendaftaran-create', 'maweb-hasil-seleksi', 'maweb-hasil-seleksi-create', 'maweb-contact-us', 'maweb-contact-us-create') ? 'active' : '' }}">
+                <i class="menu-item-icon icon ion-easel tx-20"></i>
+                <span class="menu-item-label">Management Web</span>
+                </a><!-- br-menu-link -->
+                <ul class="br-menu-sub nav flex-column">
+                    <li class="sub-item"><a href="{{route('maweb-pendaftaran')}}" class="sub-link {{ request()->is('maweb-pendaftaran', 'maweb-pendaftaran-create') ? 'active' : '' }}">MaWeb Pendaftaran</a></li>
+                    <li class="sub-item"><a href="{{route('maweb-hasil-seleksi')}}" class="sub-link {{ request()->is('maweb-hasil-seleksi', 'maweb-hasil-seleksi-create') ? 'active' : '' }}">MaWeb Hasil Seleksi</a></li>
+                    <li class="sub-item"><a href="{{route('maweb-contact-us')}}" class="sub-link {{ request()->is('maweb-contact-us', 'maweb-contact-us-create') ? 'active' : '' }}">MaWeb Contact Admin</a></li>
+                </ul>
+            </li><!-- br-menu-item -->
+        @endif
         <br>
     </div><!-- br-sideleft -->
     <!-- ########## END: LEFT PANEL ########## -->
@@ -230,10 +247,18 @@
     <script src="/bracket-master/app/lib/datatables.net-responsive-dt/js/responsive.dataTables.min.js"></script>
     <script src="/bracket-master/app/lib/highlightjs/highlight.pack.min.js"></script>
     
+    {{-- DateTimePicker --}}
+    <script src="/bracket-master/app/js/datetimepicker/jquery.datetimepicker.full.js"></script>
+    <script src="/bracket-master/app/js/datetimepicker/jquery.datetimepicker.full.min.js"></script>
+    <script src="/bracket-master/app/js/datetimepicker/jquery.datetimepicker.min.js"></script>
+
+
 
     @stack('footer-admin')
     @stack('script-1')
     @stack('password-eye')
+    @stack('datetime-picker')
+
 
 </body>
 </html>

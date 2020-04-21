@@ -74,7 +74,8 @@
                             @if ($d->data_sekolah_nilai == true)
                                 <td>{{$d->data_sekolah_nilai->asal_sekolah_nama}}</td>
                                 <td>{{$d->data_sekolah_nilai->no_skhun}}</td>
-                                <th>{{$d->data_sekolah_nilai->nilai_bahasa_indonesia + $d->data_sekolah_nilai->nilai_mtk + $d->data_sekolah_nilai->nilai_ipa}}</th>
+                                {{-- <th>{{$d->data_sekolah_nilai->nilai_bahasa_indonesia + $d->data_sekolah_nilai->nilai_mtk + $d->data_sekolah_nilai->nilai_ipa}}</th> --}}
+                                <td>{{$d->data_sekolah_nilai->rata_nilai}}</td>
                             @elseif($d->data_sekolah_nilai != true)
                             
                             @endif
