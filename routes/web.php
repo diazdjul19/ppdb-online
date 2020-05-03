@@ -19,7 +19,13 @@ Route::get('/', function () {
     return view('menu-web.home_web');
 });
 
-Auth::routes();
+// Mengizinkan Semua Route
+// Auth::routes();
+
+// Membayasi Route yang di (false)
+Auth::routes([
+    'register' => false,
+]);
 
 
 // Start Routing Web
@@ -63,8 +69,15 @@ Auth::routes();
         // End Routing Web
 
         // Start contact us siswa
-        Route::get('/contact-us', 'WebController@contact_us')->name('contact-us');
+            Route::get('/contact-us', 'WebController@contact_us')->name('contact-us');
         // End contact us siswa
+        
+
+        // Start Read Informasi Pendaftaran
+            Route::get('/read-prosedur-syarat', 'WebController@read_prosedur_syarat')->name('read-prosedur-syarat');
+            Route::get('/read-agenda', 'WebController@read_agenda')->name('read-agenda');
+            Route::get('/read-daftar-ulang', 'WebController@read_daftar_ulang')->name('read-daftar-ulang');
+        // End Read Informasi Pendaftaran
 
 
 
@@ -92,7 +105,7 @@ Auth::routes();
         Route::post('/upload-data-nilai-store', 'DashboardSiswaController@upload_data_nilai_store')->name('upload-data-nilai-store');
 
         // Edit Password Siswa
-        Route::get('/edit-password/{enter_code}', 'DashboardSiswaController@edit_password')->name('edit-password');
+        Route::get('/edit-password', 'DashboardSiswaController@edit_password')->name('edit-password');
         Route::post('/edit-password-store', 'DashboardSiswaController@edit_password_store')->name('edit-password-store');
 
 
@@ -131,6 +144,26 @@ Auth::routes();
                 Route::get('/maweb-delete/{id}',"MawebController@maweb_delete")->name("maweb-delete");
             // End Management Web (pendaftaran, hasil seleksi, contact_us)
 
+            // Start Gelombang Pendaftaran
+                Route::resource('gelpend', 'GelpendController');
+                Route::get('gelpend/delete/{id}',"GelpendController@destroy")->name("gelpend.destroy");
+            // End Gelombang Pendaftaran
+
+            // Start Management Content
+                Route::get('/macont-prosedur-syarat', 'MacontController@macont_prosedur_syarat')->name('macont-prosedur-syarat');
+                Route::post('/macont-prosedur-syarat-store', 'MacontController@macont_prosedur_syarat_store')->name('macont-prosedur-syarat-store');
+                Route::put('/macont-prosedur-syarat-update/{id}', 'MacontController@macont_prosedur_syarat_update')->name('macont-prosedur-syarat-update');
+
+                Route::get('/macont-agenda', 'MacontController@macont_agenda')->name('macont-agenda');
+                Route::post('/macont-agenda-store', 'MacontController@macont_agenda_store')->name('macont-agenda-store');
+                Route::put('/macont-agenda-update/{id}', 'MacontController@macont_agenda_update')->name('macont-agenda-update');
+
+                Route::get('/macont-daftar-ulang', 'MacontController@macont_daftar_ulang')->name('macont-daftar-ulang');
+                Route::post('/macont-daftar-ulang-store', 'MacontController@macont_daftar_ulang_store')->name('macont-daftar-ulang-store');
+                Route::put('/macont-daftar-ulang-update/{id}', 'MacontController@macont_daftar_ulang_update')->name('macont-daftar-ulang-update');
+            // End Management Content
+
+
         // End Routing Dashboard Admin
     });
 
@@ -140,7 +173,6 @@ Auth::routes();
              // Start Home
                 Route::get('/home', 'HomeController@index')->name('home');
             // End Home
-
 
             // Start Management SISWA
                 // Start Management Siswa (Edit, Delete, Detail)
@@ -187,6 +219,14 @@ Auth::routes();
                 // End Management Siswa Rejected
 
             // End Management SISWA
+
+
+
+            // Start Edit Password Admin Operator
+                Route::get('/edit-password-ao', 'HomeController@edit_password_ao')->name('edit-password-ao');
+                Route::post('/edit-password-store-ao', 'HomeController@edit_password_store_ao')->name('edit-password-store-ao');
+            // End Edit Password Admin Operator
+
     });
 
 

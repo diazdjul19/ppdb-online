@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMsOpenCloseWebsTable extends Migration
+class CreateMsTextContsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateMsOpenCloseWebsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ms_open_close_webs', function (Blueprint $table) {
+        Schema::create('ms_text_conts', function (Blueprint $table) {
             $table->id();
-            $table->string('jenis_maweb');
-            $table->dateTime('dari_tgl');
-            $table->dateTime('sampai_tgl');
-            $table->string('nama_gelombang_table_ms_gelpends')->nullable();
+            $table->string('code_unik');
+            $table->string('nama_content');
+            $table->longText('text_information')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateMsOpenCloseWebsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ms_open_close_webs');
+        Schema::dropIfExists('ms_text_conts');
     }
 }

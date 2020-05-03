@@ -118,7 +118,10 @@
     <link rel="stylesheet" href="/bracket-master/app/css/bracket.css">
 
     {{-- favicon --}}
-    <link rel="shortcut icon" href="/bracket-master/app/img/favicon-32x32.png" />
+    {{-- <link rel="shortcut icon" href="/bracket-master/app/img/favicon-32x32.png" /> --}}
+
+    {{-- favicon --}}
+    <link rel="icon" href="/bracket-master/app/img/key.png" />
 </head>
 
 <body>
@@ -152,17 +155,26 @@
                 </div>
                 
                 <div class="form-group">
-                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Enter your Password">
-
-                @error('password')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
+                    <div class="input-group">
+                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password"  autocomplete="new-password" placeholder="Password Baru">
+                        @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <div class="input-group-append">
+                            <div class="input-group-text"><i class="fa fa-eye" arial-hidden="true" id="eye1" onclick="toggle1()"></i></div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
+                    <div class="input-group">
+                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation"  autocomplete="new-password" placeholder="Confirm Password Baru">
+                        <div class="input-group-append">
+                            <div class="input-group-text"><i class="fa fa-eye" arial-hidden="true" id="eye2" onclick="toggle2()"></i></div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group tx-12">By clicking on the register button below, you agree to our privacy policy and terms of use for our website.</div>
@@ -201,6 +213,47 @@
     });
     });
 </script>
+
+
+<script>
+    var state= false;
+    function toggle1() {
+        if (state) {
+            document.getElementById(
+                "password").
+                setAttribute("type", "password");
+            document.getElementById(
+                "eye1").style.color='#7a797e';
+            state = false;
+        }else{
+            document.getElementById(
+                "password").
+                setAttribute("type", "text");
+            document.getElementById(
+                "eye1").style.color='#5887ef';
+            state = true;
+        }
+    }
+
+    function toggle2() {
+        if (state) {
+            document.getElementById(
+                "password-confirm").
+                setAttribute("type", "password");
+            document.getElementById(
+                "eye2").style.color='#7a797e';
+            state = false;
+        }else{
+            document.getElementById(
+                "password-confirm").
+                setAttribute("type", "text");
+            document.getElementById(
+                "eye2").style.color='#5887ef';
+            state = true;
+        }
+    }
+</script>
+
 
 </body>
 </html>

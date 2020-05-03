@@ -67,12 +67,34 @@
                         </div>
                         <br>                
 
+
+
+
+
+
+
+
                         @if (request()->is('maweb-pendaftaran-create'))
                             <form class="form-sample" action="{{route('maweb-pendaftaran-store')}}" method="POST">
                                 @csrf
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Jenis MaWeb</label>
                                     <input type="text" name="jenis_maweb" class="form-control" id="exampleInputEmail1"  placeholder="" value="MaWeb Pendaftaran" readonly>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Jenis Gelombang Pendaftaran</label>
+                                    <select class="form-control" id="exampleFormControlSelect1" name="nama_gelombang_table_ms_gelpends" required>
+                                        <optgroup label="Jenis Gelombang Pendaftaran"> 
+                                            <option value="disabled" disabled selected>Jenis Gelombang Pendaftaran</option>
+                                            @foreach ($data_gelpend as $dg)
+                                                <option value="{{$dg->nama_gelombang}}">{{$dg->nama_gelombang}}</option>
+                                            @endforeach
+                                        </optgroup>
+                                    </select>
+                                    @if ($message = Session::get('not_gelpend'))
+                                        <strong style="color:red;">{{ $message }}</strong>
+                                    @endif
                                 </div>
 
                                 <div class="row">
@@ -101,6 +123,18 @@
                                     </div>
                                 </button>
                             </form>
+
+
+
+
+
+
+
+
+
+
+
+
                         @elseif(request()->is('maweb-hasil-seleksi-create'))
                             <form class="form-sample" action="{{route('maweb-hasil-seleksi-store')}}" method="POST">
                                 @csrf

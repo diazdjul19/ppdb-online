@@ -305,8 +305,8 @@
             <div class="row">
                 <div class="col-12">
 
-                    <h6 class="br-section-label mt-0">Formulir Pendaftaran Siswa Baru</h6>
-                    <p class="br-section-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    <h6 class="br-section-label mt-0">Formulir Pendaftaran Peserta Didik Baru</h6>
+                    <p class="br-section-text">Pembukaan Formulir PPDB Jalur <span style="font-weight:bold;">{{$open_close->nama_gelombang_table_ms_gelpends}}</span> Di Buka Mulai Tanggal <span class="badge badge-success" style="font-size:12px;">{{date('d/m/Y - H:i', strtotime($open_close->dari_tgl))}}</span> Sampai Tanggal <span class="badge badge-danger" style="font-size:12px;">{{date('d/m/Y - H:i', strtotime($open_close->sampai_tgl))}}</span></p>
 
                     @if ($message = Session::get('gagal_daftar'))
                         <div class="alert alert-danger alert-bordered pd-y-20" role="alert">
@@ -396,7 +396,6 @@
                                                                     <option value="perempuan">Perempuan</option>
                                                                 </optgroup>
                                                             </select>
-                                                            <br>
                                                             <span class="text-danger">{{ $errors->first('jenis_kelamin') }}</span>
                                                         </div>
                                                     </div>
@@ -619,11 +618,13 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
+                                                                <div class="form-group row">
                                                                     <div class="col-md-12">
                                                                         <label for="" class="menu-item-label">Pekerjaan</label>
                                                                         <input type="text" name="pekerjaan_ayah" class="form-control" id="exampleInputEmail1"  placeholder="Pekerjaan Ayah">
                                                                     </div>
                                                                 </div>
+                                                            </div>
                                                         </div>
 
                                                         <div class="row">
@@ -644,6 +645,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
+                                                                <div class="form-group row">
                                                                     <div class="col-md-12">
                                                                         <label>Pendidikan Terakhir</label>
                                                                         <select class="form-control" id="exampleFormControlSelect1" name="pendidikan_terakhir_ayah">                                                                 
@@ -662,6 +664,7 @@
                                                                         </select>
                                                                     </div>
                                                                 </div>
+                                                            </div>
                                                         </div>
 
                                                         <div class="row">
@@ -709,11 +712,13 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
+                                                                <div class="form-group row">
                                                                     <div class="col-md-12">
                                                                         <label for="" class="menu-item-label">Pekerjaan</label>
                                                                         <input type="text" name="pekerjaan_ibu" class="form-control" id="exampleInputEmail1"  placeholder="Pekerjaan Ibu" >
                                                                     </div>
                                                                 </div>
+                                                            </div>
                                                         </div>
 
                                                         <div class="row">
@@ -734,6 +739,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
+                                                                <div class="form-group row">
                                                                     <div class="col-md-12">
                                                                         <label>Pendidikan Terakhir</label>
                                                                         <select class="form-control" id="exampleFormControlSelect1" name="pendidikan_terakhir_ibu">
@@ -752,6 +758,7 @@
                                                                         </select>
                                                                     </div>
                                                                 </div>
+                                                            </div>
                                                         </div>
 
                                                         <div class="row">
@@ -811,11 +818,13 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
+                                                        <div class="form-group row">
                                                             <div class="col-md-12">
                                                                 <label for="" class="menu-item-label">Pekerjaan</label>
                                                                 <input type="text" name="pekerjaan_wali" class="form-control" id="exampleInputEmail1"  placeholder="Pekerjaan Wali" >
                                                             </div>
                                                         </div>
+                                                    </div>
                                                 </div>
 
                                                 <div class="row">
@@ -836,6 +845,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
+                                                        <div class="form-group row">
                                                             <div class="col-md-12">
                                                                 <label>Pendidikan Terakhir</label>
                                                                 <select class="form-control" id="exampleFormControlSelect1" name="pendidikan_terakhir_wali">
@@ -854,6 +864,7 @@
                                                                 </select>
                                                             </div>
                                                         </div>
+                                                    </div>
                                                 </div>
 
                                                 <div class="row">
@@ -895,10 +906,10 @@
                                                 <br>
                                 
                                                 <div class="form-group row mb-0">
-                                                    <div class="col-6">
+                                                    <div class="col-md-6 mt-1">
                                                         <a href="" class="btn btn-warning  w-100  px-4 font-14">Refresh <i class="icon ion-loop"></i></a>
                                                     </div>
-                                                    <div class="col-6">
+                                                    <div class="col-md-6 mt-1">
                                                         <button type="submit" class="btn btn-primary w-100  px-4 font-14">Simpan<i class="fa fa-save ml-2"></i></button>
                                                     </div>
                                                 </div>

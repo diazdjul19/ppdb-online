@@ -79,7 +79,7 @@
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <label>Provinsi Sekolah Asal</label>
+                                    <label>Prov Sekolah Asal</label>
                                     <div id="the-basics">
                                         <input class="typeahead form-control" type="text" name="asal_sekolah_provinsi" placeholder="Provinsi" required>
                                     </div>
@@ -158,7 +158,21 @@
                                 </div> <!-- /.form-group -->
                             </div>
                         </div>
-                            
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <label for="de_ing" class="col-form-label ml-3" style="margin-right:2.5%;">Bahasa Inggris</label>
+                                    <div class="col-sm-3">
+                                        <div class="input-group ">
+                                            <input type="text" class="form-control" id="de_ing" name="de_ing" maxlength="2" required />
+                                            <span class="addon ml-2 mr-2 mt-2"><b>,</b></span>
+                                            <input type="text" class="form-control" id="be_ing" name="be_ing" maxlength="2" required />
+                                        </div>
+                                    </div>
+                                </div> <!-- /.form-group -->
+                            </div>
+                        </div>                        
 
                         <br>
                         

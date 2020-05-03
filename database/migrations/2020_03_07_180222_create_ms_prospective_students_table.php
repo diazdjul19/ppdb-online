@@ -16,6 +16,7 @@ class CreateMsProspectiveStudentsTable extends Migration
         Schema::create('ms_prospective_students', function (Blueprint $table) {
             $table->Increments("id");
             $table->string("code_pendaftaran");
+            $table->string("enter_code");
             $table->string("password_pendaftaran");
             $table->string("nik");
             $table->string("nisn");
@@ -43,6 +44,7 @@ class CreateMsProspectiveStudentsTable extends Migration
             $table->integer('id_table_mother_data');
             $table->integer('id_table_guardians_data');
             $table->integer('id_table_ms_prospective_grades');
+            $table->string("gelombang_pendaftaran")->nullable();
             $table->timestamps();
         });
     }

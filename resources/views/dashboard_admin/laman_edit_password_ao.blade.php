@@ -1,10 +1,10 @@
-@extends('layouts.master-dashboard-siswa-ppdb')
+@extends('layouts.master-admin-ppdb')
 @section('br-mainpanel')
     {{-- br-header --}}
     <div class="br-pageheader">
         <nav class="breadcrumb pd-0 mg-0 tx-12">
-            <a class="breadcrumb-item" href="{{route('home-db-siswa')}}">PPDB Online</a>
-            <a class="breadcrumb-item" href="{{route('home-db-siswa')}}">{{$data->nama_calon_siswa}}</a>
+            <a class="breadcrumb-item" href="{{route('home')}}">PPDB Online</a>
+            <a class="breadcrumb-item" href="{{route('home')}}">{{Auth::user()->name}}</a>
             <span class="breadcrumb-item active">Edit Password Account</span>
         </nav>
     </div><!-- br-pageheader -->
@@ -20,7 +20,7 @@
     <br>
     <div class="br-pagebody">
         <div class="d-flex align-items-center justify-content-center bg-white-300 ht-500 pd-x-20 pd-xs-x-0 mt-2">
-            <form action="{{route('edit-password-store')}}" method="post">
+            <form action="{{route('edit-password-store-ao')}}" method="post">
                 @csrf
                 <div class="card wd-350 shadow-base">
                     <div class="card-body pd-x-20 pd-xs-40">
@@ -28,9 +28,9 @@
                     <p class="mg-b-30 tx-14">Silahkan Buat Password Baru Anda</p>
 
                     <div class="form-group">
-                        <label for="">NISN <span class="tx-danger">*</span></label>
+                        <label for="">Email<span class="tx-danger">*</span></label>
                         {{-- <input class="form-control" type="text" name="nisn" placeholder="NISN" value="{{$data->nisn}}" readonly> --}}
-                        <input class="form-control" type="text" name="" placeholder="NISN" value="{{$data->nisn}}" readonly>
+                        <input class="form-control" type="text" name="" placeholder="Email" value="{{Auth::user()->email}}" readonly>
 
                     </div><!-- form-group -->
 
@@ -61,7 +61,7 @@
                             </div><!-- alert -->
                         @endif
                         <div class="input-group">
-                            <input class="form-control" type="password" name="password_pendaftaran" placeholder="Password" id="password">
+                            <input class="form-control" type="password" name="password" placeholder="Password" id="password">
                             <div class="input-group-append">
                                 <div class="input-group-text"><i class="fa fa-eye" arial-hidden="true" id="eye1" onclick="toggle1()"></i></div>
                             </div>

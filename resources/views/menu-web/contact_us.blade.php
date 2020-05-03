@@ -6,13 +6,13 @@
     <section class="hero-banner" >
         <div class="container">
             <div class="row pl-5 pr-5">
-                <div class="col-6">
+                <div class="col-md-6">
                     <div class="hero-banner-sm-content">
-                        <h1>Contact Admin  PPDB</h1>
+                        <h1>Kontak Admin  PPDB</h1>
                         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex, natus fuga, quod earum quam veritatis doloremque neque voluptate tenetur nobis voluptates aspernatur ipsa dignissimos laborum sed architecto recusandae libero. Nam?</p>
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-md-6">
                     <img class="section-intro-img rounded float-right" src="/safario/img/home/service3.png" alt="">
                 </div>
             </div>
@@ -27,10 +27,10 @@
                 <div class="row">
                 <div class="col-md-12 bg-white shadow-sm p-5">
                     <div class="row">
-                    <div class="col-12">
+                    <div class="col-md-12">
                     <h3 class="contact-title" style="color:black;">Alamat Sekolah</h3>
                     </div>
-                    <div class="col-lg-8">
+                    <div class="col-md-8">
                         <div class="d-none d-sm-block mb-5 pb-4">
                             <div style="height: 480px;">
                                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.2633759019077!2d106.92984501431162!3d-6.359947563986839!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6993411a5d5955%3A0x3070600ac1dee970!2sSMK%20Negeri%204%20Kota%20Bekasi!5e0!3m2!1sid!2sid!4v1571283969085!5m2!1sid!2sid" width="100%" height="480px" frameborder="0" style="border:0;" allowfullscreen="">
@@ -39,7 +39,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4">
+                    <div class="col-md-4">
                     <div class="media contact-info">
                         <span class="contact-info__icon"><i class="ti-home"></i></span>
                         <div class="media-body">

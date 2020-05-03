@@ -83,6 +83,8 @@
                                     <span class="badge badge-danger" style="font-size:12px;">Selesai</span>
                                 @elseif ($dt >= $d->dari_tgl)
                                     <span class="badge badge-success" style="font-size:12px;">Berlangsung</span>
+                                @elseif($dt <= $d->dari_tgl)
+                                    <span class="badge badge-warning" style="font-size:12px;">Belum Mulai</span>
                                 @endif
                             </td>
                             <td class="text-center pt-2">

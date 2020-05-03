@@ -8,6 +8,8 @@ use App\Models\CandidatsMaster\MsProspectiveStudentGrades;
 use App\Models\CandidatsMaster\MsFatherData;
 use App\Models\CandidatsMaster\MsMotherData;
 use App\Models\CandidatsMaster\MsGuardiansData;
+use App\Models\Gelpend\MsGelpend;
+
 
 use App\Exports\SiswaReceivedExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -64,7 +66,10 @@ class ManagementSiswaController extends Controller
             return abort(404);
         }
 
-        return view('dashboard_admin.management_siswa_process_create_siswa', compact('random_string'));
+        // Mendapatkan Data Gelombang Pendaftaran
+        $data_gelpend = MsGelpend::all();
+
+        return view('dashboard_admin.management_siswa_process_create_siswa', compact('random_string', 'data_gelpend'));
     }
 
     public function siswa_process_store(Request $request)
@@ -79,6 +84,7 @@ class ManagementSiswaController extends Controller
             'kewarganegaraan' => 'required',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
+            'gelombang_pendaftaran' =>'required',
 
 
             'alamat_rt' => 'digits_between:0,3',
@@ -109,7 +115,9 @@ class ManagementSiswaController extends Controller
         $data_cs->alamat_kecamatan = $request->alamat_kecamatan;
         $data_cs->alamat_kota_kabupaten = $request->alamat_kota_kabupaten;
         $data_cs->alamat_provinsi = $request->alamat_provinsi;
+        $data_cs->gelombang_pendaftaran = $request->gelombang_pendaftaran;
         $data_cs->status= 'process';
+
         
         if(isset($request->foto_siswa)){
             $imageFile = $request->nama_calon_siswa.'/'.\Str::random(60).'.'.$request->foto_siswa->getClientOriginalExtension();
@@ -207,8 +215,9 @@ class ManagementSiswaController extends Controller
         $data_nilai->nilai_bahasa_indonesia = $request->de_indo .'.'. $request->be_indo;
         $data_nilai->nilai_mtk = $request->de_mtk .'.'. $request->be_mtk;
         $data_nilai->nilai_ipa = $request->de_ipa .'.'. $request->be_ipa;
+        $data_nilai->nilai_bahasa_inggris = $request->de_ing .'.'. $request->be_ing;
 
-        $data_nilai->rata_nilai = $data_nilai->nilai_bahasa_indonesia + $data_nilai->nilai_mtk + $data_nilai->nilai_ipa;
+        $data_nilai->rata_nilai = $data_nilai->nilai_bahasa_indonesia + $data_nilai->nilai_mtk + $data_nilai->nilai_ipa + $data_nilai->nilai_bahasa_inggris;
         
 
         if(isset($request->foto_scan_surat_skhun)){
@@ -303,7 +312,7 @@ class ManagementSiswaController extends Controller
         } elseif($data) {
 
            // Menjumlahkan Nilai
-            $rata_nilai = $data->data_sekolah_nilai->nilai_bahasa_indonesia + $data->data_sekolah_nilai->nilai_mtk + $data->data_sekolah_nilai->nilai_ipa;
+            $rata_nilai = $data->data_sekolah_nilai->nilai_bahasa_indonesia + $data->data_sekolah_nilai->nilai_mtk + $data->data_sekolah_nilai->nilai_ipa + $data->data_sekolah_nilai->nilai_bahasa_inggris;
             return view('dashboard_admin.management_siswa_detail', compact('data', 'rata_nilai'));
 
                 
@@ -331,16 +340,19 @@ class ManagementSiswaController extends Controller
     {
         $data = MsProspectiveStudents::where('id', $id)->with('data_ayah', 'data_ibu', 'data_wali','data_sekolah_nilai')->first();
         
+        // Mendapatkan Data Gelombang Pendaftaran
+        $data_gelpend = MsGelpend::all();
+
         // Create Rata Rata Nilai
         if ($data->data_sekolah_nilai != true) {
 
-            return view('dashboard_admin.management_siswa_edit', compact('data'));
+            return view('dashboard_admin.management_siswa_edit', compact('data', 'data_gelpend'));
 
 
         } elseif($data) {
 
-            $rata_nilai = $data->data_sekolah_nilai->nilai_bahasa_indonesia + $data->data_sekolah_nilai->nilai_mtk + $data->data_sekolah_nilai->nilai_ipa;
-            return view('dashboard_admin.management_siswa_edit', compact('data', 'rata_nilai'));
+            $rata_nilai = $data->data_sekolah_nilai->nilai_bahasa_indonesia + $data->data_sekolah_nilai->nilai_mtk + $data->data_sekolah_nilai->nilai_ipa + $data->data_sekolah_nilai->nilai_bahasa_inggris;
+            return view('dashboard_admin.management_siswa_edit', compact('data', 'rata_nilai', 'data_gelpend'));
         
             
         }
@@ -379,6 +391,8 @@ class ManagementSiswaController extends Controller
         $data->alamat_kota_kabupaten = $request->get('alamat_kota_kabupaten');
         $data->alamat_provinsi = $request->get('alamat_provinsi');
         $data->status = $request->get('status');
+        $data->gelombang_pendaftaran = $request->get('gelombang_pendaftaran');
+
 
     
         
@@ -427,9 +441,19 @@ class ManagementSiswaController extends Controller
             return redirect(route('siswa-edit', [$data_nilai->id_table_ms_prospective_students ]));
         }
 
+        if(isset($request->de_ing)){
+            $data_nilai->nilai_bahasa_inggris = $request->get('de_ing') .'.'. $request->get('be_ing');
+        }
+        elseif(isset($request->be_ing)){
+            \Session::flash('dedu_ing', 'Isikan nilai depan terlebih dulu.');
+            return redirect(route('siswa-edit', [$data_nilai->id_table_ms_prospective_students ]));
+        }
 
-        $data_nilai->rata_nilai = $data_nilai->nilai_bahasa_indonesia + $data_nilai->nilai_mtk + $data_nilai->nilai_ipa;
-        
+
+        $data_nilai->rata_nilai =   $data_nilai->nilai_bahasa_indonesia +
+                                    $data_nilai->nilai_mtk +
+                                    $data_nilai->nilai_ipa +
+                                    $data_nilai->nilai_bahasa_inggris;
         
         
         if(isset($request->foto_scan_surat_skhun)){
@@ -440,7 +464,7 @@ class ManagementSiswaController extends Controller
         }
 
         $data_nilai->save();
-        return redirect(route('siswa-edit', $data_nilai->id));
+        return redirect(route('siswa-received'));
 
 
 

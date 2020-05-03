@@ -10,6 +10,21 @@
 
     <div class="br-pagebody">
 
+        @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-bordered pd-y-20" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="d-sm-flex align-items-center justify-content-start">
+                <i class="icon ion-ios-checkmark alert-icon tx-52 mg-r-20 tx-success"></i>
+                <div class="mg-t-20 mg-sm-t-0">
+                    <h5 class="mg-b-2 tx-success">{{$message}}</h5>
+                    <p class="mg-b-0 tx-gray">Silahkan login menggunakan Email dan Password yang telah anda Update.</p>
+                </div>
+                </div><!-- d-flex -->
+            </div><!-- alert -->
+        @endif
+
         <div class="row row-sm">
             <div class="col-sm-6 col-xl-3">
             <div class="bg-primary rounded overflow-hidden">
@@ -73,7 +88,7 @@
         <br>
 
         <div class="row row-sm">
-            <div class="col-sm-4">
+            <div class="col-sm-4 mt-1">
                 <div class="card">
                     <div class="card-header tx-medium bd-0 tx-white bg-mantle">
                         Profile Admin PPDB
@@ -139,9 +154,9 @@
                 </div><!-- card -->
             </div>
 
-            <div class="col-sm-8">
-                <div class="card bd-0 shadow-base pd-25">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.2633759019077!2d106.92984501431162!3d-6.359947563986839!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6993411a5d5955%3A0x3070600ac1dee970!2sSMK%20Negeri%204%20Kota%20Bekasi!5e0!3m2!1sid!2sid!4v1571283969085!5m2!1sid!2sid" width="100%" height="480px" frameborder="0" style="border:0;" allowfullscreen="">
+            <div class="col-sm-8 mt-1">
+                <div class="card bd-0 shadow-base pd-20">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.2633759019077!2d106.92984501431162!3d-6.359947563986839!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6993411a5d5955%3A0x3070600ac1dee970!2sSMK%20Negeri%204%20Kota%20Bekasi!5e0!3m2!1sid!2sid!4v1571283969085!5m2!1sid!2sid" width="100%" height="450px" frameborder="0" style="border:0;" allowfullscreen="">
                     </iframe>
                 </div><!-- card -->
             </div>

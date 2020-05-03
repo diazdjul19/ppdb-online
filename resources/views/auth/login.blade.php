@@ -178,7 +178,7 @@
                 @endif
                 </div>
 
-                <div class="mg-t-60 tx-center">Not yet a member? <a href="{{route('register')}}" class="tx-info">Register</a></div>
+                {{-- <div class="mg-t-60 tx-center">Not yet a member? <a href="{{route('register')}}" class="tx-info">Register</a></div> --}}
                 
             </form>
 

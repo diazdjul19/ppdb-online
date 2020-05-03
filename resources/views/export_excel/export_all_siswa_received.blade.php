@@ -41,9 +41,10 @@
                         <th>|</th>
                         <th>Asal Sekolah</th>
                         <th>NO SKHUN</th>
-                        <th>B.Indo</th>
+                        <th>Bahasa Indonesia</th>
                         <th>MTK</th>
                         <th>IPA</th>
+                        <th>Bahasa Inggris</th>
                         <th>Rata Nilai</th>
                     </tr>
                 </thead>
@@ -64,6 +65,7 @@
                                 <td>{{$d->data_sekolah_nilai->nilai_bahasa_indonesia}}</td>
                                 <td>{{$d->data_sekolah_nilai->nilai_mtk}}</td>
                                 <td>{{$d->data_sekolah_nilai->nilai_ipa}}</td>
+                                <td>{{$d->data_sekolah_nilai->nilai_bahasa_inggris}}</td>
                                 {{-- <td>{{$d->data_sekolah_nilai->nilai_bahasa_indonesia + $d->data_sekolah_nilai->nilai_mtk + $d->data_sekolah_nilai->nilai_ipa}}</td> --}}
                                 <td>{{$d->data_sekolah_nilai->rata_nilai}}</td>
 

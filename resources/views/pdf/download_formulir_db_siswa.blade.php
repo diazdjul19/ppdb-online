@@ -92,6 +92,11 @@
                             </td>
                         </tr>
                         <tr>
+                            <th>Gelombang Pendaftaran</th>
+                            <td>:</td>
+                            <td>{{$data->gelombang_pendaftaran}}</td>
+                        </tr>
+                        <tr>
                             <th>Alamat Rumah</th>
                             <td>:</td>
                             <td>{{$data->alamat_jalan}} RT.{{$data->alamat_rt}} RW.{{$data->alamat_rw}}</td>
@@ -150,6 +155,11 @@
                             <th>Nilai IPA</th>
                             <td>:</td>
                             <td>{{$data->data_sekolah_nilai->nilai_ipa}}</td>
+                        </tr>
+                        <tr>
+                            <th>Nilai Bahasa Inggris</th>
+                            <td>:</td>
+                            <td>{{$data->data_sekolah_nilai->nilai_bahasa_inggris}}</td>
                         </tr>
                         <tr>
                             <th>Total Rata-Rata Nilai</th>

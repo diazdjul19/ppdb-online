@@ -51,7 +51,10 @@ class DashboardSiswaController extends Controller
             
         } elseif($data) {
 
-            $rata_nilai = $data->data_sekolah_nilai->nilai_bahasa_indonesia + $data->data_sekolah_nilai->nilai_mtk + $data->data_sekolah_nilai->nilai_ipa;
+            $rata_nilai =   $data->data_sekolah_nilai->nilai_bahasa_indonesia +
+                            $data->data_sekolah_nilai->nilai_mtk +
+                            $data->data_sekolah_nilai->nilai_ipa +
+                            $data->data_sekolah_nilai->nilai_bahasa_inggris;
             return view('dashboard_siswa.home_db_siswa', compact('data', 'rata_nilai'));
             
         }
@@ -194,7 +197,11 @@ class DashboardSiswaController extends Controller
         } elseif($data) {
 
              // Create Rata Rata Nilai
-            $rata_nilai = $data->data_sekolah_nilai->nilai_bahasa_indonesia + $data->data_sekolah_nilai->nilai_mtk + $data->data_sekolah_nilai->nilai_ipa;
+            $rata_nilai =   $data->data_sekolah_nilai->nilai_bahasa_indonesia + 
+                            $data->data_sekolah_nilai->nilai_mtk + 
+                            $data->data_sekolah_nilai->nilai_ipa +
+                            $data->data_sekolah_nilai->nilai_bahasa_inggris;
+
 
             $pdf = \PDF::loadView('pdf.download_formulir_db_siswa', compact('data', 'rata_nilai'))->setPaper('a4');
             return $pdf->download('Formulir Sekolah - '.$data->nisn.'.pdf');
@@ -254,8 +261,13 @@ class DashboardSiswaController extends Controller
         $data_nilai->nilai_bahasa_indonesia = $request->de_indo .'.'. $request->be_indo;
         $data_nilai->nilai_mtk = $request->de_mtk .'.'. $request->be_mtk;
         $data_nilai->nilai_ipa = $request->de_ipa .'.'. $request->be_ipa;
+        $data_nilai->nilai_bahasa_inggris = $request->de_ing .'.'. $request->be_ing;
 
-        $data_nilai->rata_nilai = $data_nilai->nilai_bahasa_indonesia + $data_nilai->nilai_mtk + $data_nilai->nilai_ipa;
+
+        $data_nilai->rata_nilai =   $data_nilai->nilai_bahasa_indonesia + 
+                                    $data_nilai->nilai_mtk + 
+                                    $data_nilai->nilai_ipa +
+                                    $data_nilai->nilai_bahasa_inggris;
         
 
         if(isset($request->foto_scan_surat_skhun)){
@@ -289,11 +301,13 @@ class DashboardSiswaController extends Controller
     }
 
 
-    public function edit_password($enter_code)
+    public function edit_password()
     {
 
-        $data = MsProspectiveStudents::where('enter_code' , $enter_code)->first();
-        
+        $data_session = \Session::get('siswa');
+        $data = MsProspectiveStudents::where('enter_code', $data_session->enter_code)->first();
+
+
         if ($data == true) {
             return view('dashboard_siswa.laman_edit_password', compact('data'));
         }
@@ -306,30 +320,45 @@ class DashboardSiswaController extends Controller
     public function edit_password_store(Request $request)
     {    
         
-        $data = MsProspectiveStudents::where('nisn',$request->nisn)->first();
+        $data_session = \Session::get('siswa');
 
-        if ($request->password_pendaftaran != $request->password_confirm) {
+        $data = MsProspectiveStudents::where('nisn',$data_session->nisn)->first();
 
-            
-            \Session::flash('error', 'Password Tidak Sama !');
 
-            return redirect(route('edit-password', [$data->enter_code ]));
-            
+        // Check Old Password
+        if (\Hash::check($request->old_password, $data->password_pendaftaran)) {
+
+
+            // Check Confirm Password
+            if ($request->password_pendaftaran != $request->password_confirm) {
+                \Session::flash('error', 'Password Tidak Sama !');
+                return redirect(route('edit-password'));
+            }
+            elseif ($request->password_pendaftaran == false) {
+                \Session::flash('non_new_pass', 'Password Baru Belum Di Isi !');
+                return redirect(route('edit-password'));
+            }
+
+            // Make Hash Password
+            if (isset($request->password_pendaftaran)) {
+                $data->password_pendaftaran = \Hash::make($request->password_pendaftaran);
+
+                // Update Password Siswa
+                $data_akhir = $data->password_pendaftaran;
+                $data->update(['password_pendaftaran' => $data_akhir]);
+
+
+                \Session::flash('success', 'Sukses Update Password');
+                return redirect(route('home-db-siswa'));
+            }
+
+        }else {
+            \Session::flash('error_old_password', 'Password Lama Tidak Sesuai !');
+            return redirect(route('edit-password'));
         }
-
-
-        if (isset($request->password_pendaftaran)) {
-            $data->password_pendaftaran = \Hash::make($request->password_pendaftaran);
-        }
-
 
         
-        $data_akhir = $data->password_pendaftaran;
-        $data->update(['password_pendaftaran' => $data_akhir]);
 
-
-        \Session::flash('success', 'Sukses Update Password');
-        return redirect(route('home-db-siswa'));
 
     }
 

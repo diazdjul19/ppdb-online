@@ -53,11 +53,13 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
+                                        <div class="form-group row">
                                             <div class="col-md-12">
                                                 <label for="" class="menu-item-label">Pekerjaan</label>
                                                 <input type="text" name="pekerjaan_ayah" class="form-control" id="exampleInputEmail1"  placeholder="Pekerjaan Ayah" value="{{$data->data_ayah->pekerjaan_ayah}}">
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
 
                                 <div class="row">
@@ -78,6 +80,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
+                                        <div class="form-group row">
                                             <div class="col-md-12">
                                                 <label>Pendidikan Terakhir</label>
                                                 <select class="form-control" id="exampleFormControlSelect1" name="pendidikan_terakhir_ayah">
@@ -120,6 +123,7 @@
                                                 </select>
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
 
                                 <div class="row">
@@ -190,11 +194,13 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
+                                        <div class="form-group row">
                                             <div class="col-md-12">
                                                 <label for="" class="menu-item-label">Pekerjaan</label>
                                                 <input type="text" name="pekerjaan_ibu" class="form-control" id="exampleInputEmail1"  placeholder="Pekerjaan Ibu" value="{{$data->data_ibu->pekerjaan_ibu}}">
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
 
                                 <div class="row">
@@ -215,6 +221,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
+                                        <div class="form-group row">
                                             <div class="col-md-12">
                                                 <label>Pendidikan Terakhir</label>
                                                 <select class="form-control" id="exampleFormControlSelect1" name="pendidikan_terakhir_ibu">
@@ -257,6 +264,7 @@
                                                 </select>
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
 
                                 <div class="row">
@@ -327,11 +335,13 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
+                                        <div class="form-group row">
                                             <div class="col-md-12">
                                                 <label for="" class="menu-item-label">Pekerjaan</label>
                                                 <input type="text" name="pekerjaan_wali" class="form-control" id="exampleInputEmail1"  placeholder="Pekerjaan Wali" value="{{$data->data_wali->pekerjaan_wali}}">
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
 
                                 <div class="row">
@@ -352,6 +362,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
+                                        <div class="form-group row">
                                             <div class="col-md-12">
                                                 <label>Pendidikan Terakhir</label>
                                                 <select class="form-control" id="exampleFormControlSelect1" name="pendidikan_terakhir_wali">
@@ -394,6 +405,7 @@
                                                 </select>
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
 
                                 <div class="row">

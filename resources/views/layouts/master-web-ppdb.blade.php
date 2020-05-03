@@ -51,17 +51,36 @@
                     <li class="nav-item {{ request()->is('home-web') ? 'active' : '' }}"><a class="nav-link" href="{{route('home-web')}}">Home</a></li> 
                     <li class="nav-item {{ request()->is('create-pendaftaran') ? 'active' : '' }}"><a class="nav-link" href="{{route('create-pendaftaran')}}">Pendaftaran</a></li> 
                     <li class="nav-item {{ request()->is('hasil-seleksi') ? 'active' : '' }}"><a class="nav-link" href="{{route('hasil-seleksi')}}">Hasil Seleksi</a></li> 
-                    
+    
 
-                    <li class="nav-item submenu dropdown">
+                    <li class="nav-item submenu dropdown {{ request()->is('contact-us', 'read-prosedur-syarat', 'read-agenda', 'read-daftar-ulang') ? 'active' : '' }}">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                        aria-expanded="false">Blog</a>
+                        aria-expanded="false">Informasi Sekolah</a>
                         <ul class="dropdown-menu">
-                        <li class="nav-item"><a class="nav-link" href="">Blog Single</a></li>
-                        <li class="nav-item"><a class="nav-link" href="">Blog Details</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{route('read-prosedur-syarat')}}">Prosedur & Syarat</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{route('read-agenda')}}">Agenda</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{route('read-daftar-ulang')}}">Info Daftar Ulang</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{route('contact-us')}}">Kontak Admin</a></li>
+                            <li class="nav-item">
+
+
+                            <div class="nav-item text-center">
+                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Dropdown Button Sekolah
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">Report Bugs</a>
+                                    <a class="dropdown-item" href="{{route('login')}}">Admin & Operator</a>
+
+                                </div>
+                            </div>
+
+                        
                         </ul>
+                        
                     </li>
-                    <li class="nav-item {{ request()->is('contact-us') ? 'active' : '' }}"><a class="nav-link" href="{{route('contact-us')}}">Contact</a></li>                 </ul>
+                    {{-- <li class="nav-item {{ request()->is('contact-us') ? 'active' : '' }}"><a class="nav-link" href="{{route('contact-us')}}">Contact</a></li>                  --}}
+                </ul>
 
                 {{-- Start Login Siswa --}}
                 <div class="nav-right text-center text-lg-right py-4 py-lg-0">
@@ -142,22 +161,20 @@
     <!-- ================ start footer Area ================= -->
     <footer class="footer" style="background-color:#04091E;">
         <div class="container">
-        
-
-        <div class="footer-bottom">
-            <div class="row align-items-center">
-            <p class="col-lg-8 col-sm-12 footer-text m-0 text-center text-lg-left"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            </p>
-            <div class="col-lg-4 col-sm-12 footer-social text-center text-lg-right">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-dribbble"></i></a>
-                <a href="#"><i class="fab fa-behance"></i></a>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                <p class="col-lg-8 col-sm-12 footer-text m-0 text-center text-lg-left"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                </p>
+                <div class="col-lg-4 col-sm-12 footer-social text-center text-lg-right">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-dribbble"></i></a>
+                    <a href="#"><i class="fab fa-behance"></i></a>
+                </div>
+                </div>
             </div>
-            </div>
-        </div>
         </div>
     </footer>
     <!-- ================ End footer Area ================= -->

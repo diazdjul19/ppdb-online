@@ -9,6 +9,8 @@ use App\Models\CandidatsMaster\MsFatherData;
 use App\Models\CandidatsMaster\MsMotherData;
 use App\Models\CandidatsMaster\MsGuardiansData;
 use App\Models\MaWebMaster\MsOpenCloseWeb;
+use App\Models\MaContMaster\MsTextCont;
+
 
 
 use Illuminate\Support\Facades\Crypt;
@@ -60,11 +62,23 @@ class WebController extends Controller
                                 ->first();
 
         if ($open_close != null) {
-            return view('menu-web.create_pendaftaran', compact('random_string'));
+            return view('menu-web.create_pendaftaran', compact('random_string', 'open_close'));
         }
         else {
-            \Session::flash('gagal_masuk_pendaftaran', "Maaf Halaman Pendaftaran Saat Ini Sedang Di Tutup.");
-            return redirect(route('home-web'));
+
+            $get_date = MsOpenCloseWeb::where('jenis_maweb', 'maweb_pendaftaran')->orderBy('id', 'desc')->first();
+
+            if ($get_date == null) {
+                \Session::flash('not_access_not_date', "Informasi Pendaftaran Peserta Didik Baru akan terus kami UPDATE pada website Ini.");
+                return redirect(route('home-web'));
+            }
+            elseif($dt >= $get_date->sampai_tgl) {
+                $get_date_sampai = date('d/m/Y - H:i', strtotime($get_date->sampai_tgl));
+                \Session::flash('not_access_use_date', "Pendaftaran Peserta Didik Baru jalur $get_date->nama_gelombang_table_ms_gelpends telah di TUTUP pada tanggal $get_date_sampai.");
+                return redirect(route('home-web'));
+            }
+
+            
         }
         // End Open Close Web
 
@@ -115,13 +129,23 @@ class WebController extends Controller
         $data_cs->alamat_kota_kabupaten = $request->alamat_kota_kabupaten;
         $data_cs->alamat_provinsi = $request->alamat_provinsi;
         $data_cs->status= 'process';
-        
+
         if(isset($request->foto_siswa)){
             $imageFile = $request->nama_calon_siswa.'/'.\Str::random(60).'.'.$request->foto_siswa->getClientOriginalExtension();
             $image_path = $request->file('foto_siswa')->move(storage_path('app/public/foto_siswa/'.$request->nama_calon_siswa), $imageFile);
 
             $data_cs->foto_siswa = $imageFile;
         }
+
+        // Mendapatkan Maweb Pendaftaran Yang Sedang Aktif
+        $dt = date('Y-m-d H:i:s');
+        $open_close = MsOpenCloseWeb::where('jenis_maweb', 'maweb_pendaftaran')        
+                                ->where('dari_tgl','<=',$dt)
+                                ->where('sampai_tgl','>=',$dt)
+                                ->orderBy('id', 'desc')
+                                ->first();
+        $data_cs->gelombang_pendaftaran = $open_close->nama_gelombang_table_ms_gelpends;
+
 
         // Cek NISN For Enter
         $check_nisn = MsProspectiveStudents::where('nisn', $request->nisn)->first();
@@ -326,6 +350,37 @@ class WebController extends Controller
         // End Open Close Web
     }
 
+
+
+
+
+
+
+
+    // Start Read Informasi Pendaftaran
+
+        public function read_prosedur_syarat()
+        {
+            $data_code = MsTextCont::where('code_unik', 'ea385809eefed48c3c3abb6dc680945e')->first();
+            return view('menu-web.read_prosedur_syarat', compact('data_code'));
+        }
+
+        public function read_agenda()
+        {
+            $data_code = MsTextCont::where('code_unik', 'd0dbdfd8edf8dd1608405055c26adc94')->first();
+            return view('menu-web.read_agenda', compact('data_code'));
+        }
+        
+        public function read_daftar_ulang()
+        {
+            $data_code = MsTextCont::where('code_unik', '86397b70d3bfde246082defe4d67288a')->first();
+            return view('menu-web.read_daftar_ulang', compact('data_code'));
+        }
+
+
+
+    // End Read Informasi Pendaftaran 
+    
 
 
 

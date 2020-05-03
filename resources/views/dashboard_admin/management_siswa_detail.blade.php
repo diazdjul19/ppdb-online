@@ -76,6 +76,7 @@
                                     </p>
                                 </li>
 
+
                                 <li class="list-group-item rounded-top-0">
                                     <p class="mg-b-0">
                                     <i class="fa fa-tags tx-info mg-r-8"></i>
@@ -94,6 +95,7 @@
                                     </tr>
                                     </p>
                                 </li>
+
 
                                 @if ($data->status == 'process' )
                                     <li class="list-group-item rounded-top-0">
@@ -221,6 +223,13 @@
                                                 </td>
 
                                             </tr>
+
+                                            <tr>
+                                                <th>Gelombang Pendaftaran</th>
+                                                <td>:</td>
+                                                <td>{{$data->gelombang_pendaftaran}}</td>
+                                            </tr>
+
                                             <tr>
                                                 <th>Alamat Rumah & RT / RW</th>
                                                 <td>:</td>
@@ -462,6 +471,11 @@
                                                 <th>Nilai IPA</th>
                                                 <td>:</td>
                                                 <td>{{$data->data_sekolah_nilai->nilai_ipa}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Nilai Bahasa Inggris</th>
+                                                <td>:</td>
+                                                <td>{{$data->data_sekolah_nilai->nilai_bahasa_inggris}}</td>
                                             </tr>
                                             <tr>
                                                 <th>Total Rata-Rata Nilai</th>

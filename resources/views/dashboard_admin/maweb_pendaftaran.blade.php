@@ -52,7 +52,8 @@
                         <th class="text-center">Jenis MaWeb</th>
                         <th class="text-center">Dari Tgl</th>
                         <th class="text-center">Sampai Tgl</th>
-                        <th class="text-center">Tanggal Create</th>
+                        {{-- <th class="text-center">Tanggal Create</th> --}}
+                        <th class="text-center">Jenis Gelombang</th>
                         <th class="text-center">Status</th>
                         <th class="text-center">Hapus</th>
                     </tr>
@@ -77,12 +78,15 @@
                                     {{date('d M Y  | H:i:s', strtotime($d->sampai_tgl))}}
                                 </span>
                             </td>
-                            <td class="text-center pt-3">{{date('d M Y  | H:i:s', strtotime($d->created_at))}}</td>
+                            <td class="text-center pt-3">{{$d->nama_gelombang_table_ms_gelpends}}</td>
+                            {{-- <td class="text-center pt-3">{{date('d M Y  | H:i:s', strtotime($d->created_at))}}</td> --}}
                             <td class="text-center pt-3">
                                 @if ($dt >= $d->sampai_tgl)
                                     <span class="badge badge-danger" style="font-size:12px;">Selesai</span>
                                 @elseif ($dt >= $d->dari_tgl)
                                     <span class="badge badge-success" style="font-size:12px;">Berlangsung</span>
+                                @elseif($dt <= $d->dari_tgl)
+                                    <span class="badge badge-warning" style="font-size:12px;">Belum Mulai</span>
                                 @endif
                             </td>
                             <td class="text-center pt-2">

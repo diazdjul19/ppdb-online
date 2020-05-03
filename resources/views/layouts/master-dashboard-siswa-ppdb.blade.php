@@ -166,7 +166,7 @@
                         </form>
                         
                     </li> --}}
-                    <li><a href="{{route('edit-password', $data->enter_code)}}"><i class="icon ion-wrench"></i> Edit Password</a></li>
+                    <li><a href="{{route('edit-password')}}"><i class="icon ion-wrench"></i> Edit Password</a></li>
                     
                     <li>
                         <a class="dropdown-item" href="{{ route('logout-db-siswa') }}">

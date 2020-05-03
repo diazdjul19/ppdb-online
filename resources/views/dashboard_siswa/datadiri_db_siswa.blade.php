@@ -53,11 +53,13 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
+                                        <div class="form-group row">
                                             <div class="col-md-12">
                                                 <label for="" class="menu-item-label">NIK</label>
                                                 <input type="text" name="" class="form-control" id="exampleInputEmail1"  placeholder="NIK" value="{{$data->nik}}" readonly>
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
 
                                 <div class="row">
@@ -92,9 +94,11 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="col-md-12">
-                                            <label for="" class="menu-item-label">Agama</label>
-                                            <input type="text" name="agama" class="form-control" id="exampleInputEmail1"  placeholder="Agama" value="{{$data->agama}}">
+                                        <div class="form-group row">
+                                            <div class="col-md-12">
+                                                <label for="" class="menu-item-label">Agama</label>
+                                                <input type="text" name="agama" class="form-control" id="exampleInputEmail1"  placeholder="Agama" value="{{$data->agama}}">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -117,6 +121,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
+                                        <div class="form-group row">
                                             <div class="col-md-12">
                                                 <label>Warganegara</label>
                                                 <select class="form-control" id="exampleFormControlSelect1" name="kewarganegaraan">
@@ -136,6 +141,7 @@
                                                 </select>
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
 
                                 <div class="row">
@@ -180,12 +186,14 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label class="ml-3" >Foto Siswa</label>
-                                        <div class="col-md-12 mb-2">
-                                            @if($data->foto_siswa)
-                                                <img src="{{url('/storage/foto_siswa/'.$data->foto_siswa)}}"
-                                                width="100px">
-                                            @endif
-                                            <input type="file" class="form-control" name="foto_siswa">
+                                        <div class="form-group row">
+                                            <div class="col-md-12 mb-2">
+                                                @if($data->foto_siswa)
+                                                    <img src="{{url('/storage/foto_siswa/'.$data->foto_siswa)}}"
+                                                    width="100px">
+                                                @endif
+                                                <input type="file" class="form-control" name="foto_siswa">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -208,13 +216,14 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
+                                        <div class="form-group row">
                                             <div class="col-md-12">
                                                 <label for="">Kode POS</label>
                                                 <input type="text" name="alamat_kode_pos" class="form-control" id="exampleInputEmail1"  placeholder="Kode POS" value="{{$data->alamat_kode_pos}}">
-                                                    <span class="text-danger">{{ $errors->first('alamat_kode_pos') }}</span>
-
+                                                <span class="text-danger">{{ $errors->first('alamat_kode_pos') }}</span>
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
 
                                 <div class="row">
@@ -247,11 +256,13 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
+                                        <div class="form-group row">
                                             <div class="col-md-12">
                                                 <label for="">Kecamatan</label>
                                                 <input type="text" name="alamat_kecamatan" class="form-control" id="exampleInputEmail1"  placeholder="Kecamatan" value="{{$data->alamat_kecamatan}}">
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
 
                                 <div class="row">

@@ -83,6 +83,9 @@
     <link href="/bracket-master/app/lib/datatables.net-dt/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="/bracket-master/app/lib/datatables.net-responsive-dt/css/responsive.dataTables.min.css" rel="stylesheet">
 
+    {{-- Summernote --}}
+    <link href="/bracket-master/app/lib/summernote/summernote-bs4.css" rel="stylesheet">
+
     {{-- DateTimePicker --}}
     <link rel="stylesheet" href="/bracket-master/app/js/datetimepicker/jquery.datetimepicker.min.css">
 </head>
@@ -140,6 +143,29 @@
                 </ul>
             </li><!-- br-menu-item -->
         @endif
+
+        @if (Auth::user()->level == 'A')
+            <li class="br-menu-item">
+                <a href="#" class="br-menu-link with-sub {{ request()->is('macont-prosedur-syarat', 'macont-agenda', 'macont-daftar-ulang') ? 'active' : '' }}">
+                <i class="menu-item-icon icon ion-clipboard tx-20"></i>
+                <span class="menu-item-label">Management Content</span>
+                </a><!-- br-menu-link -->
+                <ul class="br-menu-sub nav flex-column">
+                    <li class="sub-item"><a href="macont-prosedur-syarat" class="sub-link {{ request()->is('macont-prosedur-syarat') ? 'active' : '' }}">MaCont Prosedur & Syarat</a></li>
+                    <li class="sub-item"><a href="macont-agenda" class="sub-link {{ request()->is('macont-agenda') ? 'active' : '' }}">MaCont Agenda</a></li>
+                    <li class="sub-item"><a href="macont-daftar-ulang" class="sub-link {{ request()->is('macont-daftar-ulang') ? 'active' : '' }}">MaCont Daftar Ulang</a></li>
+                </ul>
+            </li><!-- br-menu-item -->
+        @endif
+
+        @if (Auth::user()->level == 'A')
+            <li class="br-menu-item">
+                <a href="{{route('gelpend.index')}}" class="br-menu-link {{ request()->is('gelpend', 'gelpend/create', 'gelpend/*/edit') ? 'active' : '' }}">
+                <i class="menu-item-icon icon ion-shuffle tx-24"></i>
+                <span class="menu-item-label">Gelombang Pendaftaran</span>
+                </a><!-- br-menu-link -->
+            </li><!-- br-menu-item -->
+        @endif
         <br>
     </div><!-- br-sideleft -->
     <!-- ########## END: LEFT PANEL ########## -->
@@ -184,6 +210,9 @@
                 <ul class="list-unstyled user-profile-nav">
                     {{-- <li><a href=""><i class="icon ion-ios-person"></i> Edit Profile</a></li>
                     <li><a href=""><i class="icon ion-ios-gear"></i> Settings</a></li> --}}
+
+                    <li><a href="{{route('edit-password-ao')}}"><i class="icon ion-wrench"></i>Edit Password</a></li>
+
                     <li>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
@@ -246,6 +275,9 @@
     <script src="/bracket-master/app/lib/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="/bracket-master/app/lib/datatables.net-responsive-dt/js/responsive.dataTables.min.js"></script>
     <script src="/bracket-master/app/lib/highlightjs/highlight.pack.min.js"></script>
+
+    {{-- Summernote --}}
+    <script src="/bracket-master/app/lib/summernote/summernote-bs4.min.js"></script>
     
     {{-- DateTimePicker --}}
     <script src="/bracket-master/app/js/datetimepicker/jquery.datetimepicker.full.js"></script>
@@ -258,6 +290,7 @@
     @stack('script-1')
     @stack('password-eye')
     @stack('datetime-picker')
+    @stack('summernote')
 
 
 </body>

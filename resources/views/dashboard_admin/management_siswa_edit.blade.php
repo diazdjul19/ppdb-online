@@ -105,11 +105,13 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
+                                        <div class="form-group row">
                                             <div class="col-md-12">
                                                 <label for="" class="menu-item-label">NIK</label>
                                                 <input type="text" name="nik" class="form-control" id="exampleInputEmail1"  placeholder="NIK" value="{{$data->nik}}">
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
 
                                 <div class="row">
@@ -144,9 +146,11 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="col-md-12">
-                                            <label for="" class="menu-item-label">Agama</label>
-                                            <input type="text" name="agama" class="form-control" id="exampleInputEmail1"  placeholder="Agama" value="{{$data->agama}}">
+                                        <div class="form-group row">
+                                            <div class="col-md-12">
+                                                <label for="" class="menu-item-label">Agama</label>
+                                                <input type="text" name="agama" class="form-control" id="exampleInputEmail1"  placeholder="Agama" value="{{$data->agama}}">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -169,6 +173,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
+                                        <div class="form-group row">
                                             <div class="col-md-12">
                                                 <label>Warganegara</label>
                                                 <select class="form-control" id="exampleFormControlSelect1" name="kewarganegaraan">
@@ -188,6 +193,7 @@
                                                 </select>
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
 
                                 <div class="row">
@@ -231,13 +237,35 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <label class="ml-3" >Foto Siswa</label>
-                                        <div class="col-md-12 mb-2">
-                                            @if($data->foto_siswa)
-                                                <img src="{{url('/storage/foto_siswa/'.$data->foto_siswa)}}"
-                                                width="100px">
-                                            @endif
-                                            <input type="file" class="form-control" name="foto_siswa">
+                                        <div class="form-group row">
+                                            <div class="col-md-12">
+                                                <label>Gelpend</label>
+                                                <select class="form-control" id="" name="gelombang_pendaftaran">
+                                                    <optgroup label="Gelpend Lama">
+                                                        <option  value="{{$data->gelombang_pendaftaran}}">{{$data->gelombang_pendaftaran}}</option>
+                                                    </optgroup>  
+                                                    <optgroup label="Gelpend Baru">  
+                                                        @foreach ($data_gelpend as $dg)
+                                                            <option value="{{$dg->nama_gelombang}}">{{$dg->nama_gelombang}}</option>
+                                                        @endforeach
+                                                    </optgroup>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group row">
+                                            <label class="ml-3" >Foto Siswa</label>
+                                            <div class="col-md-12 mb-2">
+                                                @if($data->foto_siswa)
+                                                    <img src="{{url('/storage/foto_siswa/'.$data->foto_siswa)}}"
+                                                    width="100px">
+                                                @endif
+                                                <input type="file" class="form-control" name="foto_siswa">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -260,13 +288,14 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
+                                        <div class="form-group row">
                                             <div class="col-md-12">
                                                 <label for="">Kode POS</label>
                                                 <input type="text" name="alamat_kode_pos" class="form-control" id="exampleInputEmail1"  placeholder="Kode POS" value="{{$data->alamat_kode_pos}}">
-                                                    <span class="text-danger">{{ $errors->first('alamat_kode_pos') }}</span>
-
+                                                <span class="text-danger">{{ $errors->first('alamat_kode_pos') }}</span>
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
 
                                 <div class="row">
@@ -299,11 +328,13 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
+                                        <div class="form-group row">
                                             <div class="col-md-12">
                                                 <label for="">Kecamatan</label>
                                                 <input type="text" name="alamat_kecamatan" class="form-control" id="exampleInputEmail1"  placeholder="Kecamatan" value="{{$data->alamat_kecamatan}}">
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
 
                                 <div class="row">
@@ -311,7 +342,7 @@
                                         <div class="form-group row">
                                             <div class="col-md-12">
                                                 <label for="">Kota / Kabupaten</label>
-                                                <input type="text" name="alamat_kota_kabupaten" class="form-control" id="exampleInputEmail1"  placeholder="Kota / Kabupaten"  value="{{$data->alamat_kota_kabupaten}}">
+                                                <input type="text" name="alamat_kota_kabupaten" class="typeahead form-control" id="exampleInputEmail1"  placeholder="Kota / Kabupaten"  value="{{$data->alamat_kota_kabupaten}}">
                                             </div>
                                         </div>
                                     </div>
@@ -319,32 +350,34 @@
                                         <div class="form-group row">
                                             <div class="col-md-12">
                                                 <label for="">Provinsi</label>
-                                                <input type="text" name="alamat_provinsi" class="form-control" id="exampleInputEmail1"  placeholder="Provinsi" value="{{$data->alamat_provinsi}}">
+                                                <input type="text" name="alamat_provinsi" class="typeahead form-control" id="exampleInputEmail1"  placeholder="Provinsi" value="{{$data->alamat_provinsi}}">
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
-                                        <div class="col-md-12">
-                                            <label>Status</label>
-                                            <select class="form-control" id="exampleFormControlSelect1" name="status">
-                                                <optgroup label="Status Lama">
-                                                    <option  value="{{$data->status}}">
-                                                        @if ($data->status == 'process')
-                                                            <span>Prosess</span>
-                                                        @elseif($data->status == 'received')
-                                                            <span>Terima</span> 
-                                                        @elseif($data->status == 'rejected')
-                                                            <span>Tolak</span> 
-                                                        @endif
-                                                    </option>
-                                                </optgroup>  
-                                                <optgroup label="Status Baru">  
-                                                    <option value="process">Prosess</option>
-                                                    <option value="received">Terima</option>
-                                                    <option value="rejected">Tolak</option>
-                                                </optgroup>
-                                            </select>
+                                        <div class="form-group row">
+                                            <div class="col-md-12">
+                                                <label>Status</label>
+                                                <select class="form-control" id="exampleFormControlSelect1" name="status">
+                                                    <optgroup label="Status Lama">
+                                                        <option  value="{{$data->status}}">
+                                                            @if ($data->status == 'process')
+                                                                <span>Prosess</span>
+                                                            @elseif($data->status == 'received')
+                                                                <span>Terima</span> 
+                                                            @elseif($data->status == 'rejected')
+                                                                <span>Tolak</span> 
+                                                            @endif
+                                                        </option>
+                                                    </optgroup>  
+                                                    <optgroup label="Status Baru">  
+                                                        <option value="process">Prosess</option>
+                                                        <option value="received">Terima</option>
+                                                        <option value="rejected">Tolak</option>
+                                                    </optgroup>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                     
@@ -422,13 +455,13 @@
                             <div class="form-group">
                                 <div class="form-group row">
                                     <div class="col">
-                                        <label>Kota Sekolah Asal</label>
+                                        <label>Kota Sekolah</label>
                                         <div id="the-basics">
                                             <input class="typeahead form-control" type="text" name="asal_sekolah_kota" placeholder="Kota / Kabupaten" required value="{{$data->data_sekolah_nilai->asal_sekolah_kota}}">
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <label>Provinsi Sekolah Asal</label>
+                                        <label>Provinsi Sekolah</label>
                                         <div id="the-basics">
                                             <input class="typeahead form-control" type="text" name="asal_sekolah_provinsi" placeholder="Provinsi" required value="{{$data->data_sekolah_nilai->asal_sekolah_provinsi}}">
                                         </div>
@@ -442,16 +475,16 @@
                             </div>
 
                             <div class="form-group mt-3">
-
                                 <label class="" >Foto / Scan Surat SKHUN</label>
-                                <div class="col-md-12">
-                                    @if($data->foto_siswa)
-                                        <img src="{{url('/storage/foto_scan_surat_skhun/'.$data->data_sekolah_nilai->foto_scan_surat_skhun)}}"
-                                        width="100px">
-                                    @endif
-                                    <input type="file" class="form-control" name="foto_scan_surat_skhun">
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        @if($data->foto_siswa)
+                                            <img src="{{url('/storage/foto_scan_surat_skhun/'.$data->data_sekolah_nilai->foto_scan_surat_skhun)}}"
+                                            width="100px">
+                                        @endif
+                                        <input type="file" class="form-control" name="foto_scan_surat_skhun">
+                                    </div>
                                 </div>
-
                             </div>
 
 
@@ -507,6 +540,21 @@
                                                     @endif
                                                 </div>
                                             </div> <!-- /.form-group -->
+
+
+                                            <div class="form-group row">
+                                                <label for="de_ing" class="col-form-label ml-3" style="margin-right:4.5%;">Bahasa Inggris</label>
+                                                <div class="col-sm-6">
+                                                    <div class="input-group ">
+                                                        <input type="text" class="form-control" id="de_ing" name="de_ing" maxlength="2" />
+                                                        <span class="addon ml-2 mr-2 mt-2"><b>,</b></span>
+                                                        <input type="text" class="form-control" id="be_ing" name="be_ing" maxlength="2" />
+                                                    </div>
+                                                    @if ($message = Session::get('dedu_ing'))
+                                                        <strong style="color:red;">{{ $message }}</strong>
+                                                    @endif
+                                                </div>
+                                            </div> <!-- /.form-group -->
                                         
                                         </div>
                                     </div>
@@ -531,6 +579,11 @@
                                                                 <th>Nilai IPA</th>
                                                                 <td>:</td>
                                                                 <td>{{$data->data_sekolah_nilai->nilai_ipa}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Nilai Bahasa Inggris</th>
+                                                                <td>:</td>
+                                                                <td>{{$data->data_sekolah_nilai->nilai_bahasa_inggris}}</td>
                                                             </tr>
                                                             <tr class="table-dark" style="color:black;">
                                                                 <th>Total Rata-Rata Nilai</th>
@@ -609,11 +662,13 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
+                                        <div class="form-group row">
                                             <div class="col-md-12">
                                                 <label for="" class="menu-item-label">Pekerjaan</label>
                                                 <input type="text" name="pekerjaan_ayah" class="form-control" id="exampleInputEmail1"  placeholder="Pekerjaan Ayah" value="{{$data->data_ayah->pekerjaan_ayah}}">
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
 
                                 <div class="row">
@@ -634,6 +689,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
+                                        <div class="form-group row">
                                             <div class="col-md-12">
                                                 <label>Pendidikan Terakhir</label>
                                                 <select class="form-control" id="exampleFormControlSelect1" name="pendidikan_terakhir_ayah">
@@ -676,6 +732,7 @@
                                                 </select>
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
 
                                 <div class="row">
@@ -737,11 +794,13 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
+                                        <div class="form-group row">
                                             <div class="col-md-12">
                                                 <label for="" class="menu-item-label">Pekerjaan</label>
                                                 <input type="text" name="pekerjaan_ibu" class="form-control" id="exampleInputEmail1"  placeholder="Pekerjaan Ibu" value="{{$data->data_ibu->pekerjaan_ibu}}">
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
 
                                 <div class="row">
@@ -762,6 +821,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
+                                        <div class="form-group row">
                                             <div class="col-md-12">
                                                 <label>Pendidikan Terakhir</label>
                                                 <select class="form-control" id="exampleFormControlSelect1" name="pendidikan_terakhir_ibu">
@@ -804,6 +864,7 @@
                                                 </select>
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
 
                                 <div class="row">
@@ -865,11 +926,13 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
+                                        <div class="form-group row">
                                             <div class="col-md-12">
                                                 <label for="" class="menu-item-label">Pekerjaan</label>
                                                 <input type="text" name="pekerjaan_wali" class="form-control" id="exampleInputEmail1"  placeholder="Pekerjaan Wali" value="{{$data->data_wali->pekerjaan_wali}}">
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
 
                                 <div class="row">
@@ -890,6 +953,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
+                                        <div class="form-group row">
                                             <div class="col-md-12">
                                                 <label>Pendidikan Terakhir</label>
                                                 <select class="form-control" id="exampleFormControlSelect1" name="pendidikan_terakhir_wali">
@@ -932,6 +996,7 @@
                                                 </select>
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
 
                                 <div class="row">
