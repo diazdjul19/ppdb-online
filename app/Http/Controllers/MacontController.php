@@ -102,6 +102,37 @@ class MacontController extends Controller
         
     }
 
+     // PROFIL SEKOLAH
+    public function macont_profil_sekolah()
+    {
+        $data_code = MsTextCont::where('code_unik', 'c9c9aa4b06eb1592459070c357743a63')->first();
+        return view('dashboard_admin.macont_profil_sekolah', compact('data_code'));
+
+    }
+
+    public function macont_profil_sekolah_store(Request $request)
+    {
+        $data = new MsTextCont();
+        $data->code_unik = $request->code_unik;
+        $data->nama_content = $request->nama_content;
+        $data->text_information = $request->text_information;
+        $data->save();
+
+        \Session::flash('success_create', "Macont Daftar Ulang Berhasil Di Publish");
+        return redirect(route('macont-profil-sekolah'));
+    }
+
+    public function macont_profil_sekolah_update(Request $request, $id)
+    {
+        $data = MsTextCont::find($id);
+        $data->text_information = $request->get('text_information');
+        $data->save();
+
+        \Session::flash('success_update', "Macont Daftar Ulang Berhasil Di Publish");
+        return redirect(route('macont-profil-sekolah'));
+        
+    }
+
 
 
 }

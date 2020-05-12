@@ -199,6 +199,9 @@
             <div class="footer-left">
                 <div class="mg-b-2">Copyright &copy; 2020. Diaz Djuliansyah.</div>
                 <div>Teknik Komputer Jaringan. SMKN 4 Kota Bekasi</div>
+                <div class="">
+                    Copyright &copy;<script>document.write(new Date().getFullYear());</script>  Bracket Plus | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://themeforest.net/search/bracket%20plus?gclid=CjwKCAjw4871BRAjEiwAbxXi2_aqXW4I8QDrNC9yfj87XDbTpVVhW9ul5Gxfq4NHLQ8nVkdxXB7z2BoCnLAQAvD_BwE" target="_blank">themeforest</a>
+                </div>
             </div>
             <div class="footer-right d-flex align-items-center">
                 <span class="tx-uppercase mg-r-10">Check:</span>

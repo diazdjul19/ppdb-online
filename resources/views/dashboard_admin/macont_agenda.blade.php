@@ -48,7 +48,8 @@
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">ISI CONTENT</label>
                                     <textarea id="note1" name="text_information"></textarea>
-                                    
+                                    <span><i>Max Ideal Width Image 700px.</i></span>
+
                                 </div>
 
                                 <div class="form-group row mb-0">
@@ -66,7 +67,7 @@
         </div>
         {{-- br-body --}}
 
-    @elseif($data_code != null))
+    @elseif($data_code != null)
         {{-- br-body --}}
         <div class="br-pagebody">
 
@@ -125,7 +126,7 @@
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">ISI CONTENT</label>
                                     <textarea id="note1" name="text_information">{{$data_code->text_information}}</textarea>
-                                    
+                                    <span><i>Max Ideal Width Image 700px.</i></span>
                                 </div>
 
                                 <div class="form-group row mb-0">

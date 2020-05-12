@@ -10,12 +10,16 @@ use App\Models\CandidatsMaster\MsMotherData;
 use App\Models\CandidatsMaster\MsGuardiansData;
 use App\Models\MaWebMaster\MsOpenCloseWeb;
 use App\Models\MaContMaster\MsTextCont;
+use App\Models\ReportBugsMaster\ReportBugs;
+
 
 
 
 use Illuminate\Support\Facades\Crypt;
 use Webpatser\Uuid\Uuid;
 use Alert;
+use Mail;
+
 
 
 class WebController extends Controller
@@ -358,7 +362,6 @@ class WebController extends Controller
 
 
     // Start Read Informasi Pendaftaran
-
         public function read_prosedur_syarat()
         {
             $data_code = MsTextCont::where('code_unik', 'ea385809eefed48c3c3abb6dc680945e')->first();
@@ -377,9 +380,51 @@ class WebController extends Controller
             return view('menu-web.read_daftar_ulang', compact('data_code'));
         }
 
-
-
+        public function read_profil_sekolah()
+        {
+            $data_code = MsTextCont::where('code_unik', 'c9c9aa4b06eb1592459070c357743a63')->first();
+            return view('menu-web.read_profil_sekolah', compact('data_code'));
+        }
     // End Read Informasi Pendaftaran 
+
+    
+
+
+    // Start Report Bugs
+        public function report_bugs()
+        {
+            return view('menu-web.report_bugs');
+        }
+
+        public function report_bugs_store(Request $request)
+        {
+            $data = new ReportBugs();
+            $data->subject = $request->subject;
+            $data->name = $request->name;
+            $data->email = $request->email;
+            $data->text_report = $request->text_report;
+            $data->status = "not complete";
+            $data->save();
+
+            if ($data) {
+                
+                Mail::send('sand_to_email.report_bugs_to_admin', ['data' => $data], function($data) {
+                    $data->to('diazdjul19@gmail.com', 'Lapor Bugs')->subject('Report Bugs PPDB');
+                    $data->from(env('MAIL_USERNAME', 'diazdjul19@gmail.com'), 'PPDB Online SMKN 4 Kota Bekasi');
+                });
+
+                Mail::send('sand_to_email.report_bugs_to_pelapor', ['data' => $data], function($data) use($request){
+                $data->to($request->email, 'Lapor Bugs')->subject('Report Bugs PPDB');
+                $data->from(env('MAIL_USERNAME', 'diazdjul19@gmail.com'), 'PPDB Online SMKN 4 Kota Bekasi');
+            });
+
+                \Session::flash('success_report', "Bantuan Anda Akan Sangat Kami Hargai.");
+                return redirect(route('report-bugs'));
+            }else{
+                return "Gagal";
+            }
+        }
+    // End Report Bugs
     
 
 

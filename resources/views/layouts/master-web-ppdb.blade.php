@@ -30,6 +30,9 @@
     {{-- Datatable --}}
     <link href="/bracket-master/app/lib/datatables.net-dt/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="/bracket-master/app/lib/datatables.net-responsive-dt/css/responsive.dataTables.min.css" rel="stylesheet">
+
+    {{-- Summernote --}}
+    <link href="/bracket-master/app/lib/summernote/summernote-bs4.css" rel="stylesheet">
     
     </head>
     <body class="bg-shape">
@@ -53,31 +56,26 @@
                     <li class="nav-item {{ request()->is('hasil-seleksi') ? 'active' : '' }}"><a class="nav-link" href="{{route('hasil-seleksi')}}">Hasil Seleksi</a></li> 
     
 
-                    <li class="nav-item submenu dropdown {{ request()->is('contact-us', 'read-prosedur-syarat', 'read-agenda', 'read-daftar-ulang') ? 'active' : '' }}">
+                    <li class="nav-item submenu dropdown {{ request()->is('contact-us', 'read-prosedur-syarat', 'read-agenda', 'read-daftar-ulang', 'read-profil-sekolah') ? 'active' : '' }}">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                        aria-expanded="false">Informasi Sekolah</a>
+                        aria-expanded="false">Tentang Sekolah</a>
                         <ul class="dropdown-menu">
+                            <li class="nav-item"><a class="nav-link" href="{{route('read-profil-sekolah')}}">Profil Sekolah</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{route('read-prosedur-syarat')}}">Prosedur & Syarat</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{route('read-agenda')}}">Agenda</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{route('read-daftar-ulang')}}">Info Daftar Ulang</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{route('contact-us')}}">Kontak Admin</a></li>
                             <li class="nav-item">
-
-
-                            <div class="nav-item text-center">
-                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Dropdown Button Sekolah
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#">Report Bugs</a>
-                                    <a class="dropdown-item" href="{{route('login')}}">Admin & Operator</a>
-
-                                </div>
-                            </div>
-
-                        
                         </ul>
-                        
+                    </li>
+
+                    <li class="nav-item submenu dropdown {{ request()->is('report-bugs') ? 'active' : '' }}">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                        aria-expanded="false">Report Bugs</a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item"><a class="nav-link" href="{{route('report-bugs')}}">Report Bugs</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{route('login')}}">Admin & Operator</a></li>
+                        </ul>
                     </li>
                     {{-- <li class="nav-item {{ request()->is('contact-us') ? 'active' : '' }}"><a class="nav-link" href="{{route('contact-us')}}">Contact</a></li>                  --}}
                 </ul>
@@ -196,6 +194,9 @@
     <script src="/bracket-master/app/lib/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="/bracket-master/app/lib/datatables.net-responsive-dt/js/responsive.dataTables.min.js"></script>
 
+    {{-- Summernote --}}
+    <script src="/bracket-master/app/lib/summernote/summernote-bs4.min.js"></script>
+
     {{-- <script src="/bracket-master/app/lib/jquery/jquery.min.js"></script> --}}
     <script src="/bracket-master/app/lib/highlightjs/highlight.pack.min.js"></script>
     <script src="/bracket-master/app/lib/jquery-steps/build/jquery.steps.min.js"></script>
@@ -203,6 +204,8 @@
     
     @stack('script-1')
     @stack('footer-web')
+    @stack('summernote')
+
     {{-- @stack('tawk_to') --}}
 
 

@@ -146,11 +146,12 @@
 
         @if (Auth::user()->level == 'A')
             <li class="br-menu-item">
-                <a href="#" class="br-menu-link with-sub {{ request()->is('macont-prosedur-syarat', 'macont-agenda', 'macont-daftar-ulang') ? 'active' : '' }}">
+                <a href="#" class="br-menu-link with-sub {{ request()->is('macont-prosedur-syarat', 'macont-agenda', 'macont-daftar-ulang', 'macont-profil-sekolah') ? 'active' : '' }}">
                 <i class="menu-item-icon icon ion-clipboard tx-20"></i>
                 <span class="menu-item-label">Management Content</span>
                 </a><!-- br-menu-link -->
                 <ul class="br-menu-sub nav flex-column">
+                    <li class="sub-item"><a href="macont-profil-sekolah" class="sub-link {{ request()->is('macont-profil-sekolah') ? 'active' : '' }}">MaCont Profil Sekolah</a></li>
                     <li class="sub-item"><a href="macont-prosedur-syarat" class="sub-link {{ request()->is('macont-prosedur-syarat') ? 'active' : '' }}">MaCont Prosedur & Syarat</a></li>
                     <li class="sub-item"><a href="macont-agenda" class="sub-link {{ request()->is('macont-agenda') ? 'active' : '' }}">MaCont Agenda</a></li>
                     <li class="sub-item"><a href="macont-daftar-ulang" class="sub-link {{ request()->is('macont-daftar-ulang') ? 'active' : '' }}">MaCont Daftar Ulang</a></li>
@@ -163,6 +164,15 @@
                 <a href="{{route('gelpend.index')}}" class="br-menu-link {{ request()->is('gelpend', 'gelpend/create', 'gelpend/*/edit') ? 'active' : '' }}">
                 <i class="menu-item-icon icon ion-shuffle tx-24"></i>
                 <span class="menu-item-label">Gelombang Pendaftaran</span>
+                </a><!-- br-menu-link -->
+            </li><!-- br-menu-item -->
+        @endif
+
+        @if (Auth::user()->level == 'A')
+            <li class="br-menu-item">
+                <a href="{{route('report-bugs-admin.index')}}" class="br-menu-link {{ request()->is('report-bugs-admin', 'report-bugs-admin/*') ? 'active' : '' }}">
+                <i class="menu-item-icon icon ion-chatbubble-working tx-24"></i>
+                <span class="menu-item-label">Bugs Message</span>
                 </a><!-- br-menu-link -->
             </li><!-- br-menu-item -->
         @endif
@@ -248,6 +258,9 @@
             <div class="footer-left">
                 <div class="mg-b-2">Copyright &copy; 2020. Diaz Djuliansyah.</div>
                 <div>Teknik Komputer Jaringan. SMKN 4 Kota Bekasi</div>
+                <div class="">
+                    Copyright &copy;<script>document.write(new Date().getFullYear());</script>  Bracket Plus | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://themeforest.net/search/bracket%20plus?gclid=CjwKCAjw4871BRAjEiwAbxXi2_aqXW4I8QDrNC9yfj87XDbTpVVhW9ul5Gxfq4NHLQ8nVkdxXB7z2BoCnLAQAvD_BwE" target="_blank">themeforest</a>
+                </div>
             </div>
             <div class="footer-right d-flex align-items-center">
                 <span class="tx-uppercase mg-r-10">Check:</span>
@@ -295,3 +308,4 @@
 
 </body>
 </html>
+

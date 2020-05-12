@@ -74,10 +74,18 @@ Auth::routes([
         
 
         // Start Read Informasi Pendaftaran
+            Route::get('/read-profil-sekolah', 'WebController@read_profil_sekolah')->name('read-profil-sekolah');
             Route::get('/read-prosedur-syarat', 'WebController@read_prosedur_syarat')->name('read-prosedur-syarat');
             Route::get('/read-agenda', 'WebController@read_agenda')->name('read-agenda');
             Route::get('/read-daftar-ulang', 'WebController@read_daftar_ulang')->name('read-daftar-ulang');
         // End Read Informasi Pendaftaran
+
+        // Start Report Bugs
+            Route::get('/report-bugs', 'WebController@report_bugs')->name('report-bugs');
+            Route::post('/report-bugs-store', 'WebController@report_bugs_store')->name('report-bugs-store');
+
+        // End Report Bugs
+
 
 
 
@@ -161,7 +169,23 @@ Auth::routes([
                 Route::get('/macont-daftar-ulang', 'MacontController@macont_daftar_ulang')->name('macont-daftar-ulang');
                 Route::post('/macont-daftar-ulang-store', 'MacontController@macont_daftar_ulang_store')->name('macont-daftar-ulang-store');
                 Route::put('/macont-daftar-ulang-update/{id}', 'MacontController@macont_daftar_ulang_update')->name('macont-daftar-ulang-update');
+
+                Route::get('/macont-profil-sekolah', 'MacontController@macont_profil_sekolah')->name('macont-profil-sekolah');
+                Route::post('/macont-profil-sekolah-store', 'MacontController@macont_profil_sekolah_store')->name('macont-profil-sekolah-store');
+                Route::put('/macont-profil-sekolah-update/{id}', 'MacontController@macont_profil_sekolah_update')->name('macont-profil-sekolah-update');
             // End Management Content
+
+            // Start Report Bugs
+                Route::resource('report-bugs-admin', 'ReportBugsController');
+
+                Route::get('report-bugs-detail/complete/{id}', "ReportBugsController@complete")->name("report-bugs-detail.complete");
+                Route::get('report-bugs-detail/not-complete/{id}', "ReportBugsController@not_complete")->name("report-bugs-detail.not-complete");
+                Route::get('report-bugs-detail/spam/{id}', "ReportBugsController@spam")->name("report-bugs-detail.spam");
+
+                Route::get('report-bugs-admin/delete/{id}',"ReportBugsController@destroy")->name("report-bugs-admin.destroy");
+
+            // End Report Bugs
+
 
 
         // End Routing Dashboard Admin

@@ -168,8 +168,9 @@
                 </div>
 
                 <div class="service-card-body">
-                <h3>Isi Formulir</h3>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    <h3>Prosedur & Syarat</h3>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    <a class="button" href="{{route('read-prosedur-syarat')}}">Learn More</a>
                 </div>
             </div>
             </div>
@@ -179,8 +180,9 @@
                 <img class="img-fluid" src="/safario/img/home/service2.png" alt="">
                 </div>
                 <div class="service-card-body">
-                <h3>Proses Seleksi</h3>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    <h3>Agenda PPDB</h3>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    <a class="button" href="{{route('read-agenda')}}">Learn More</a>
                 </div>
             </div>
             </div>
@@ -190,8 +192,9 @@
                 <img class="img-fluid" src="/safario/img/home/service3.png" alt="">
                 </div>
                 <div class="service-card-body">
-                <h3>Daftar Ulang</h3>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    <h3>Info Daftar Ulang</h3>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    <a class="button" href="{{route('read-daftar-ulang')}}">Learn More</a>
                 </div>
             </div>
             </div>

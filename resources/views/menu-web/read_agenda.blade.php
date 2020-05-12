@@ -9,11 +9,11 @@
             <div class="row p-3" style="background-color:#fff;">
                 <div class="col-lg-8 posts-list">
                     
-                        <div class="hero-banner-sm-content mt-3">
-                            <h1><i class="fa fa-tags"></i> Agenda</h1>
-                        </div>
+                    <div class="hero-banner-sm-content mt-3">
+                        <h1><i class="fa fa-tags"></i> Agenda</h1>
+                    </div>
                     
-                    <div class="single-post">
+                    <div class="single-post p-2">
                         <div class="blog_details">
                             @if ($data_code != null)
                                 <p>{!!$data_code->text_information!!}</p>
