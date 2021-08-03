@@ -22,7 +22,7 @@ class CreateMsMotherDataTable extends Migration
             $table->date('tanggal_lahir_ibu')->nullable();
             $table->string('pekerjaan_ibu')->nullable();
             $table->string('pendidikan_terakhir_ibu')->nullable();
-            $table->string('no_hp')->nullable();
+            $table->string('no_hp_ibu')->nullable();
             $table->string('alamat_ibu')->nullable();
             $table->timestamps();
         });

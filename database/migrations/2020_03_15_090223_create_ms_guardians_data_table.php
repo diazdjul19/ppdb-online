@@ -20,10 +20,10 @@ class CreateMsGuardiansDataTable extends Migration
             $table->string('nik_wali')->nullable();
             $table->string('tempat_lahir_wali')->nullable();
             $table->date('tanggal_lahir_wali')->nullable();
-            $table->string('jenis_kelamin')->nullable();
+            $table->string('jenis_kelamin_wali')->nullable();
             $table->string('pekerjaan_wali')->nullable();
             $table->string('pendidikan_terakhir_wali')->nullable();
-            $table->string('no_hp')->nullable();
+            $table->string('no_hp_wali')->nullable();
             $table->string('alamat_wali')->nullable();
             $table->timestamps();
         });

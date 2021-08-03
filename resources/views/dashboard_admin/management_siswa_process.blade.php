@@ -74,62 +74,74 @@
         <hr>
         <br>
 
-        <div class="table-wrapper table-responsive-sm">
-            <table id="table_id" class="table display responsive nowrap" >
-                <thead class="thead-colored thead-primary">
-                    <tr>
-                        <th class="text-center">No</th>
-                        <th class="text-center">Nama</th>
-                        <th class="text-center">NISN</th>
-                        <th class="text-center">Nilai</th>
-                        <th class="text-center">Jenis Kelamin</th>
-                        <th class="text-center">Status</th>
-                        <th class="text-center">Action</th>
-                        <th class="text-center">Detail</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    @foreach ($data as $d)
+        <form action="{{route('select-delete-process')}}" method="post">
+            @csrf
+            <div class="table-wrapper table-responsive-sm">
+                <table id="table_id" class="table display responsive nowrap" >
+                    <thead class="thead-colored thead-primary">
                         <tr>
-                            <td class="text-center pt-4">{{$loop->iteration}}</td>
-                            <td class="text-center pt-4">{{$d->nama_calon_siswa}}</td>
-                            <td class="text-center pt-4">{{$d->nisn}}</td>
-                            <td class="text-center pt-4" style="font-weight:bold;">{{$d->data_sekolah_nilai->rata_nilai}}</td>
-                            <td class="text-center pt-4">
-                                @if ($d->jenis_kelamin == 'laki-laki')
-                                    <span class="badge badge-primary p-1" style="font-size:12px;">Laki - Laki</span> 
-                                @elseif($d->jenis_kelamin == 'perempuan')
-                                    <span class="badge badge-danger p-1" style="font-size:12px;">Perempuan</span> 
-                                @endif
-                            </td>
-                            <td class="text-center pt-4">
-                                @if ($d->status == 'rejected')
-                                    <span class="badge badge-danger p-1" style="font-size:12px;">Di Tolak</span> 
-                                @elseif($d->status == 'process')
-                                    <span class="badge badge-warning p-1" style="font-size:12px;">Menunggu</span> 
-                                @elseif($d->status == 'received')
-                                <span class="badge badge-success p-1" style="font-size:12px;">Di Terima</span> 
-                                @endif
-                            </td>
-                            <td class="text-center pt-3">
-                                <a href="{{route('siswa-edit', $d->id)}}" class="btn btn-outline-success btn-icon rounded-circle mr-1"><div><i class="icon ion-compose" style="font-size:23px;"></i></div></a>
-                                <a href="{{route('siswa-delete', $d->id)}}" class="btn btn-outline-danger btn-icon rounded-circle ml-1"><div><i class="icon ion-trash-b" style="font-size:23px;"></i></div></a>
-                            </td>
-                            <td class="text-center pt-3">
-                                <a href="{{route('siswa-detail', $d->id)}}" class="btn btn-purple btn-with-icon">
-                                    <div class="ht-40">
-                                        <span class="icon wd-30"><i class="fas fa-info-circle" style="font-size:20px;"></i></span>
-                                        <span class="pd-x-15">Detail</span>
-                                    </div>
-                                </a>
-                            </td>
+                            <th class="text-center">No</th>
+                            <th class="text-center">Nama</th>
+                            <th class="text-center">NISN</th>
+                            <th class="text-center">Nilai</th>
+                            <th class="text-center">Jenis Kelamin</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Action</th>
+                            {{-- <th class="text-center">Detail</th> --}}
+                            <th class="text-center">
+                                <div>
+                                    <button class="btn btn-danger btn-icon" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus Data Yang Di Pilih?');">
+                                        <i class="icon ion-trash-b p-2"></i>
+                                    </button>
+                                </div>
+                            </th>
                         </tr>
-                    @endforeach
-                </tbody>
+                    </thead>
 
-            </table>
-        </div>
+                    <tbody>
+                        @foreach ($data as $d)
+                            <tr>
+                                <td class="text-center pt-4">{{$loop->iteration}}</td>
+                                <td class="text-center pt-4">{{$d->nama_calon_siswa}}</td>
+                                <td class="text-center pt-4">{{$d->nisn}}</td>
+                                <td class="text-center pt-4" style="font-weight:bold;">{{$d->data_sekolah_nilai->rata_nilai}}</td>
+                                <td class="text-center pt-4">
+                                    @if ($d->jenis_kelamin == 'laki-laki')
+                                        <span class="badge badge-primary p-1" style="font-size:12px;">Laki - Laki</span> 
+                                    @elseif($d->jenis_kelamin == 'perempuan')
+                                        <span class="badge badge-danger p-1" style="font-size:12px;">Perempuan</span> 
+                                    @endif
+                                </td>
+                                <td class="text-center pt-4">
+                                    @if ($d->status == 'rejected')
+                                        <span class="badge badge-danger p-1" style="font-size:12px;">Di Tolak</span> 
+                                    @elseif($d->status == 'process')
+                                        <span class="badge badge-warning p-1" style="font-size:12px;">Menunggu</span> 
+                                    @elseif($d->status == 'received')
+                                    <span class="badge badge-success p-1" style="font-size:12px;">Di Terima</span> 
+                                    @endif
+                                </td>
+                                <td class="text-center pt-3">
+                                    <a href="{{route('siswa-edit', $d->id)}}" class="btn btn-outline-success btn-icon rounded-circle mr-1"><div><i class="icon ion-compose" style="font-size:23px;"></i></div></a>
+                                    {{-- <a href="{{route('siswa-delete', $d->id)}}" class="btn btn-outline-danger btn-icon rounded-circle ml-1"><div><i class="icon ion-trash-b" style="font-size:23px;"></i></div></a> --}}
+                                    <a href="{{route('siswa-detail', $d->id)}}" class="btn btn-outline-purple btn-icon rounded-circle ml-1"><div><i class="fas fa-info-circle" style="font-size:23px;"></i></div></a>
+                                </td>
+                                {{-- <td class="text-center pt-3">
+                                    <a href="{{route('siswa-detail', $d->id)}}" class="btn btn-purple btn-with-icon">
+                                        <div class="ht-40">
+                                            <span class="icon wd-30"><i class="fas fa-info-circle" style="font-size:20px;"></i></span>
+                                            <span class="pd-x-15">Detail</span>
+                                        </div>
+                                    </a>
+                                </td> --}}
+                                <td class="text-center pt-4"><input type="checkbox" name="select_delete[]" value="{{$d->id}}"></td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+
+                </table>
+            </div>
+        </form>    
         </div>
     </div>
     

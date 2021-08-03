@@ -17,7 +17,7 @@ class CreateMsProspectiveStudentsTable extends Migration
             $table->Increments("id");
             $table->string("code_pendaftaran");
             $table->string("enter_code");
-            $table->string("password_pendaftaran");
+            $table->string("password_pendaftaran")->nullable();
             $table->string("nik");
             $table->string("nisn");
             $table->string("no_register_akte")->nullable();
@@ -40,10 +40,10 @@ class CreateMsProspectiveStudentsTable extends Migration
             $table->string("alamat_provinsi")->nullable();
             $table->string("tinggal_bersama")->nullable();
             $table->string("status");
-            $table->integer('id_table_father_data');
-            $table->integer('id_table_mother_data');
-            $table->integer('id_table_guardians_data');
-            $table->integer('id_table_ms_prospective_grades');
+            $table->integer('id_table_ms_father_data')->nullable();
+            $table->integer('id_table_ms_mother_data')->nullable();
+            $table->integer('id_table_ms_guardians_data')->nullable();
+            $table->integer('id_table_ms_prospective_grades')->nullable();
             $table->string("gelombang_pendaftaran")->nullable();
             $table->timestamps();
         });

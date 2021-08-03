@@ -22,7 +22,7 @@ class CreateMsFatherDataTable extends Migration
             $table->date('tanggal_lahir_ayah')->nullable();
             $table->string('pekerjaan_ayah')->nullable();
             $table->string('pendidikan_terakhir_ayah')->nullable();
-            $table->string('no_hp')->nullable();
+            $table->string('no_hp_ayah')->nullable();
             $table->string('alamat_ayah')->nullable();
             $table->timestamps();
         });

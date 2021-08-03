@@ -20,12 +20,12 @@ Route::get('/', function () {
 });
 
 // Mengizinkan Semua Route
-// Auth::routes();
+Auth::routes();
 
 // Membayasi Route yang di (false)
-Auth::routes([
-    'register' => false,
-]);
+// Auth::routes([
+//     'register' => false,
+// ]);
 
 
 // Start Routing Web
@@ -225,6 +225,9 @@ Auth::routes([
 
                     Route::get('/siswa-process-laman-confirm/{enter_code}', 'ManagementSiswaController@siswa_process_laman_confirm')->name('siswa-process-laman-confirm');
                     Route::post('/siswa-process-laman-store', 'ManagementSiswaController@siswa_process_laman_store')->name('siswa-process-laman-store');
+
+                    Route::post('/select-delete-process', 'ManagementSiswaController@select_delete')->name('select-delete-process');
+
                 // End Management Siswa Process
 
 
@@ -235,11 +238,16 @@ Auth::routes([
                     
                     // Dowanload pdf formulir siswa
                     Route::get('/download-formulir-db-siswa/{enter_code}', 'DashboardSiswaController@download_formulir_db_siswa')->name('download-formulir-db-siswa');
+
+                    Route::post('/select-delete-received', 'ManagementSiswaController@select_delete')->name('select-delete-received');
+
                 // End Management Siswa Received
 
                 
                 // Start Management Siswa Rejected
                     Route::get('/siswa-rejected', 'ManagementSiswaController@siswa_rejected')->name('siswa-rejected');
+                    Route::post('/select-delete-rejected', 'ManagementSiswaController@select_delete')->name('select-delete-rejected');
+
                 // End Management Siswa Rejected
 
             // End Management SISWA

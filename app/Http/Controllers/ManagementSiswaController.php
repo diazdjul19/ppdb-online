@@ -17,6 +17,8 @@ use Maatwebsite\Excel\Facades\Excel;
 use Webpatser\Uuid\Uuid;
 use Auth;
 use PDF;
+use RealRashid\SweetAlert\Facades\Alert;
+
 class ManagementSiswaController extends Controller
 {
 
@@ -545,42 +547,101 @@ class ManagementSiswaController extends Controller
     }
 
 
-    public function siswa_delete($id)
-    {
-        $data = MsProspectiveStudents::find($id);
+    // public function siswa_delete($id)
+    // {
+    //     $data = MsProspectiveStudents::find($id);
 
-        $data1 = MsProspectiveStudents::where('id', $id)->first()->delete();
-        $data1 = MsFatherData::where('id', $data->id_table_ms_father_data)->first()->delete();
-        $data2 = MsMotherData::where('id', $data->id_table_ms_mother_data)->first()->delete();
-        $data3 = MsGuardiansData::where('id', $data->id_table_ms_guardians_data)->first()->delete();
+    //     $data1 = MsProspectiveStudents::where('id', $id)->first()->delete();
+    //     $data1 = MsFatherData::where('id', $data->id_table_ms_father_data)->first()->delete();
+    //     $data2 = MsMotherData::where('id', $data->id_table_ms_mother_data)->first()->delete();
+    //     $data3 = MsGuardiansData::where('id', $data->id_table_ms_guardians_data)->first()->delete();
 
-        $data4 = MsProspectiveStudentGrades::where('id', $data->id_table_ms_prospective_grades)->first();
-        if ($data4 == true) {
+    //     $data4 = MsProspectiveStudentGrades::where('id', $data->id_table_ms_prospective_grades)->first();
+    //     if ($data4 == true) {
 
-            $data4 = MsProspectiveStudentGrades::where('id', $data->id_table_ms_prospective_grades)->first()->delete();
+    //         $data4 = MsProspectiveStudentGrades::where('id', $data->id_table_ms_prospective_grades)->first()->delete();
             
-        } else {
+    //     } else {
                 
-        }
+    //     }
 
-        if ($data->status == 'process') {
-            return redirect(route('siswa-process'));
-        }
-        elseif ($data->status == 'received') {
-            return redirect(route('siswa-received'));
-        }
-        elseif ($data->status == 'rejected') {
-            return redirect(route('siswa-rejected'));
+    //     if ($data->status == 'process') {
+    //         return redirect(route('siswa-process'));
+    //     }
+    //     elseif ($data->status == 'received') {
+    //         return redirect(route('siswa-received'));
+    //     }
+    //     elseif ($data->status == 'rejected') {
+    //         return redirect(route('siswa-rejected'));
             
+    //     }
+
+    public function select_delete(Request $request)
+    {
+
+        $select_delete = $request->get('select_delete');
+
+        if ($select_delete == true) {
+
+            
+            $get_id_1 = MsProspectiveStudents::whereIn('id', $select_delete)->get('id'); 
+            $get_id_2 = MsProspectiveStudents::whereIn('id', $select_delete)->get('id_table_ms_father_data');
+            $get_id_3 = MsProspectiveStudents::whereIn('id', $select_delete)->get('id_table_ms_mother_data');
+            $get_id_4 = MsProspectiveStudents::whereIn('id', $select_delete)->get('id_table_ms_guardians_data');
+            $get_id_5 = MsProspectiveStudents::whereIn('id', $select_delete)->get('id_table_ms_prospective_grades');
+
+
+            $data_confirm = MsProspectiveStudents::whereIn('id', $select_delete)->get('id');
+
+            if ($data_confirm == true) {
+                $data1 = MsProspectiveStudents::whereIn('id', $get_id_1)->delete(); 
+                $data2 = MsFatherData::whereIn('id', $get_id_2)->delete();
+                $data3 = MsMotherData::whereIn('id', $get_id_3)->delete();
+                $data4 = MsGuardiansData::whereIn('id', $get_id_4)->delete();
+                $data5 = MsProspectiveStudentGrades::whereIn('id', $get_id_5)->delete();
+            } else {
+                return "Gagal Menghapus Data :(";
+            }
+
+
+            if (request()->is('select-delete-process')) {
+                toast('Data Berhasil Di Hapus','info');
+                return redirect(route('siswa-process'));
+            }
+            elseif (request()->is('select-delete-received')) {
+                toast('Data Berhasil Di Hapus','info');
+                return redirect(route('siswa-received'));
+            }
+            elseif (request()->is('select-delete-rejected')) {
+                toast('Data Berhasil Di Hapus','info');
+                return redirect(route('siswa-rejected'));
+                
+            }
+
+        }else {
+
+            if (request()->is('select-delete-process')) {
+                return redirect(route('siswa-process'));
+            }
+            elseif (request()->is('select-delete-received')) {
+                return redirect(route('siswa-received'));
+            }
+            elseif (request()->is('select-delete-rejected')) {
+                return redirect(route('siswa-rejected'));
+                
+            }
+
         }
-
-
-        
-
-
-        
 
     }
+
+
+        
+
+
+        
+
+    // }
 
 
 
