@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Validator;
 use App\User;
 use Auth;
 
+use JD\Cloudder\Facades\Cloudder;
+
+
 class UserController extends Controller
 {
     /**
@@ -61,11 +64,25 @@ class UserController extends Controller
         $data->level = $request->level;
         $data->foto_user = $request->foto_user;
     
-        if(isset($request->foto_user)){
-            $imageFile = $request->name.'/'.\Str::random(60).'.'.$request->foto_user->getClientOriginalExtension();
-            $image_path = $request->file('foto_user')->move(storage_path('app/public/user/'.$request->name), $imageFile);
+        // MENGUPLOAD IMAGE KE STORAGE BAWAAN LARAVEL
+        // if(isset($request->foto_user)){
+        //     $imageFile = $request->name.'/'.\Str::random(60).'.'.$request->foto_user->getClientOriginalExtension();
+        //     $image_path = $request->file('foto_user')->move(storage_path('app/public/user/'.$request->name), $imageFile);
 
-            $data->foto_user = $imageFile;
+        //     $data->foto_user = $imageFile;
+        // }
+
+        // MENGUPLOAD IMAGE KE STORAGE CLOUDINARY
+        if ($image = $request->file('foto_user')) {
+            $image_path = $image->getRealPath();
+            Cloudder::upload($image_path, null, array("folder" => "ppdb-online-storage/tb_user_storage", "overwrite" => TRUE, "resource_type" => "image"));
+
+            //直前にアップロードされた画像のpublicIdを取得する。
+            $publicId = Cloudder::getPublicId();
+            $logoUrl = Cloudder::secureShow($publicId);
+
+            $data->foto_user_public_id = $publicId;
+            $data->foto_user = $logoUrl;
         }
 
         $data->save();
@@ -134,12 +151,33 @@ class UserController extends Controller
         }
 
 
-        if(isset($request->foto_user)){
-            $imageFile = $request->name.'/'.\Str::random(60).'.'.$request->foto_user->getClientOriginalExtension();
-            $image_path = $request->file('foto_user')->move(storage_path('app/public/user/'.$request->name), $imageFile);
+        // MENGUPLOAD IMAGE KE STORAGE BAWAAN LARAVEL
+        // if(isset($request->foto_user)){
+        //     $imageFile = $request->name.'/'.\Str::random(60).'.'.$request->foto_user->getClientOriginalExtension();
+        //     $image_path = $request->file('foto_user')->move(storage_path('app/public/user/'.$request->name), $imageFile);
 
-            $data->foto_user = $imageFile;
+        //     $data->foto_user = $imageFile;
+        // }
+
+        // MENGHAPUS IMAGE LAMA, JIKA DI TEMUKAN DATA YANG BARU DI EDIT
+        if(isset($request->foto_user)){
+            Cloudder::destroyImage($data->foto_user_public_id);
         }
+
+        // MENGUPLOAD IMAGE KE STORAGE CLOUDINARY
+        if ($image = $request->file('foto_user')) {
+            $image_path = $image->getRealPath();
+            Cloudder::upload($image_path, null, array("folder" => "ppdb-online-storage/tb_user_storage", "overwrite" => TRUE, "resource_type" => "image"));
+
+            //直前にアップロードされた画像のpublicIdを取得する。
+            $publicId = Cloudder::getPublicId();
+            $logoUrl = Cloudder::secureShow($publicId);
+
+            $data->foto_user_public_id = $publicId;
+            $data->foto_user = $logoUrl;
+        }
+
+        
         
         $data->save();
 
@@ -155,7 +193,13 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $data = User::find($id)->delete();
+        $find_data = User::find($id);
+
+        if(isset($find_data->foto_user_public_id)){
+            Cloudder::destroyImage($find_data->foto_user_public_id);
+        }
+
+        $delete_data = User::find($id)->delete();
         return redirect(route('user.index'));
     }
 }

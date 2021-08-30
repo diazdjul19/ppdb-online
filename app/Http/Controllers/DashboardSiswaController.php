@@ -12,6 +12,9 @@ use App\Models\MaWebMaster\MsOpenCloseWeb;
 
 use PDF;
 
+use JD\Cloudder\Facades\Cloudder;
+
+
 class DashboardSiswaController extends Controller
 {
     /**
@@ -109,13 +112,32 @@ class DashboardSiswaController extends Controller
         $data->alamat_kota_kabupaten = $request->get('alamat_kota_kabupaten');
         $data->alamat_provinsi = $request->get('alamat_provinsi');
     
-        
-        if(isset($request->foto_siswa)){
-            $imageFile = $data->nama_calon_siswa.'/'.\Str::random(60).'.'.$request->foto_siswa->getClientOriginalExtension();
-            $image_path = $request->file('foto_siswa')->move(storage_path('app/public/foto_siswa/'.$data->nama_calon_siswa), $imageFile);
+        // MENGUPLOAD KE STORAGE BAWAAN LARAVEL
+        // if(isset($request->foto_siswa)){
+        //     $imageFile = $data->nama_calon_siswa.'/'.\Str::random(60).'.'.$request->foto_siswa->getClientOriginalExtension();
+        //     $image_path = $request->file('foto_siswa')->move(storage_path('app/public/foto_siswa/'.$data->nama_calon_siswa), $imageFile);
 
-            $data->foto_siswa = $imageFile;
+        //     $data->foto_siswa = $imageFile;
+        // }
+
+        // MENGHAPUS IMAGE LAMA, JIKA DI TEMUKAN DATA YANG BARU DI EDIT
+        if(isset($request->foto_siswa)){
+            Cloudder::destroyImage($data->foto_siswa_public_id);
         }
+
+        // MENGUPLOAD IMAGE KE STORAGE CLOUDINARY
+        if ($image = $request->file('foto_siswa')) {
+            $image_path = $image->getRealPath();
+            Cloudder::upload($image_path, null, array("folder" => "ppdb-online-storage/tb_prospective_students_storage", "overwrite" => TRUE, "resource_type" => "image"));
+
+            //直前にアップロードされた画像のpublicIdを取得する。
+            $publicId = Cloudder::getPublicId();
+            $logoUrl = Cloudder::secureShow($publicId);
+
+            $data->foto_siswa_public_id = $publicId;
+            $data->foto_siswa = $logoUrl;
+        }
+
 
         $data->save();
         return redirect(route('home-db-siswa'));

@@ -39,7 +39,12 @@
                     </div><!-- card-header -->
                     <div class="card-body">
                         <div class="text-center">
-                            <img class="img-fluid rounded-circle " style="width:130px;height:135px;" src="{{url('/storage/foto_siswa/'.$data->foto_siswa)}}" alt="">
+                            {{-- Mengambil foto dari storage bawwan laravel --}}
+                            {{-- <img class="img-fluid rounded-circle " style="width:130px;height:135px;" src="{{url('/storage/foto_siswa/'.$data->foto_siswa)}}" alt=""> --}}
+
+                            {{-- Mengambil foto dari storage cloudinary --}}
+                            <img class="img-fluid rounded-circle " style="width:130px;height:135px;" src="{{$data->foto_siswa}}" alt="">
+
                         </div>
 
                         <div class="rounded-bottom mt-3">
@@ -492,7 +497,12 @@
                                         <hr>
                                         <tr>
                                             <div class="text-center">
-                                                <img class="img-fluid" alt="Responsive image"  src="{{url('/storage/foto_scan_surat_skhun/'.$data->data_sekolah_nilai->foto_scan_surat_skhun)}}" alt="">
+                                                {{-- Mengambil foto dari storage bawwan laravel --}}
+                                                {{-- <img class="img-fluid" alt="Responsive image"  src="{{url('/storage/foto_scan_surat_skhun/'.$data->data_sekolah_nilai->foto_scan_surat_skhun)}}" alt=""> --}}
+
+                                                {{-- Mengambil foto dari storage cloudinary --}}
+                                                <img class="img-fluid" alt="Responsive image"  src="{{$data->data_sekolah_nilai->foto_scan_surat_skhun}}" alt="">
+
                                             </div>
 
                                         </tr>

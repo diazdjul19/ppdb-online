@@ -191,8 +191,12 @@
                                     <label class="col-md-3 col-form-label" for="exampleInputEmail1">Foto User</label>                                   
                                 <div class="col-md-9">
                                     @if($data->foto_user)
-                                            <img src="{{url('/storage/user/'.$data->foto_user)}}"
-                                            width="120px">
+                                        {{-- MENGAMBIL IMAGE DARI STORAGE BAWAAN LARAVEL --}}
+                                        {{-- <img src="{{url('/storage/user/'.$data->foto_user)}}" width="120px"> --}}
+
+                                        {{-- MENGAMBIL IMAGE DARI STORAGE CLOUDINARY --}}
+                                        <img src="{{$data->foto_user}}" width="120px">
+
                                     @endif
                             
                                     <input type="file" name="foto_user" class="form-control" id="exampleInputEmail1"  placeholder="User Photo" value="{{$data->foto_user}}">

@@ -261,8 +261,12 @@
                                             <label class="ml-3" >Foto Siswa</label>
                                             <div class="col-md-12 mb-2">
                                                 @if($data->foto_siswa)
-                                                    <img src="{{url('/storage/foto_siswa/'.$data->foto_siswa)}}"
-                                                    width="100px">
+                                                    {{-- MENGAMBIL IMAGE DARI STORAGE BAWAAN LARAVEL --}}
+                                                    {{-- <img src="{{url('/storage/foto_siswa/'.$data->foto_siswa)}}"width="100px"> --}}
+
+                                                    {{-- MENGAMBIL IMAGE DARI STORAGE CLOUDINARY --}}
+                                                    <img src="{{$data->foto_siswa}}"width="100px">
+
                                                 @endif
                                                 <input type="file" class="form-control" name="foto_siswa">
                                             </div>
@@ -479,8 +483,12 @@
                                 <div class="form-group row">
                                     <div class="col-md-12">
                                         @if($data->foto_siswa)
-                                            <img src="{{url('/storage/foto_scan_surat_skhun/'.$data->data_sekolah_nilai->foto_scan_surat_skhun)}}"
-                                            width="100px">
+                                            {{-- MENGAMBIL IMAGE DARI STORAGE BAWWAN LARAVEL --}}
+                                            {{-- <img src="{{url('/storage/foto_scan_surat_skhun/'.$data->data_sekolah_nilai->foto_scan_surat_skhun)}}" width="100px"> --}}
+
+                                            {{-- MENGAMBIL IMAGE DARI STORAGE CLOUDINARY --}}
+                                            <img src="{{$data->data_sekolah_nilai->foto_scan_surat_skhun}}" width="100px">
+
                                         @endif
                                         <input type="file" class="form-control" name="foto_scan_surat_skhun">
                                     </div>

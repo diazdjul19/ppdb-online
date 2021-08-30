@@ -189,8 +189,12 @@
                                         <div class="form-group row">
                                             <div class="col-md-12 mb-2">
                                                 @if($data->foto_siswa)
-                                                    <img src="{{url('/storage/foto_siswa/'.$data->foto_siswa)}}"
-                                                    width="100px">
+                                                    {{-- Mengambil image dari storage bawaan laravel --}}
+                                                    {{-- <img src="{{url('/storage/foto_siswa/'.$data->foto_siswa)}}" width="100px"> --}}
+
+                                                    {{-- Mengambil image dari storage cloudinary --}}
+                                                    <img src="{{$data->foto_siswa}}" width="100px">
+
                                                 @endif
                                                 <input type="file" class="form-control" name="foto_siswa">
                                             </div>

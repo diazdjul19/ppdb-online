@@ -27,6 +27,7 @@ class CreateMsProspectiveStudentGradesTable extends Migration
             $table->float("nilai_bahasa_inggris")->nullable();
             $table->float("rata_nilai")->nullable();
             $table->string("foto_scan_surat_skhun")->nullable();
+            $table->string("foto_scan_surat_skhun_public_id")->nullable();
             $table->timestamps();
         });
     }

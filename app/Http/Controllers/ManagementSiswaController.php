@@ -19,19 +19,11 @@ use Auth;
 use PDF;
 use RealRashid\SweetAlert\Facades\Alert;
 
+use JD\Cloudder\Facades\Cloudder;
+
+
 class ManagementSiswaController extends Controller
 {
-
-
-
-
-
-
-
-
-
-
-
     public function siswa_process()
     {   
         $get_process = 'process';
@@ -121,11 +113,25 @@ class ManagementSiswaController extends Controller
         $data_cs->status= 'process';
 
         
-        if(isset($request->foto_siswa)){
-            $imageFile = $request->nama_calon_siswa.'/'.\Str::random(60).'.'.$request->foto_siswa->getClientOriginalExtension();
-            $image_path = $request->file('foto_siswa')->move(storage_path('app/public/foto_siswa/'.$request->nama_calon_siswa), $imageFile);
+        // MENGUPLOAD IMAGE KE STORAGE BAWAAN LARAVEL
+        // if(isset($request->foto_siswa)){
+        //     $imageFile = $request->nama_calon_siswa.'/'.\Str::random(60).'.'.$request->foto_siswa->getClientOriginalExtension();
+        //     $image_path = $request->file('foto_siswa')->move(storage_path('app/public/foto_siswa/'.$request->nama_calon_siswa), $imageFile);
 
-            $data_cs->foto_siswa = $imageFile;
+        //     $data_cs->foto_siswa = $imageFile;
+        // }
+
+        // MENGUPLOAD IMAGE KE STORAGE CLOUDINARY
+        if ($image = $request->file('foto_siswa')) {
+            $image_path = $image->getRealPath();
+            Cloudder::upload($image_path, null, array("folder" => "ppdb-online-storage/tb_prospective_students_storage", "overwrite" => TRUE, "resource_type" => "image"));
+
+            //直前にアップロードされた画像のpublicIdを取得する。
+            $publicId = Cloudder::getPublicId();
+            $logoUrl = Cloudder::secureShow($publicId);
+
+            $data_cs->foto_siswa_public_id = $publicId;
+            $data_cs->foto_siswa = $logoUrl;
         }
 
         // Cek NISN For Enter
@@ -221,12 +227,25 @@ class ManagementSiswaController extends Controller
 
         $data_nilai->rata_nilai = $data_nilai->nilai_bahasa_indonesia + $data_nilai->nilai_mtk + $data_nilai->nilai_ipa + $data_nilai->nilai_bahasa_inggris;
         
+        // MENGUPLOAD KE STORAGE BAWAAN LARAVEL
+        // if(isset($request->foto_scan_surat_skhun)){
+        //     $imageFile = $request->no_skhun.'/'.\Str::random(60).'.'.$request->foto_scan_surat_skhun->getClientOriginalExtension();
+        //     $image_path = $request->file('foto_scan_surat_skhun')->move(storage_path('app/public/foto_scan_surat_skhun/'.$request->no_skhun), $imageFile);
 
-        if(isset($request->foto_scan_surat_skhun)){
-            $imageFile = $request->no_skhun.'/'.\Str::random(60).'.'.$request->foto_scan_surat_skhun->getClientOriginalExtension();
-            $image_path = $request->file('foto_scan_surat_skhun')->move(storage_path('app/public/foto_scan_surat_skhun/'.$request->no_skhun), $imageFile);
+        //     $data_nilai->foto_scan_surat_skhun = $imageFile;
+        // }
+        
+        // MENGUPLOAD KE STORAGE CLOUDINARY
+        if ($image = $request->file('foto_scan_surat_skhun')) {
+            $image_path = $image->getRealPath();
+            Cloudder::upload($image_path, null, array("folder" => "ppdb-online-storage/tb_prospective_students_grades_storage", "overwrite" => TRUE, "resource_type" => "image"));
 
-            $data_nilai->foto_scan_surat_skhun = $imageFile;
+            //直前にアップロードされた画像のpublicIdを取得する。
+            $publicId = Cloudder::getPublicId();
+            $logoUrl = Cloudder::secureShow($publicId);
+
+            $data_nilai->foto_scan_surat_skhun_public_id = $publicId;
+            $data_nilai->foto_scan_surat_skhun = $logoUrl;
         }
 
         $data_nilai->id_table_ms_prospective_students = $data_cs->id;
@@ -345,13 +364,7 @@ class ManagementSiswaController extends Controller
         // Mendapatkan Data Gelombang Pendaftaran
         $data_gelpend = MsGelpend::all();
 
-        // Create Rata Rata Nilai
-        if ($data->data_sekolah_nilai != true) {
-
-            return view('dashboard_admin.management_siswa_edit', compact('data', 'data_gelpend'));
-
-
-        } elseif($data) {
+        if ($data) {
 
             $rata_nilai = $data->data_sekolah_nilai->nilai_bahasa_indonesia + $data->data_sekolah_nilai->nilai_mtk + $data->data_sekolah_nilai->nilai_ipa + $data->data_sekolah_nilai->nilai_bahasa_inggris;
             return view('dashboard_admin.management_siswa_edit', compact('data', 'rata_nilai', 'data_gelpend'));
@@ -359,6 +372,13 @@ class ManagementSiswaController extends Controller
             
         }
 
+        // Create Rata Rata Nilai
+        if ($data->data_sekolah_nilai != true) {
+
+            return view('dashboard_admin.management_siswa_edit', compact('data', 'data_gelpend'));
+
+
+        } 
     }
 
     public function siswa_update_datadiri(Request $request, $id)
@@ -397,12 +417,30 @@ class ManagementSiswaController extends Controller
 
 
     
-        
-        if(isset($request->foto_siswa)){
-            $imageFile = $data->nama_calon_siswa.'/'.\Str::random(60).'.'.$request->foto_siswa->getClientOriginalExtension();
-            $image_path = $request->file('foto_siswa')->move(storage_path('app/public/foto_siswa/'.$data->nama_calon_siswa), $imageFile);
+        // MENGUPLOAD KE STORAGE BAWAAN LARAVEL
+        // if(isset($request->foto_siswa)){
+        //     $imageFile = $data->nama_calon_siswa.'/'.\Str::random(60).'.'.$request->foto_siswa->getClientOriginalExtension();
+        //     $image_path = $request->file('foto_siswa')->move(storage_path('app/public/foto_siswa/'.$data->nama_calon_siswa), $imageFile);
 
-            $data->foto_siswa = $imageFile;
+        //     $data->foto_siswa = $imageFile;
+        // }
+
+        // MENGHAPUS IMAGE LAMA, JIKA DI TEMUKAN DATA YANG BARU DI EDIT
+        if(isset($request->foto_siswa)){
+            Cloudder::destroyImage($data->foto_siswa_public_id);
+        }
+
+        // MENGUPLOAD IMAGE KE STORAGE CLOUDINARY
+        if ($image = $request->file('foto_siswa')) {
+            $image_path = $image->getRealPath();
+            Cloudder::upload($image_path, null, array("folder" => "ppdb-online-storage/tb_prospective_students_storage", "overwrite" => TRUE, "resource_type" => "image"));
+
+            //直前にアップロードされた画像のpublicIdを取得する。
+            $publicId = Cloudder::getPublicId();
+            $logoUrl = Cloudder::secureShow($publicId);
+
+            $data->foto_siswa_public_id = $publicId;
+            $data->foto_siswa = $logoUrl;
         }
 
         $data->save();
@@ -457,16 +495,36 @@ class ManagementSiswaController extends Controller
                                     $data_nilai->nilai_ipa +
                                     $data_nilai->nilai_bahasa_inggris;
         
-        
-        if(isset($request->foto_scan_surat_skhun)){
-            $imageFile = $request->no_skhun.'/'.\Str::random(60).'.'.$request->foto_scan_surat_skhun->getClientOriginalExtension();
-            $image_path = $request->file('foto_scan_surat_skhun')->move(storage_path('app/public/foto_scan_surat_skhun/'.$request->no_skhun), $imageFile);
+        // MENGUPLOAD KE STORAGE BAWAAN LARAVEL
+        // if(isset($request->foto_scan_surat_skhun)){
+        //     $imageFile = $request->no_skhun.'/'.\Str::random(60).'.'.$request->foto_scan_surat_skhun->getClientOriginalExtension();
+        //     $image_path = $request->file('foto_scan_surat_skhun')->move(storage_path('app/public/foto_scan_surat_skhun/'.$request->no_skhun), $imageFile);
 
-            $data_nilai->foto_scan_surat_skhun = $imageFile;
+        //     $data_nilai->foto_scan_surat_skhun = $imageFile;
+        // }
+
+        // MENGHAPUS IMAGE LAMA, JIKA DI TEMUKAN DATA YANG BARU DI EDIT
+        if(isset($request->foto_scan_surat_skhun)){
+            Cloudder::destroyImage($data_nilai->foto_scan_surat_skhun_public_id);
+        }
+
+        // MENGUPLOAD KE STORAGE CLOUDINARY
+        if ($image = $request->file('foto_scan_surat_skhun')) {
+            $image_path = $image->getRealPath();
+            Cloudder::upload($image_path, null, array("folder" => "ppdb-online-storage/tb_prospective_students_grades_storage", "overwrite" => TRUE, "resource_type" => "image"));
+
+            //直前にアップロードされた画像のpublicIdを取得する。
+            $publicId = Cloudder::getPublicId();
+            $logoUrl = Cloudder::secureShow($publicId);
+
+            $data_nilai->foto_scan_surat_skhun_public_id = $publicId;
+            $data_nilai->foto_scan_surat_skhun = $logoUrl;
         }
 
         $data_nilai->save();
-        return redirect(route('siswa-received'));
+        return redirect(route('siswa-edit', $data_nilai->id_table_ms_prospective_students));
+
+
 
 
 

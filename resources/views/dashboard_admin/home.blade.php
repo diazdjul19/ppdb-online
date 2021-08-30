@@ -95,7 +95,12 @@
                     </div><!-- card-header -->
                     <div class="card-body">
                         <div class="text-center">
-                            <img class="img-fluid rounded-circle " style="width:130px;height:135px;" src="{{url('/storage/user/'.Auth::user()->foto_user)}}" alt="">
+                            {{-- Mengambil Image dari storage bawaan laravel --}}
+                            {{-- <img class="img-fluid rounded-circle " style="width:130px;height:135px;" src="{{url('/storage/user/'.Auth::user()->foto_user)}}" alt=""> --}}
+
+                            {{-- Mengambil image dari store cloudinary --}}
+                            <img class="img-fluid rounded-circle " style="width:130px;height:135px;" src="{{Auth::user()->foto_user}}" alt="">
+
                         </div>
 
                         <div class="rounded-bottom mt-3">

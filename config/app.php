@@ -171,7 +171,11 @@ return [
         // wkhtmltopdf
         Barryvdh\Snappy\ServiceProvider::class,
 
+        // Laravel Excel
         Maatwebsite\Excel\ExcelServiceProvider::class,
+
+        // Cloudinary Storage
+        JD\Cloudder\CloudderServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -248,7 +252,11 @@ return [
         'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
         'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
 
+        // Laravel Excel
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+
+        // Cloudinary Storage
+        'Cloudder' => JD\Cloudder\Facades\Cloudder::class,
     ],
 
 ];

@@ -133,12 +133,22 @@
             <div class="dropdown">
             <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
                 <span class="logged-name hidden-md-down">{{$data->nama_calon_siswa}}</span>
-                <img src="{{url('/storage/foto_siswa/'.$data->foto_siswa)}}" class="wd-32 rounded-circle" alt="">
+                {{-- Mengambil image dari storage bawaan laravel --}}
+                {{-- <img src="{{url('/storage/foto_siswa/'.$data->foto_siswa)}}" class="wd-32 rounded-circle" alt=""> --}}
+
+                {{-- Mengambil image dari storage cloudinary --}}
+                <img src="{{$data->foto_siswa}}" class="wd-32 rounded-circle" alt="">
+
                 <span class="square-10 bg-success"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-header wd-250">
                 <div class="tx-center">
-                <a href=""><img src="{{url('/storage/foto_siswa/'.$data->foto_siswa)}}" class="wd-80 rounded-circle" alt=""></a>
+                {{-- Mengambil image dari storage bawaan laravel --}}
+                {{-- <a href=""><img src="{{url('/storage/foto_siswa/'.$data->foto_siswa)}}" class="wd-80 rounded-circle" alt=""></a> --}}
+                
+                {{-- Mengambil image dari storage cloudinary --}}
+                <a href=""><img src="{{$data->foto_siswa}}" class="wd-80 rounded-circle" alt=""></a>
+
                 <h6 class="logged-fullname">{{$data->nama_calon_siswa}}</h6>
                 <p>{{$data->nisn}}</p>
                 </div>

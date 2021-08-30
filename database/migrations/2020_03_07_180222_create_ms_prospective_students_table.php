@@ -29,6 +29,7 @@ class CreateMsProspectiveStudentsTable extends Migration
             $table->date("tanggal_lahir");
             $table->string("no_hp")->nullable();
             $table->string("foto_siswa")->nullable();
+            $table->string("foto_siswa_public_id")->nullable();
             $table->string("alamat_jalan")->nullable();
             $table->string("alamat_dusun")->nullable();
             $table->string("alamat_rt")->nullable();
