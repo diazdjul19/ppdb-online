@@ -45,12 +45,11 @@ return [
         'binary'  => '/app/bin/wkhtmltopdf',
         
         'timeout' => false,
-//         'options' => [
-//             'enable-local-file-access' => true,
-//             'orientation'   => 'landscape',
-//             'encoding'      => 'UTF-8'
-//         ],
-        'options' => [],
+        'options' => [
+            'enable-local-file-access' => true,
+            'orientation'   => 'landscape',
+            'encoding'      => 'UTF-8'
+        ],
         'env'     => [],
     ],
     
@@ -66,12 +65,11 @@ return [
         'binary'  => '/app/bin/wkhtmltoimage',
         
         'timeout' => false,
-//         'options' => [
-//             'enable-local-file-access' => true,
-//             'orientation'   => 'landscape',
-//             'encoding'      => 'UTF-8'
-//         ],
-        'options' => [],
+        'options' => [
+            'enable-local-file-access' => true,
+            'orientation'   => 'landscape',
+            'encoding'      => 'UTF-8'
+        ],
         'env'     => [],
     ],
 
