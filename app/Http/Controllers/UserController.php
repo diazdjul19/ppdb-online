@@ -161,7 +161,9 @@ class UserController extends Controller
 
         // MENGHAPUS IMAGE LAMA, JIKA DI TEMUKAN DATA YANG BARU DI EDIT
         if(isset($request->foto_user)){
-            Cloudder::destroyImage($data->foto_user_public_id);
+            if ($data->foto_user_public_id) {
+                Cloudder::destroyImage($data->foto_user_public_id);
+            }
         }
 
         // MENGUPLOAD IMAGE KE STORAGE CLOUDINARY

@@ -427,8 +427,11 @@ class ManagementSiswaController extends Controller
 
         // MENGHAPUS IMAGE LAMA, JIKA DI TEMUKAN DATA YANG BARU DI EDIT
         if(isset($request->foto_siswa)){
-            Cloudder::destroyImage($data->foto_siswa_public_id);
+            if ($data->foto_siswa_public_id) {
+                Cloudder::destroyImage($data->foto_siswa_public_id);
+            }
         }
+
 
         // MENGUPLOAD IMAGE KE STORAGE CLOUDINARY
         if ($image = $request->file('foto_siswa')) {
@@ -505,8 +508,11 @@ class ManagementSiswaController extends Controller
 
         // MENGHAPUS IMAGE LAMA, JIKA DI TEMUKAN DATA YANG BARU DI EDIT
         if(isset($request->foto_scan_surat_skhun)){
-            Cloudder::destroyImage($data_nilai->foto_scan_surat_skhun_public_id);
+            if ($data->foto_scan_surat_skhun_public_id) {
+                Cloudder::destroyImage($data->foto_scan_surat_skhun_public_id);
+            }
         }
+
 
         // MENGUPLOAD KE STORAGE CLOUDINARY
         if ($image = $request->file('foto_scan_surat_skhun')) {
