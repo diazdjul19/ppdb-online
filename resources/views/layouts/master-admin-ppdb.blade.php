@@ -197,21 +197,32 @@
             <div class="dropdown">
             <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
                 <span class="logged-name hidden-md-down">{{Auth::user()->name}}</span>
-                {{-- Mengambil Foto Dari storage Bawaan Laravel --}}
-                {{-- <img src="{{url('/storage/user/'.Auth::user()->foto_user)}}" class="wd-32 rounded-circle" alt=""> --}}
+                @if (Auth::user()->foto_user == true)
+                    {{-- Mengambil Foto Dari storage Bawaan Laravel --}}
+                    {{-- <img src="{{url('/storage/user/'.Auth::user()->foto_user)}}" class="wd-32 rounded-circle" alt=""> --}}
+                    
+                    {{-- mengambil foto dari storage cloudinary --}}
+                    <img src="{{Auth::user()->foto_user}}" class="wd-32 rounded-circle" alt="">
+                @elseif (Auth::user()->foto_user == false)
+                    <img src="/image-tambahan/user-polos.png" class="wd-32 rounded-circle" alt="">
+                @endif
                 
-                {{-- mengambil foto dari storage cloudinary --}}
-                <img src="{{Auth::user()->foto_user}}" class="wd-32 rounded-circle" alt="">
 
                 <span class="square-10 bg-success"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-header wd-250">
                 <div class="tx-center">
-                {{-- Mengambil Foto Dari storage Bawaan Laravel --}}
-                {{-- <a href=""><img src="{{url('/storage/user/'.Auth::user()->foto_user)}}" class="wd-80 rounded-circle" alt=""></a> --}}
+                @if (Auth::user()->foto_user == true)
+                    {{-- Mengambil Foto Dari storage Bawaan Laravel --}}
+                    {{-- <a href=""><img src="{{url('/storage/user/'.Auth::user()->foto_user)}}" class="wd-80 rounded-circle" alt=""></a> --}}
 
-                {{-- mengambil foto dari storage cloudinary --}}
-                <a href=""><img src="{{Auth::user()->foto_user}}" class="wd-80 rounded-circle" alt=""></a>
+                    {{-- mengambil foto dari storage cloudinary --}}
+                    <a href=""><img src="{{Auth::user()->foto_user}}" class="wd-80 rounded-circle" alt=""></a>
+                    <img src="{{Auth::user()->foto_user}}" class="wd-32 rounded-circle" alt="">
+                @elseif (Auth::user()->foto_user == false)
+                    <img src="/image-tambahan/user-polos.png" class="wd-80 rounded-circle" alt="">
+                @endif
+                
 
                 <h6 class="logged-fullname">{{Auth::user()->name}}</h6>
                 <p>{{Auth::user()->email}}</p>

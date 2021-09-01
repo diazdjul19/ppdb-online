@@ -16,7 +16,7 @@
 	<table width="100%">
 		<tr>
 			<td width="10%" align="center">
-				<img src="C:\laragon\www\ppdb-online\public\safario\img\gallery\KOTA_BEKASI.jpg" alt="" width="100px" height="100px">
+				<img src="{{asset('image-tambahan/logo_kota_bekasi.jfif')}}" alt="" width="100px" height="100px">
 			</td>
 			<td width="80%" align="center">
 					<font size="4">DINAS PENDIDIKAN KOTA BEKASI</font> <br>
@@ -25,7 +25,7 @@
 					<font size="2">KOTA BEKASI 17434</font><br>
 			</td>
 			<td width="10%" align="center">
-				<img src="C:\laragon\www\ppdb-online\public\safario\img\gallery\SMKN4.png" alt="" width="100px" height="100px">
+				<img src="{{asset('image-tambahan/logo-smkn4.png')}}" alt="" width="100px" height="100px">
 			</td>
 		</tr>
     </table>

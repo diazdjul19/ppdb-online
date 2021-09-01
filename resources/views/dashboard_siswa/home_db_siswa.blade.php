@@ -71,11 +71,16 @@
                     </div><!-- card-header -->
                     <div class="card-body">
                         <div class="text-center">
-                            {{-- Mengambil image dari storage bawaan laravel --}}
-                            {{-- <img class="img-fluid rounded-circle " style="width:130px;height:135px;" src="{{url('/storage/foto_siswa/'.$data->foto_siswa)}}" alt=""> --}}
+                            @if ($data->foto_siswa == true)
+                                {{-- Mengambil image dari storage bawaan laravel --}}
+                                {{-- <img class="img-fluid rounded-circle " style="width:130px;height:135px;" src="{{url('/storage/foto_siswa/'.$data->foto_siswa)}}" alt=""> --}}
 
-                            {{-- Mengambil image dari storage cloudinary --}}
-                            <img class="img-fluid rounded-circle " style="width:130px;height:135px;" src="{{$data->foto_siswa}}" alt="">
+                                {{-- Mengambil image dari storage cloudinary --}}
+                                <img class="img-fluid rounded-circle " style="width:130px;height:135px;" src="{{$data->foto_siswa}}" alt="">
+                            @elseif ($data->foto_siswa == false)
+                                <img src="/image-tambahan/user-polos.png" class="img-fluid rounded-circle " style="width:130px;height:135px;">
+                            @endif
+                            
 
                         </div>
 
@@ -522,12 +527,15 @@
                                         <hr>
                                         <tr>
                                             <div class="text-center">
-                                                {{-- Mengambil image dari storage bawaan laravel --}}
-                                                {{-- <img class="img-fluid" alt="Responsive image"  src="{{url('/storage/foto_scan_surat_skhun/'.$data->data_sekolah_nilai->foto_scan_surat_skhun)}}" alt=""> --}}
+                                                @if ($data->data_sekolah_nilai->foto_scan_surat_skhun == true)
+                                                    {{-- Mengambil image dari storage bawaan laravel --}}
+                                                    {{-- <img class="img-fluid" alt="Responsive image"  src="{{url('/storage/foto_scan_surat_skhun/'.$data->data_sekolah_nilai->foto_scan_surat_skhun)}}" alt=""> --}}
 
-                                                {{-- Mengambil image dari storage cloudinary --}}
-                                                <img class="img-fluid" alt="Responsive image"  src="{{$data->data_sekolah_nilai->foto_scan_surat_skhun}}" alt="">
-
+                                                    {{-- Mengambil image dari storage cloudinary --}}
+                                                    <img class="img-fluid" alt="Responsive image"  src="{{$data->data_sekolah_nilai->foto_scan_surat_skhun}}" alt="">
+                                                @elseif ($data->data_sekolah_nilai->foto_scan_surat_skhun == false)
+                                                    <span>Anda Belum Mengupload Scan Foto SKHUN</span>
+                                                @endif
                                             </div>
 
                                         </tr>

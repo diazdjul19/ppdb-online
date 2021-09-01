@@ -95,11 +95,16 @@
                     </div><!-- card-header -->
                     <div class="card-body">
                         <div class="text-center">
-                            {{-- Mengambil Image dari storage bawaan laravel --}}
-                            {{-- <img class="img-fluid rounded-circle " style="width:130px;height:135px;" src="{{url('/storage/user/'.Auth::user()->foto_user)}}" alt=""> --}}
+                            @if (Auth::user()->foto_user == true)
+                                {{-- Mengambil Image dari storage bawaan laravel --}}
+                                {{-- <img class="img-fluid rounded-circle " style="width:130px;height:135px;" src="{{url('/storage/user/'.Auth::user()->foto_user)}}" alt=""> --}}
 
-                            {{-- Mengambil image dari store cloudinary --}}
-                            <img class="img-fluid rounded-circle " style="width:130px;height:135px;" src="{{Auth::user()->foto_user}}" alt="">
+                                {{-- Mengambil image dari store cloudinary --}}
+                                <img class="img-fluid rounded-circle " style="width:130px;height:135px;" src="{{Auth::user()->foto_user}}" alt="">
+                            @elseif (Auth::user()->foto_user == false)
+                                <img src="/image-tambahan/user-polos.png" class="img-fluid rounded-circle " style="width:130px;height:135px;" alt="">
+                            @endif
+                            
 
                         </div>
 

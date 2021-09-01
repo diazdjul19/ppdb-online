@@ -194,7 +194,8 @@
 
                                                     {{-- Mengambil image dari storage cloudinary --}}
                                                     <img src="{{$data->foto_siswa}}" width="100px">
-
+                                                @elseif ($data->foto_siswa != true)
+                                                    <span>Foto Tidak Ada</span>
                                                 @endif
                                                 <input type="file" class="form-control" name="foto_siswa">
                                             </div>

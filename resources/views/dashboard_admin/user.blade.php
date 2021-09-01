@@ -62,11 +62,15 @@
                             <td class="text-center pt-4">{{$loop->iteration}}</td>
                             {{-- <td class="text-center pt-4"></td> --}}
                             <td class="text-center">
-                                {{-- Mengambil Image dari storage bawaan laravel --}}
-                                {{-- <img style="width: 50px; height:50px;border-radius:50%;" src="{{url('/storage/user/'.$d->foto_user)}}"> --}}
+                                @if ($d->foto_user == true)
+                                    {{-- Mengambil Image dari storage bawaan laravel --}}
+                                    {{-- <img style="width: 50px; height:50px;border-radius:50%;" src="{{url('/storage/user/'.$d->foto_user)}}"> --}}
 
-                                {{-- Mengambil Image dari storage cloudinary --}}
-                                <img style="width: 50px; height:50px;border-radius:50%;" src="{{$d->foto_user}}">
+                                    {{-- Mengambil Image dari storage cloudinary --}}
+                                    <img style="width: 50px; height:50px;border-radius:50%;" src="{{$d->foto_user}}">
+                                @elseif ($d->foto_user == false)
+                                    <img src="/image-tambahan/user-polos.png" style="width: 50px; height:50px;border-radius:50%;" alt="">
+                                @endif
 
                             </td>
                             <td class="text-center pt-4">{{$d->name}}</td>

@@ -133,21 +133,31 @@
             <div class="dropdown">
             <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
                 <span class="logged-name hidden-md-down">{{$data->nama_calon_siswa}}</span>
-                {{-- Mengambil image dari storage bawaan laravel --}}
-                {{-- <img src="{{url('/storage/foto_siswa/'.$data->foto_siswa)}}" class="wd-32 rounded-circle" alt=""> --}}
+                @if ($data->foto_siswa == true)
+                    {{-- Mengambil image dari storage bawaan laravel --}}
+                    {{-- <img src="{{url('/storage/foto_siswa/'.$data->foto_siswa)}}" class="wd-32 rounded-circle" alt=""> --}}
 
-                {{-- Mengambil image dari storage cloudinary --}}
-                <img src="{{$data->foto_siswa}}" class="wd-32 rounded-circle" alt="">
+                    {{-- Mengambil image dari storage cloudinary --}}
+                    <img src="{{$data->foto_siswa}}" class="wd-32 rounded-circle" alt="">
+                @elseif ($data->foto_siswa == false)
+                    <img src="/image-tambahan/user-polos.png" class="wd-32 rounded-circle" alt="">
+                @endif
+                
 
                 <span class="square-10 bg-success"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-header wd-250">
                 <div class="tx-center">
-                {{-- Mengambil image dari storage bawaan laravel --}}
-                {{-- <a href=""><img src="{{url('/storage/foto_siswa/'.$data->foto_siswa)}}" class="wd-80 rounded-circle" alt=""></a> --}}
+                @if ($data->foto_siswa == true)
+                    {{-- Mengambil image dari storage bawaan laravel --}}
+                    {{-- <a href=""><img src="{{url('/storage/foto_siswa/'.$data->foto_siswa)}}" class="wd-80 rounded-circle" alt=""></a> --}}
+                    
+                    {{-- Mengambil image dari storage cloudinary --}}
+                    <a href=""><img src="{{$data->foto_siswa}}" class="wd-80 rounded-circle" alt=""></a>
+                @elseif ($data->foto_siswa == false)
+                    <img src="/image-tambahan/user-polos.png" class="wd-80  rounded-circle" alt="">
+                @endif
                 
-                {{-- Mengambil image dari storage cloudinary --}}
-                <a href=""><img src="{{$data->foto_siswa}}" class="wd-80 rounded-circle" alt=""></a>
 
                 <h6 class="logged-fullname">{{$data->nama_calon_siswa}}</h6>
                 <p>{{$data->nisn}}</p>
