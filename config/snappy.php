@@ -36,13 +36,13 @@ return [
     'pdf' => [
         'enabled' => true,
         // BINARY FOR LOCAL WINDOWS
-        'binary'  => env('SNAPPY_BIN', '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf"'),
+        //'binary'  => env('SNAPPY_BIN', '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf"'),
         
         // BINARY FOR VENDOR wemersonjanuario
         //'binary' => base_path('vendor\wemersonjanuario\wkhtmltopdf-windows\bin\64bit\wkhtmltopdf'),
         
         // BINARRY FOR BILDPACK HEROKU https://github.com/chap/wkhtmltopdf-heroku-18-buildpack.git
-        // 'binary'  => '/app/bin/wkhtmltopdf',
+        'binary'  => '/app/bin/wkhtmltopdf',
         
         'timeout' => false,
         'options' => [
@@ -56,13 +56,13 @@ return [
     'image' => [
         'enabled' => true,
         // BINARY FOR LOCAL WINDOWS
-        'binary'  => env('SNAPPY_BIN', '"C:\Program Files\wkhtmltopdf\bin\wkhtmltoimage"'),
+        //'binary'  => env('SNAPPY_BIN', '"C:\Program Files\wkhtmltopdf\bin\wkhtmltoimage"'),
         
         // BINARY FOR VENDOR wemersonjanuario
         //'binary' => base_path('vendor\wemersonjanuario\wkhtmltopdf-windows\bin\64bit\wkhtmltoimage'),
         
         // BINARRY FOR BILDPACK HEROKU https://github.com/chap/wkhtmltopdf-heroku-18-buildpack.git
-        // 'binary'  => '/app/bin/wkhtmltoimage',
+        'binary'  => '/app/bin/wkhtmltoimage',
         
         'timeout' => false,
         'options' => [
